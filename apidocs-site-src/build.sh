@@ -13,18 +13,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# Check the pre-requisits
+
+SITE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Check the prerequisites
 # Make sure jazzy is installed
-JAZZY_VERSION=`jazzy --version`
+JAZZY_VERSION=`BUNDLE_GEMFILE=$SITE_DIR/Gemfile bundle exec jazzy --version`
 if [[ $? != 0 ]]; then
-  echo "Cannot find jazzy.  To install try:"
-  echo "[sudo] gem install jazzy"
+  echo "Cannot find jazzy. To install try:"
+  echo "[sudo] bundle install"
   exit 1
 fi
 
 # Switching to the root folder of mdc
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$DIR/../.."
+cd "$SITE_DIR/../.."
 ROOT_DIR="$(pwd)"
 
 BuildComponent () {
@@ -33,7 +35,7 @@ BuildComponent () {
   echo "Generating api reference for $component..."
 
   cd "$folder"
-  jazzy_output="$ROOT_DIR/site-source/jekyll-site-src/components/$component/apidocs"
+  jazzy_output="$SITE_DIR/components/$component/apidocs"
 
   # Clear the exsiting folder
   if [ -d $jazzy_output ]; then
@@ -41,9 +43,9 @@ BuildComponent () {
   fi
 
   # Generate new api doc
-  jazzy \
+  BUNDLE_GEMFILE=$SITE_DIR/Gemfile bundle exec jazzy \
     --output "$jazzy_output" \
-    --theme "$ROOT_DIR/site-source/apidocs-site-src/theme" \
+    --theme "$SITE_DIR/apidocs-site-src/theme" \
     --module $component \
     --umbrella-header src/Material$component.h \
     --objc \

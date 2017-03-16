@@ -14,19 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Check the pre-requisits
+SITE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Check the prerequisites
 # Make sure jekyll is installed
-JEKYLL_VERSION=`jekyll --version`
+JEKYLL_VERSION=`BUNDLE_GEMFILE=$SITE_DIR/Gemfile bundle exec jekyll --version`
 if [[ $? != 0 ]]; then
-  echo "Cannot find jekyll.  To install try:"
-  echo "[sudo] gem install github-pages"
+  echo "Cannot find jekyll. To install try:"
+  echo "[sudo] bundle install"
   exit 1
 fi
 
-
 # Switching to the root folder of mdc
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$DIR/../.."
+cd "$SITE_DIR/../.."
 ROOT_DIR="$(pwd)"
 
 
@@ -47,11 +47,11 @@ for i in ${FOLDERS[@]}; do
 
     ## Prepend all README.md files with associated .jekyll_prefix.yaml files if available then remove
     ## .jekyll_prefix.yaml files
-    DIR=$(dirname "$j")
-    YAML_FILE=$(find "$DIR" -maxdepth 1 -name .jekyll_prefix.yaml)
+    README_DIR=$(dirname "$j")
+    YAML_FILE=$(find "$README_DIR" -maxdepth 1 -name .jekyll_prefix.yaml)
     if [ -e "$YAML_FILE" ]; then
-      cat "$YAML_FILE" "$j" > "${DIR}/README.tmp"
-      mv "${DIR}/README.tmp" "$j"
+      cat "$YAML_FILE" "$j" > "${README_DIR}/README.tmp"
+      mv "${README_DIR}/README.tmp" "$j"
       rm $YAML_FILE
     fi
     NEW_NAME=$(echo ${j} | sed -e s/README/index/)
@@ -71,8 +71,8 @@ for i in ${FOLDERS[@]}; do
 done
 
 
-
 # UNCOMMENT LIQUID TAGS FROM MARKDOWN
+
 #grep -rl '<!--{.*}-->' ./ | xargs sed -i '' 's/<!--{\(.*\)}-->/{\1}/g'
 GREP_LIQUID_TAGS="grep -rl --include='*\.md' '<!--[{<].*[>}]-->'"
 #SED_LIQUID_TAGS="sed -i '' 's/<!--\([{<]\)\([^>]*\)\([>}]\)-->/\1\2\3/g'"
@@ -112,9 +112,9 @@ while [ $# -gt 0 ]; do
 done
 
 # Build site
-cd "$ROOT_DIR"/site-source/jekyll-site-src
-if $preview ; then
-  jekyll serve --destination $jekyll_output --config $config
+cd "$SITE_DIR/jekyll-site-src"
+if $preview; then
+  bundle exec jekyll serve --destination $jekyll_output --config $config
 else
-  jekyll build --destination $jekyll_output --config $config
+  bundle exec jekyll build --destination $jekyll_output --config $config
 fi

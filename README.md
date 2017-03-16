@@ -1,23 +1,17 @@
 # mdc-site generation
 
-### Pre-requisition
+### Prerequisites
 
-- Ruby 
-- Gem
-- Xcode Commandline Tool (if on a mac)
+- Ruby
+  - Using OS X's system Ruby is not recommended, because requires writing to
+    system folders. [rbenv](https://github.com/rbenv/rbenv) is a better option.
+    The required Ruby version is indicated in the Gemfile.
+- Xcode Command Line Tools (if on a mac)
 
 
 ### Installation
 
-- Install Jazzy
-
-        [sudo] gem install jazzy
-
-- Install Jekyll(Github Ver.)
-
-        [sudo] gem install github-pages
-
- 
-### Site generation
-
-    scripts/site-build.sh
+```sh
+gem install bundler
+bundle install
+```
