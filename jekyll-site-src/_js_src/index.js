@@ -1,0 +1,1 @@
+import './mdc-code-render';

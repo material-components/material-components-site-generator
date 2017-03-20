@@ -1,4 +1,5 @@
 .DS_Store
+node_modules
 # The build site for preview
 site-build
 # The copied content for site, original contents are in master/develop branch

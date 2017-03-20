@@ -1,0 +1,32 @@
+{
+  "name": "mdc-site",
+  "license": "Apache-2.0",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "BUILD_ENV=production webpack --progress --colors",
+    "dev": "BUILD_ENV=development webpack --progress --colors --watch"
+  },
+  "babel": {
+    "presets": [
+      [
+        "es2015",
+        {
+          "modules": false
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-assign"
+    ]
+  },
+  "dependencies": {
+    "material-components-web": "^0.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-preset-es2015": "^6.24.0",
+    "webpack": "^2.2.1"
+  }
+}
