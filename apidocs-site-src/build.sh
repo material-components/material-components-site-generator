@@ -15,10 +15,11 @@
 # limitations under the License.
 
 SITE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+GEMFILE_PATH=$SITE_DIR/../Gemfile
 
 # Check the prerequisites
 # Make sure jazzy is installed
-JAZZY_VERSION=`BUNDLE_GEMFILE=$SITE_DIR/Gemfile bundle exec jazzy --version`
+JAZZY_VERSION=`BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jazzy --version`
 if [[ $? != 0 ]]; then
   echo "Cannot find jazzy. To install try:"
   echo "[sudo] bundle install"
@@ -43,7 +44,7 @@ BuildComponent () {
   fi
 
   # Generate new api doc
-  BUNDLE_GEMFILE=$SITE_DIR/Gemfile bundle exec jazzy \
+  BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jazzy \
     --output "$jazzy_output" \
     --theme "$SITE_DIR/apidocs-site-src/theme" \
     --module $component \
