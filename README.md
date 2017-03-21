@@ -7,15 +7,16 @@
     system folders. [rbenv](https://github.com/rbenv/rbenv) is a better option.
     The required Ruby version is indicated in the Gemfile.
 - Xcode Command Line Tools (if on a mac)
-- node v7+
+- Homebrew
+- Node.js v7+
 
 ### Installation
 
 ```sh
-gem install bundler
-bundle i
-npm install -g yarn
-yarn install
+$ gem install bundler
+$ bundle i
+$ brew update
+$ brew install yarn
 ```
 
 ### Building JavaScript for Development
