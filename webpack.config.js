@@ -4,9 +4,11 @@ const path = require('path');
 const webpack = require('webpack');
 
 
+
 const buildEnv = process.env.BUILD_ENV || 'development';
 const IS_DEV = buildEnv == 'development';
 const IS_PROD = buildEnv == 'production';
+const SITE_ROOT = path.resolve('./jekyll-site-src');
 
 const plugins = [
   new webpack.optimize.UglifyJsPlugin({
@@ -14,8 +16,9 @@ const plugins = [
   }),
 ];
 
+
 module.exports = {
-  entry: './_js_src/index.js',
+  entry: `${SITE_ROOT}/_js_src/index.js`,
   devtool: IS_DEV ? 'eval' : 'source-map',
   module: {
     rules: [{
@@ -27,7 +30,7 @@ module.exports = {
     }],
   },
   output: {
-    path: path.resolve('./js'),
+    path: `${SITE_ROOT}/js`,
     filename: 'index.bundle.js',
   },
   plugins
