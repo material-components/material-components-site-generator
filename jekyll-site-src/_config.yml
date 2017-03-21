@@ -33,9 +33,6 @@ kramdown:
 # Build target
 exclude:
   - build.sh
-  - node_modules
-  - package.json
-  - webpack.config.js
 
 defaults:
 #layout specification
