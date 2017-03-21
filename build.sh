@@ -47,7 +47,7 @@ fi
 # Build api reference
 case $target in
   all)
-    $DIR/apidocs-site-src/build.sh
+    $DIR/ios-api-docs-src/build.sh
   ;;
   site)
   ;;
@@ -55,7 +55,7 @@ case $target in
     components=$(echo $target | sed 's/^components://' | tr "," "\n")
     for component in $components
     do
-      $DIR/apidocs-site-src/build.sh $component
+      $DIR/ios-api-docs-src/build.sh $component
     done
   ;;
   *)
