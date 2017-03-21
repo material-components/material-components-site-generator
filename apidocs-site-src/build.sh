@@ -36,7 +36,7 @@ BuildComponent () {
   echo "Generating api reference for $component..."
 
   cd "$folder"
-  jazzy_output="$SITE_DIR/components/$component/apidocs"
+  jazzy_output="$SITE_DIR/../jekyll-site-src/components/$component/apidocs"
 
   # Clear the exsiting folder
   if [ -d $jazzy_output ]; then
@@ -46,7 +46,7 @@ BuildComponent () {
   # Generate new api doc
   BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jazzy \
     --output "$jazzy_output" \
-    --theme "$SITE_DIR/apidocs-site-src/theme" \
+    --theme "$SITE_DIR/theme" \
     --module $component \
     --umbrella-header src/Material$component.h \
     --objc \
