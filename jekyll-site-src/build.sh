@@ -15,10 +15,11 @@
 # limitations under the License.
 
 SITE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+GEMFILE_PATH=$SITE_DIR/../Gemfile
 
 # Check the prerequisites
 # Make sure jekyll is installed
-JEKYLL_VERSION=`BUNDLE_GEMFILE=$SITE_DIR/Gemfile bundle exec jekyll --version`
+JEKYLL_VERSION=`BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jekyll --version`
 if [[ $? != 0 ]]; then
   echo "Cannot find jekyll. To install try:"
   echo "[sudo] bundle install"
@@ -32,12 +33,14 @@ ROOT_DIR="$(pwd)"
 
 ## COPY ALL SOURCE MARKDOWN
 
-## The home page is special.
-cp "$ROOT_DIR"/site-index.md "$ROOT_DIR"/site-source/jekyll-site-src/index.md
 
 ## Copy each folder containing documentation.
 FOLDERS=("components" "contributing" "howto")
-TARGET="${ROOT_DIR}/site-source/jekyll-site-src"
+TARGET=$SITE_DIR
+
+## The home page is special.
+cp $ROOT_DIR/site-index.md $TARGET/index.md
+
 for i in ${FOLDERS[@]}; do
   ## Include all folders (for recursion), Markdown files, and .jekyll_prefix.yaml files but nothing else.
   rsync -r --include='*/' --include='*.md' --include='.jekyll_prefix.yaml' --exclude='*' --prune-empty-dirs "${ROOT_DIR}/${i}" "${TARGET}"
@@ -77,14 +80,14 @@ done
 GREP_LIQUID_TAGS="grep -rl --include='*\.md' '<!--[{<].*[>}]-->'"
 #SED_LIQUID_TAGS="sed -i '' 's/<!--\([{<]\)\([^>]*\)\([>}]\)-->/\1\2\3/g'"
 PERLSUB_LIQUID_TAGS="perl -pi -e 's/<!--([{<])(.*?)([>}])-->/\1\2\3/g'"
-eval "$PERLSUB_LIQUID_TAGS $ROOT_DIR/site-source/jekyll-site-src/index.md"
-eval "$GREP_LIQUID_TAGS $ROOT_DIR/site-source/jekyll-site-src/howto | xargs $PERLSUB_LIQUID_TAGS"
-eval "$GREP_LIQUID_TAGS $ROOT_DIR/site-source/jekyll-site-src/contributing | xargs $PERLSUB_LIQUID_TAGS"
-eval "$GREP_LIQUID_TAGS $ROOT_DIR/site-source/jekyll-site-src/components | xargs $PERLSUB_LIQUID_TAGS"
+eval "$PERLSUB_LIQUID_TAGS $SITE_DIR/jekyll-site-src/index.md"
+eval "$GREP_LIQUID_TAGS $SITE_DIR/jekyll-site-src/howto | xargs $PERLSUB_LIQUID_TAGS"
+eval "$GREP_LIQUID_TAGS $SITE_DIR/jekyll-site-src/contributing | xargs $PERLSUB_LIQUID_TAGS"
+eval "$GREP_LIQUID_TAGS $SITE_DIR/jekyll-site-src/components | xargs $PERLSUB_LIQUID_TAGS"
 
 
 # Build/Preview
-jekyll_output="$ROOT_DIR/site-source/site-build"
+jekyll_output=$SITE_DIR/site-build
 # Clear the exsiting folder
 if [ -d $jekyll_output ]; then
   rm -r $jekyll_output/*
@@ -112,9 +115,9 @@ while [ $# -gt 0 ]; do
 done
 
 # Build site
-cd "$SITE_DIR/jekyll-site-src"
+cd $SITE_DIR
 if $preview; then
-  bundle exec jekyll serve --destination $jekyll_output --config $config
+  BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jekyll serve --destination $jekyll_output --config $config
 else
-  bundle exec jekyll build --destination $jekyll_output --config $config
+  BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jekyll build --destination $jekyll_output --config $config
 fi
