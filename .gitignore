@@ -1,7 +1,12 @@
 .DS_Store
 node_modules
+
+# The root for site's documentation content. ie. One of the MDC repos.
+docs-src
+
 # The build site for preview
 site-build
+
 # The copied content for site, original contents are in master/develop branch
 jekyll-site-src/apidocs
 jekyll-site-src/components
