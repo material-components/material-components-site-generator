@@ -1,0 +1,132 @@
+#!/usr/bin/env node
+
+const assert = require('assert');
+const chalk = require('chalk');
+const path = require('path');
+const { BuildDir } = require('./lib/conf');
+const { copySync, ensureDirSync, readFileSync, removeSync, writeFileSync } = require('fs-extra');
+const { execSync } = require('child_process');
+const { isJekyllIndex, isJekyllMarkdown, liquifyMarkdown, renameJekyllToIndex } = require('./lib/jekyll');
+const { sync: globSync } = require('glob');
+
+
+// Validate input
+const args = process.argv.slice(2);
+if (args.length == 0) {
+  console.error('Missing path to components repo.\n' +
+                'Usage: script/build path/to/mdc/repo');
+  process.exit(1);
+}
+const basePath = args[0];
+
+// Ensure that the working directory is the project root
+const projectRootPath = path.join(__dirname, '..');
+process.chdir(projectRootPath);
+
+// Check prerequisites
+process.stderr.write(chalk.cyan('Checking dependencies...'));
+for (let pkgManager of ['bundle', 'yarn']) {
+  try {
+    execSync(`${pkgManager} check`);
+  } catch(e) {
+    console.error(`Dependencies not met. Please run ${pkgManager} install.`);
+    process.exit(1);
+  }
+}
+console.error(chalk.green('✓'));
+
+// Clean
+try {
+  assert(process.cwd() == projectRootPath);
+  removeSync(BuildDir.STAGE);
+  removeSync(BuildDir.DIST);
+} catch(e) {
+  console.error(chalk.red('Something went wrong'));
+  console.error(e);
+  process.exit(1);
+}
+
+// Clone Jekyll source
+copySync(BuildDir.JEKYLL, BuildDir.STAGE);
+
+
+// Prepare markdown
+console.error(chalk.cyan('Finding Jekyll markdown...'));
+
+const markdownFiles = globSync(path.join(basePath, '**/*.md'))
+    .map((filePath) => readTextFile(filePath, basePath))
+const jekyllMarkdownFiles = markdownFiles.filter(isJekyllMarkdown);
+
+process.stderr.write(chalk.cyan('Liquifying 💦 ...'));
+jekyllMarkdownFiles.forEach(liquifyMarkdown);
+console.error(chalk.green('✓'));
+
+process.stderr.write(chalk.cyan('Producing indexes...'));
+jekyllMarkdownFiles.filter(isJekyllIndex).forEach(renameJekyllToIndex);
+console.error(chalk.green('✓'));
+
+// Copy markdown and assets into the tmp directory
+process.stderr.write(chalk.cyan('Copying files...'));
+jekyllMarkdownFiles.forEach((file) => {
+  const { contents, encoding, relativePath } = file;
+  const newPath = path.resolve(BuildDir.STAGE, relativePath);
+  ensureDirSync(path.dirname(newPath));
+  writeFileSync(newPath, contents, { encoding });
+});
+
+globSync(path.join(basePath, '**/docs/'))
+    .forEach((docsDirPath) => {
+      const relativePath = path.relative(basePath, docsDirPath);
+      const newPath = path.resolve(BuildDir.STAGE, relativePath);
+      ensureDirSync(newPath);
+      copySync(docsDirPath, newPath);
+    });
+console.error(chalk.green('✓'));
+
+
+// Start Jekyll
+console.error(chalk.cyan('Building Jekyll site...'));
+const jekyllEnv = Object.assign({}, process.env, {
+  BUNDLE_GEMFILE: path.join(projectRootPath, 'GEMFILE'),
+});
+execSync(`bundle exec jekyll build \
+    --source ${BuildDir.STAGE} \
+    --destination ${BuildDir.DIST} \
+    --config ${path.join(BuildDir.STAGE, '_config.yml')}`,
+  {
+    env: jekyllEnv,
+    stdio: 'inherit',
+  });
+console.error(chalk.green('\nDone! ✓'));
+
+
+function readTextFile(path, basePath) {
+  return readFile(path, basePath, 'utf8');
+}
+
+function readFile(filePath, basePath, encoding=null) {
+  // We could use a vinyl file here.
+  return {
+    path: filePath,
+    basePath,
+    encoding,
+    relativePath: path.relative(basePath, filePath),
+    contents: readFileSync(filePath, { encoding }),
+  };
+}
+
+function writeFile(file) {
+  const { path, encoding, contents } = file;
+  writeFileSync(path, contents, { encoding });
+}
+
+
+
+// # Build site
+// cd $SITE_DIR
+// if $preview; then
+//   BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jekyll serve --destination $jekyll_output --config $config
+// else
+//   BUNDLE_GEMFILE=$GEMFILE_PATH bundle exec jekyll build --destination $jekyll_output --config $config
+// fi
+
