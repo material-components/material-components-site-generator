@@ -23,6 +23,17 @@ class Reporter {
     }
   }
 
+  fatal(err) {
+    this.logLine_(chalk.red('Something went wrong'));
+    this.logLine_(err.toString());
+  }
+
+  webpackStats(stats) {
+    this.logLine_(stats.toString({
+      colors: true
+    }))
+  }
+
   complete() {
     this.logLine_(chalk.green('Done!'));
   }

@@ -1,24 +1,45 @@
-'use strict';
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-
+const { BuildDir } = require('./scripts/lib/conf');
 
 
 const buildEnv = process.env.BUILD_ENV || 'development';
+const buildPath = path.resolve(`${__dirname}/${BuildDir.STAGE}`);
 const IS_DEV = buildEnv == 'development';
 const IS_PROD = buildEnv == 'production';
-const SITE_ROOT = path.resolve('./jekyll-site-src');
 
-const plugins = [
-  new webpack.optimize.UglifyJsPlugin({
-    sourceMap: IS_PROD
-  }),
+const CSS_LOADERS = [
+  {
+    loader: 'css-loader',
+    options: {
+      minimize: true,
+      sourceMap: true,
+    },
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      plugins: () =>[require('autoprefixer')({grid: false})],
+    },
+  },
+  {
+    loader: 'sass-loader',
+    options: {
+      sourceMap: true,
+      includePaths: ['node_modules'],
+    },
+  },
 ];
 
-
-module.exports = {
-  entry: `${SITE_ROOT}/_js_src/index.js`,
+module.exports = [{
+  name: 'js',
+  entry: `${buildPath}/_js_src/index.js`,
+  output: {
+    path: `${buildPath}/js`,
+    publicPath: '/js',
+    filename: 'index.js',
+  },
   devtool: IS_DEV ? 'eval' : 'source-map',
   module: {
     rules: [{
@@ -29,9 +50,29 @@ module.exports = {
       },
     }],
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: IS_PROD
+    }),
+  ],
+}, {
+  name: 'css',
+  entry: `${buildPath}/_css_src/index.scss`,
   output: {
-    path: `${SITE_ROOT}/js`,
-    filename: 'index.bundle.js',
+    path: `${buildPath}/css`,
+    publicPath: '/css',
+    filename: 'index.css',
   },
-  plugins
-};
+  devtool: 'source-map',
+  module: {
+    rules: [{
+      test: /\.scss$/,
+      use: ExtractTextPlugin.extract({
+        use: CSS_LOADERS,
+      }),
+    }],
+  },
+  plugins: [
+    new ExtractTextPlugin('index.css'),
+  ],
+}];
