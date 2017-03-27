@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const JEKYLL_README_PREFIX = '<!--docs:'
 const FRONT_MATTER_DELIMITER = '---';
 
-
 function isJekyllMarkdown(file) {
   const { contents, path } = file;
 
@@ -42,7 +41,6 @@ function renameJekyllToIndex(file) {
   file.path = file.path.replace(/\/(site-index|README)\.md$/, '/index.md');
   file.relativePath = file.relativePath.replace(/(\/|^)(site-index|README)\.md$/, '$1index.md');
 }
-
 
 module.exports = {
   isJekyllIndex,

@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 const path = require('path');
 const reporter = require('./lib/reporter');
+const webpack = require('webpack');
 const { BuildDir } = require('./lib/conf');
 const { execSync } = require('child_process');
 const { isJekyllIndex, isJekyllMarkdown, liquifyMarkdown, renameJekyllToIndex } = require('./lib/jekyll');
@@ -110,7 +111,22 @@ reporter.step('Building Jekyll site...', () => {
     });
 }, { noCheck: true });
 
-reporter.complete();
+reporter.step('Building assets...', () => {
+  webpack(require('../webpack.config'), (err, stats) => {
+    if (err) {
+      reporter.fatal(err);
+      process.exit(1);
+    } else if (stats.hasWarnings()) {
+      reporter.webpackStats(stats);
+    } else if (stats.hasErrors()) {
+      reporter.webpackStats(stats);
+      process.exit(1);
+    }
+
+    reporter.complete();
+  });
+}, { noCheck: true });
+
 
 
 function readTextFile(path, basePath) {
