@@ -3,6 +3,7 @@ const chalk = require('chalk');
 
 class Reporter {
   constructor() {
+    this.startTimeMs_ = Date.now();
     this.inStep_ = false;
     this.loggedInStep_ = false;
   }
@@ -30,12 +31,15 @@ class Reporter {
 
   webpackStats(stats) {
     this.logLine_(stats.toString({
-      colors: true
+      chunks: false,
+      colors: true,
+      hash: false,
     }))
   }
 
   complete() {
-    this.logLine_(chalk.green('Done!'));
+    const durationInSeconds = (Date.now() - this.startTimeMs_) / 1000;
+    this.logLine_('\n' + chalk.green(`✨  Done in ${durationInSeconds.toFixed(2)}s.`));
   }
 
   log_(msg) {

@@ -7,10 +7,9 @@ const path = require('path');
 const reporter = require('./lib/reporter');
 const webpack = require('webpack');
 const { BuildDir } = require('./lib/conf');
+const { JekyllFile } = require('./lib/file');
 const { execSync } = require('child_process');
-const { isJekyllIndex, isJekyllMarkdown, liquifyMarkdown, renameJekyllToIndex } = require('./lib/jekyll');
 const { sync: globSync } = require('glob');
-
 
 
 // Validate input
@@ -45,7 +44,6 @@ reporter.step('Checking dependencies...', () => {
   }
 });
 
-// Clean
 reporter.step('Cleaning...', () => {
   try {
     assert(process.cwd() == projectRootPath);
@@ -58,34 +56,32 @@ reporter.step('Cleaning...', () => {
   }
 });
 
-// Clone Jekyll source
 fs.copySync(BuildDir.JEKYLL, BuildDir.STAGE);
 
-
-// Prepare markdown
 const jekyllMarkdownFiles =
-reporter.step('Finding Jekyll markdown...', () => {
-  const markdownFiles = globSync(path.join(basePath, '**/*.md'))
-      .map((filePath) => readTextFile(filePath, basePath))
-  return markdownFiles.filter(isJekyllMarkdown);
-}, { noCheck: true });
+    reporter.step('Finding Jekyll markdown...', () => {
+      const markdownFiles = globSync(path.join(basePath, '**/*.md'))
+          .map((filePath) => JekyllFile.readFromPath(filePath, basePath))
+      return markdownFiles.filter((file) => file.isValidJekyll);
+    });
 
-reporter.step('Liquifying 💦 ...', () => {
-  jekyllMarkdownFiles.forEach(liquifyMarkdown);
+reporter.step('Liquifying...', () => {
+  jekyllMarkdownFiles.forEach((file) => file.uncommentHiddenCode());
 });
 
 reporter.step('Creating indexes...', () => {
-  jekyllMarkdownFiles
-      .filter(isJekyllIndex)
-      .forEach(renameJekyllToIndex);
+  jekyllMarkdownFiles.forEach((file) => {
+    if (file.shouldBecomeIndex) {
+      file.basename = 'index.md';
+    }
+  });
 });
 
 reporter.step('Copying files...', () => {
   jekyllMarkdownFiles.forEach((file) => {
-    const { contents, encoding, relativePath } = file;
-    const newPath = path.resolve(BuildDir.STAGE, relativePath);
-    fs.ensureDirSync(path.dirname(newPath));
-    fs.writeFileSync(newPath, contents, { encoding });
+    file.path = path.resolve(BuildDir.STAGE, file.relative);
+    file.basedir = BuildDir.STAGE;
+    file.write();
   });
 
   globSync(path.join(basePath, '**/docs/'))
@@ -112,39 +108,23 @@ reporter.step('Building Jekyll site...', () => {
 }, { noCheck: true });
 
 reporter.step('Building assets...', () => {
+  // TODO(shyndman): Periodically check if we can uncomment this. There's some
+  // noisy deprecation deep in Webpack.
+  process.noDeprecation = true;
   webpack(require('../webpack.config'), (err, stats) => {
+    reporter.webpackStats(stats);
+
     if (err) {
       reporter.fatal(err);
       process.exit(1);
-    } else if (stats.hasWarnings()) {
-      reporter.webpackStats(stats);
     } else if (stats.hasErrors()) {
-      reporter.webpackStats(stats);
       process.exit(1);
     }
 
-    reporter.complete();
+    finishBuild();
   });
 }, { noCheck: true });
 
-
-
-function readTextFile(path, basePath) {
-  return readFile(path, basePath, 'utf8');
-}
-
-function readFile(filePath, basePath, encoding=null) {
-  // We could use a vinyl file here.
-  return {
-    path: filePath,
-    basePath,
-    encoding,
-    relativePath: path.relative(basePath, filePath),
-    contents: fs.readFileSync(filePath, { encoding }),
-  };
-}
-
-function writeFile(file) {
-  const { path, encoding, contents } = file;
-  fs.writeFileSync(path, contents, { encoding });
+function finishBuild() {
+  reporter.complete();
 }
