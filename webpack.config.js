@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MergeFilesPlugin = require('merge-files-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const { BuildDir } = require('./scripts/lib/conf');
@@ -6,6 +7,8 @@ const { BuildDir } = require('./scripts/lib/conf');
 
 const buildEnv = process.env.BUILD_ENV || 'development';
 const buildPath = path.resolve(`${__dirname}/${BuildDir.STAGE}`);
+const modulesPath = path.resolve(`${__dirname}/node_modules`);
+
 const IS_DEV = buildEnv == 'development';
 const IS_PROD = buildEnv == 'production';
 
@@ -40,7 +43,7 @@ module.exports = [{
     publicPath: '/js',
     filename: 'index.js',
   },
-  devtool: IS_DEV ? 'eval' : 'source-map',
+  devtool: IS_DEV ? 'cheap-source-map' : false,
   module: {
     rules: [{
       test: /\.js$/,
@@ -52,27 +55,34 @@ module.exports = [{
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: IS_PROD
+      sourceMap: IS_DEV
     }),
   ],
 }, {
   name: 'css',
-  entry: `${buildPath}/_css_src/index.scss`,
+  entry: {
+    app: `${buildPath}/_css_src/app.scss`,
+    codemirror: `${modulesPath}/codemirror/lib/codemirror.css`,
+  },
   output: {
     path: `${buildPath}/css`,
     publicPath: '/css',
-    filename: 'index.css',
+    filename: '[name].css',
   },
-  devtool: 'source-map',
   module: {
     rules: [{
-      test: /\.scss$/,
+      test: /\.s?css$/,
       use: ExtractTextPlugin.extract({
         use: CSS_LOADERS,
       }),
     }],
   },
   plugins: [
-    new ExtractTextPlugin('index.css'),
+    new ExtractTextPlugin('[name].css'),
+    new MergeFilesPlugin({
+      filename: 'index.css',
+      test: /\.css$/,
+      deleteSourceFiles: true
+    }),
   ],
 }];
