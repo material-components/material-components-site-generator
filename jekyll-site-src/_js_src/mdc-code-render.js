@@ -5,6 +5,11 @@
  * side-effects only.
  */
 
+import * as CodeMirror from 'codemirror';
+import 'codemirror/mode/clike/clike';
+import 'codemirror/mode/swift/swift';
+import 'codemirror/mode/shell/shell';
+import 'codemirror/mode/ruby/ruby';
 
 // A Boolean value to control line numbers generation. Device width smaller
 // than 600px will be considered as mobile device.
