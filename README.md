@@ -19,14 +19,8 @@ $ brew update
 $ brew install yarn
 ```
 
-### Building JavaScript for Development
+### Building the Site
 
-The following will start a watch that builds the JavaScript whenever it changes:
 ```sh
-$ npm run dev
-```
-
-### Building JavaScript for Production
-```sh
-$ npm run build
+$ scripts/build path/to/mdc/repo
 ```
