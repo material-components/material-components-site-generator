@@ -34,12 +34,12 @@ class Reporter {
       chunks: false,
       colors: true,
       hash: false,
-    }))
+    }) + '\n');
   }
 
   complete() {
     const durationInSeconds = (Date.now() - this.startTimeMs_) / 1000;
-    this.logLine_('\n' + chalk.green(`✨  Done in ${durationInSeconds.toFixed(2)}s.`));
+    this.logLine_(chalk.green(`✨  Done in ${durationInSeconds.toFixed(2)}s.`));
   }
 
   log_(msg) {
