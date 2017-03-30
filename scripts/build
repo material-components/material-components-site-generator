@@ -93,20 +93,6 @@ reporter.step('Copying files...', () => {
       });
 });
 
-reporter.step('Building Jekyll site...', () => {
-  const jekyllEnv = Object.assign({}, process.env, {
-    BUNDLE_GEMFILE: path.join(projectRootPath, 'GEMFILE'),
-  });
-  execSync(`bundle exec jekyll build \
-      --source ${BuildDir.STAGE} \
-      --destination ${BuildDir.DIST} \
-      --config ${path.join(BuildDir.STAGE, '_config.yml')}`,
-    {
-      env: jekyllEnv,
-      stdio: 'inherit',
-    });
-}, { noCheck: true });
-
 reporter.step('Building assets...', () => {
   // TODO(shyndman): Periodically check if we can uncomment this. There's some
   // noisy deprecation deep in Webpack.
@@ -126,5 +112,19 @@ reporter.step('Building assets...', () => {
 }, { noCheck: true });
 
 function finishBuild() {
+  reporter.step('Building Jekyll site...', () => {
+    const jekyllEnv = Object.assign({}, process.env, {
+      BUNDLE_GEMFILE: path.join(projectRootPath, 'GEMFILE'),
+    });
+    execSync(`bundle exec jekyll build \
+        --source ${BuildDir.STAGE} \
+        --destination ${BuildDir.DIST} \
+        --config ${path.join(BuildDir.STAGE, '_config.yml')}`,
+      {
+        env: jekyllEnv,
+        stdio: 'inherit',
+      });
+  }, { noCheck: true });
+
   reporter.complete();
 }
