@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// First things first, let's check dependencies
+require('./lib/check-deps');
+
 const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
@@ -23,17 +26,6 @@ const projectRootPath = path.join(__dirname, '..');
 process.chdir(projectRootPath);
 
 // Check prerequisites
-reporter.step('Checking dependencies...', () => {
-  for (let pkgManager of ['bundle', 'yarn']) {
-    try {
-      execSync(`${pkgManager} check`);
-    } catch(e) {
-      console.error(`Dependencies not met. Please run ${pkgManager} install.`);
-      process.exit(1);
-    }
-  }
-});
-
 reporter.step('Cleaning...', () => {
   try {
     assert(process.cwd() == projectRootPath);
