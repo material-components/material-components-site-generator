@@ -1,0 +1,18 @@
+.mdc-toolbar {
+  @include pad-to-page-width;
+
+  display: flex;
+  justify-content: center;
+
+  height: 72px;
+  color: #fff;
+  background: $grey-900;
+
+  // TODO(shyndman): This increase in specificity is temporary. Remove when the
+  // latest MDC is released.
+  & &__title {
+    font-family: $ui-font-family;
+    background: no-repeat left/45px url('/images/mdc-logo.svg');
+    padding: 2px 0 4px 64px;
+  }
+}

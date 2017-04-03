@@ -1,18 +1,13 @@
 // Globals used in this file
-$code-background-color: $grey-50;
-$code-divider-color: rgba(0, 0, 0, 0.1);
+$code-background-color: $black-05;
+$code-divider-color: $black-10;
 $code-font-family: 'Roboto Mono', monospace;
 $code-text-color: $black-54;
 $code-text-size: 12px;
 $code-text-weight: 500;
 $code-lineheight: 20px;
 
-// Highlight colors, avoid any blue-green colors
-$brown-200: #BCAAA4;
-$brown-400: #8D6E63;
-$pink-900: #880E4F;
-
-.code-text-style {
+%code-text-style {
   font-family: $code-font-family;
   font-weight: $code-text-weight;
   font-size: $code-text-size;
@@ -20,14 +15,13 @@ $pink-900: #880E4F;
   color: $code-text-color
 }
 
-
 .CodeMirror {
   height: auto;
   margin: 24px 0;
   background: $code-background-color;
   border: none;
   pre {
-    @extend .code-text-style;
+    @extend %code-text-style;
   }
 }
 
@@ -58,7 +52,7 @@ $pink-900: #880E4F;
 .CodeMirror-gutters {
   border: none;
   background-color: $grey-50;
-  @extend .code-text-style;
+  @extend %code-text-style;
 }
 
 // Add period and left padding to line numbers
@@ -101,7 +95,6 @@ pre.CodeMirror-line {
 // Styles for the multi-code container
 .material-code-render {
   position: relative;
-  background: $code-background-color;
   margin: 24px 0 24px 0;
 
   // Hide any headings that were used for annotating code
@@ -112,7 +105,7 @@ pre.CodeMirror-line {
 
   .language {
     padding: 16px 0 16px 24px;
-    border-bottom: 1px solid $code-divider-color;
+    border: 1px solid $code-divider-color;
     font-family: Roboto;
     font-weight: 400;
     line-height: 24px;
@@ -135,11 +128,11 @@ pre.CodeMirror-line {
         background-position: center;
 
         &.checked {
-          background-image: url(#{$root_folder}/images/radio-checked.svg);
+          background-image: url('/images/radio-checked.svg');
           display: none;
         }
         &.unchecked {
-          background-image: url(#{$root_folder}/images/radio-unchecked.svg);
+          background-image: url('/images/radio-unchecked.svg');
           opacity: 0.54;
           display: inline-block;
         }

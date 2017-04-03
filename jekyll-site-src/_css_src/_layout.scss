@@ -1,0 +1,6 @@
+.page-content {
+  @include pad-to-page-width;
+
+  display: flex;
+  align-items: stretch;
+}

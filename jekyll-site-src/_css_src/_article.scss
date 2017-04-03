@@ -1,0 +1,80 @@
+.article {
+  @include mdc-typography(body1);
+
+  h1 {
+    @include mdc-typography(headline);
+    margin: 24px 0;
+  }
+
+  h2 {
+    @include mdc-typography(subheading2);
+    margin: 24px 0 12px;
+  }
+
+  h3 {
+    @include mdc-typography(body2);
+    margin: 24px 0;
+  }
+
+  h4 {
+    margin: 12px 0;
+  }
+
+  h1,
+  h2 {
+    font-family: $ui-font-family;
+  }
+
+  hr {
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 1.5rem 0;
+    padding: 0;
+  }
+
+  p {
+    margin: 16px 0;
+  }
+
+  // TODO(shyndman): Lists need some figuring as to not conflict with our
+  // special lists. Pre-processing required? :not()?
+  // ol {
+  //   list-style-type: decimal;
+  // }
+
+  // ul {
+  //   list-style-type: disc;
+  // }
+
+  // ol,
+  // ul {
+  //   margin-left: 18px;
+
+  //   > li {
+  //     height: 40px;
+  //   }
+  // }
+
+  &__asset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: $black-05;
+    padding: 24px;
+    margin: 28px 0;
+
+    &--screenshot {
+      > video,
+      > img {
+        width: 320px;
+      }
+    }
+
+    &--illustration {
+      > img {
+        max-width: 100%;
+      }
+    }
+  }
+}

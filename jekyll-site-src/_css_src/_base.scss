@@ -1,0 +1,26 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  color: $black-87;
+}
+
+strong {
+  font-weight: 500;
+}
+
+a {
+  &,
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    @include mdc-typography(body1);
+    color: $black-87;
+    font-family: $ui-font-family;
+  }
+}

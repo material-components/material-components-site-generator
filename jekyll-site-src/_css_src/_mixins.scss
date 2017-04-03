@@ -1,0 +1,3 @@
+@mixin pad-to-page-width {
+  padding: 0 calc((100% - #{$content-width}) / 2);
+}
