@@ -150,6 +150,7 @@ function renderComplexCodeRenderer(renderer, id) {
       return value || _complexRendererAllowedLang[0];
     }
   };
+
   /**
    * Generate Single radio button element from frontend template
    * @param {string} groupname An string to identify the group of radio button
@@ -249,34 +250,33 @@ function renderComplexCodeRenderer(renderer, id) {
   cmMap[targetLanguage].display.wrapper.classList.add('active');
 }
 
+// if (document.body.clientWidth < 600) {
+//   _mobileSized = true;
+// }
+// First: renders material code wrapper
+var complexrenders = document.querySelectorAll('.material-code-render');
+for (var i = 0; i < complexrenders.length; i++) {
+  // RendererIndex assigns a unique id to each code renderer. The id will
+  // be used by radioForm for each code renderer to form radio button group.
+  renderComplexCodeRenderer(complexrenders[i], i);
+}
 
-window.addEventListener('load', function() {
-  // if (document.body.clientWidth < 600) {
-  //   _mobileSized = true;
-  // }
-  // First: renders material code wrapper
-  var complexrenders = document.querySelectorAll('.material-code-render');
+// Second: renders all other code snippet
+var simplerenders = document.querySelectorAll('pre code');
+for (var j = 0; j < simplerenders.length; j++) {
+  renderSimpleCodeRenderer(simplerenders[j]);
+}
+
+// Listen to selectLangChange event at document level and forward that event
+// to exsiting material code renders
+document.addEventListener('selectLangChange', function(e) {
   for (var i = 0; i < complexrenders.length; i++) {
-    // RendererIndex assigns a unique id to each code renderer. The id will
-    // be used by radioForm for each code renderer to form radio button group.
-    renderComplexCodeRenderer(complexrenders[i], i);
-  }
-  // Second: renders all other code snippet
-  var simplerenders = document.querySelectorAll('pre code');
-  for (var j = 0; j < simplerenders.length; j++) {
-    renderSimpleCodeRenderer(simplerenders[j]);
-  }
-  // Listen to selectLangChange event at document level and forward that event
-  // to exsiting material code renders
-  document.addEventListener('selectLangChange', function(e) {
-    console.log('value changes');
-    for (var i = 0; i < complexrenders.length; i++) {
-      var evt = new e.constructor(e.type, e);
-      complexrenders[i].querySelector('.language').dispatchEvent(evt);
-    }
-  });
-  // scroll to targeted anchor after code renderer completes.
-  if(window.location.hash) {
-    window.location.href = window.location.hash;
+    var evt = new e.constructor(e.type, e);
+    complexrenders[i].querySelector('.language').dispatchEvent(evt);
   }
 });
+
+// scroll to targeted anchor after code renderer completes.
+if(window.location.hash) {
+  window.location.href = window.location.hash;
+}

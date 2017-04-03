@@ -1,5 +1,4 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const MergeFilesPlugin = require('merge-files-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const { BuildDir } = require('./scripts/lib/conf');
@@ -78,11 +77,6 @@ module.exports = [{
     }],
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
-    new MergeFilesPlugin({
-      filename: 'index.css',
-      test: /\.css$/,
-      deleteSourceFiles: true
-    }),
+    new ExtractTextPlugin('[name].css')
   ],
 }];

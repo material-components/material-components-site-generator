@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html class="mdc-typography">
   {% include head.html %}
-  <body id="homepage">
-    {% include header.html %}
+  <body id="homepage" class="mdc-typography">
+    {% include toolbar.html %}
 
-    <div id="main_content">
-      <section>
+    <div class="page-content">
+      <article class="article">
         {{ content }}
-      </section>
+      </article>
     </div>
 
     {% include footer.html %}

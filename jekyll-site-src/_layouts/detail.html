@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html class="mdc-typography">
   {% include head.html %}
   <body class="{{ page.layout }} {{ page.section }}">
-    {% include header.html %}
-    {% include sidebar.html %}
+    {% include toolbar.html %}
 
-    <div id="main_content">
-      <section>
+    <div class="page-content">
+      {% include drawer.html %}
+      <article class="article">
+        {% if page.category == components %}
+
+        {% endif %}
         {{ content }}
-      </section>
+      </article>
     </div>
 
     {% include footer.html %}

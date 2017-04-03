@@ -1,0 +1,40 @@
+.footer {
+  @include mdc-typography(body1);
+
+  background: $black-02;
+  height: 192px;
+  margin-top: 200px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include pad-to-page-width;
+    padding-top: 32px;
+    padding-bottom: 24px;
+    height: 100%;
+  }
+
+  &__logo {
+    display: inline-block;
+    background: url('/images/google-logo.svg');
+    background-size: 72px;
+    opacity: .54;
+    width: 72px;
+    height: 24px;
+  }
+
+  &__links {
+    display: flex;
+    position: relative;
+    left: -8px;
+  }
+
+  &__link {
+    padding: 8px 8px;
+
+    color: $black-54;
+    text-decoration: none;
+  }
+}

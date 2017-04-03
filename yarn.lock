@@ -2143,10 +2143,6 @@ meow, meow@^3.7.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
-merge-files-webpack-plugin:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/merge-files-webpack-plugin/-/merge-files-webpack-plugin-1.1.2.tgz#875f4e6af008444890014cbd5a7f0169a0049c5c"
-
 micromatch@^2.1.5:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
@@ -3016,6 +3012,10 @@ require-from-string@^1.1.0:
 require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
+
+reset-css:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/reset-css/-/reset-css-2.2.0.tgz#57ce1d2e8c28cca656c59385dc484f0cb35c5a1d"
 
 right-align@^0.1.1:
   version "0.1.3"

@@ -13,9 +13,10 @@
   <meta property="og:site_name" content="{{ site.title | escape }}" />
   <meta property="article:section" content="{% if page.title %}{{ page.title | escape }}{% endif %}" />
 
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="{{ site.url }}{{ site.folder }}/css/index.css">
-  <link rel="stylesheet" href="{{ site.url }}{{ site.folder }}/css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Roboto+Mono" rel="stylesheet" type="text/css">
+  <!-- TODO(shyndman): Merge these stylesheets together -->
+  <link rel="stylesheet" href="{{ site.url }}{{ site.folder }}/css/codemirror.css">
+  <link rel="stylesheet" href="{{ site.url }}{{ site.folder }}/css/app.css">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.folder | prepend: site.url }}">
   <link rel='shortcut icon' type='image/x-icon' href='{{ site.url }}{{ site.folder }}/favicon.ico' />
 </head>

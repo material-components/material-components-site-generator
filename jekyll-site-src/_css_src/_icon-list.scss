@@ -1,0 +1,33 @@
+.icon-list {
+  @extend .mdc-list;
+  @extend .mdc-list--dense;
+
+  padding: 0;
+
+  > li {
+    @extend .mdc-list-item;
+    text-transform: uppercase;
+  }
+}
+
+.icon-link,
+.icon-spec {
+  &::before {
+    content: '';
+    display: inline-block;
+
+
+    background-size: 22px;
+    width: 22px;
+    height: 22px;
+    margin-right: 20px;
+  }
+}
+
+.icon-spec::before {
+  background-image: url('/images/icons/ic_material_design_black_24px.svg');
+}
+
+.icon-link::before {
+  background-image: url('/images/icons/ic_open_in_new_black_24px.svg');
+}
