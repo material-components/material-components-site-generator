@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const reporter = require('./lib/reporter');
 const webpack = require('webpack');
-const { BuildDir, FilePattern } = require('./lib/conf');
+const { ASSET_EXTENSIONS, BuildDir, FilePattern } = require('./lib/conf');
 const { JekyllFile } = require('./lib/file');
 const { addWatchToWebpackConfig, setupFileWatches } = require('./lib/watch');
 const { execSync } = require('child_process');
@@ -55,7 +55,7 @@ reporter.step('Processing Jekyll files...', () => {
 
 reporter.step('Copying supplementary directories...', () => {
   const docsDirectoryPaths = globSync(
-      path.join(docsRepoPath, FilePattern.SUPPLEMENTARY_DIRECTORIES));
+      path.join(docsRepoPath, FilePattern.DOCS_DIRS));
   docsDirectoryPaths.forEach((docsDirPath) =>
       processSupplementaryDirectory(docsRepoPath, docsDirPath));
 });
@@ -109,5 +109,10 @@ if (cli.flags.watch) {
     const newFilePath = filePath.replace(BuildDir.JEKYLL, BuildDir.STAGE);
     fs.ensureDirSync(path.dirname(newFilePath));
     fs.copySync(filePath, newFilePath);
+
+    const fileExt = path.extname(filePath);
+    if (!ASSET_EXTENSIONS.has(filePath)) {
+      buildJekyll();
+    }
   });
 }
