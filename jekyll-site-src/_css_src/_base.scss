@@ -13,6 +13,10 @@ strong {
   font-weight: 500;
 }
 
+code {
+  font-family: $ui-font-family;
+}
+
 a {
   @include link-styles {
     @include mdc-typography(body1);
