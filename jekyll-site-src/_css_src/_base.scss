@@ -14,11 +14,7 @@ strong {
 }
 
 a {
-  &,
-  &:link,
-  &:visited,
-  &:hover,
-  &:active {
+  @include link-styles {
     @include mdc-typography(body1);
     color: $black-87;
     font-family: $ui-font-family;
