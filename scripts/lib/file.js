@@ -75,13 +75,18 @@ class JekyllFile extends VinylFile {
    * in Github.
    */
   uncommentHiddenCode() {
-    this.stringContents = this.stringContents
-        .replace(JEKYLL_README_PREFIX, FRONT_MATTER_DELIMITER)
-        .replace(/-->/, FRONT_MATTER_DELIMITER)
-        // Note that [^] matches any character including newlines, whereas "."
-        // does not. For anyone who's wondering, [^] the negation of the empty
-        // set.
-        .replace(/<!--([{<][^]*?[>}])-->/g, '$1');
+    let { stringContents } = this;
+    if (stringContents.includes(JEKYLL_README_PREFIX)) {
+      stringContents = stringContents
+          .replace(JEKYLL_README_PREFIX, FRONT_MATTER_DELIMITER)
+          .replace(/-->/, FRONT_MATTER_DELIMITER)
+    }
+
+    // Note that [^] matches any character including newlines, whereas "."
+    // does not. For anyone who's wondering, [^] the negation of the empty
+    // set.
+    this.stringContents =
+        stringContents.replace(/<!--([{<][^]*?[>}])-->/g, '$1');
   }
 
   /**
