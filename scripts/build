@@ -63,15 +63,12 @@ reporter.step('Building assets...', () => {
   }
 
   webpack(webpackConfig, (err, stats) => {
-    reporter.webpackStats(stats);
-
     if (err) {
       reporter.fatal(err);
       process.exit(1);
-    } else if (stats.hasErrors()) {
-      process.exit(1);
     }
 
+    reporter.webpackStats(stats);
     buildJekyll();
   });
 }, { noCheck: true });
@@ -98,12 +95,14 @@ function buildJekyll() {
 
 if (cli.flags.watch) {
   setupFileWatches((filePath) => {
+    reporter.fileChanged(filePath);
+
     const newFilePath = filePath.replace(BuildDir.JEKYLL, BuildDir.STAGE);
     fs.ensureDirSync(path.dirname(newFilePath));
     fs.copySync(filePath, newFilePath);
 
     const fileExt = path.extname(filePath);
-    if (!ASSET_EXTENSIONS.has(filePath)) {
+    if (!ASSET_EXTENSIONS.has(fileExt)) {
       buildJekyll();
     }
   });

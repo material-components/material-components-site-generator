@@ -16,7 +16,9 @@ function addWatchToWebpackConfig(webpackConfig) {
 }
 
 function setupFileWatches(callback) {
-  const watcher = chokidar.watch(BuildDir.JEKYLL);
+  const watcher = chokidar.watch(BuildDir.JEKYLL, {
+    ignoreInitial: true,
+  });
   watcher
       .on('add', (path) => callback(path))
       .on('change', (path) => callback(path));

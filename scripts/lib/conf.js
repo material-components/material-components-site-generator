@@ -10,5 +10,5 @@ module.exports.FilePattern = {
 };
 
 module.exports.ASSET_EXTENSIONS = new Set([
-  'js', 'css', 'scss'
+  '.js', '.css', '.scss'
 ]);

@@ -37,6 +37,10 @@ class Reporter {
     }) + '\n');
   }
 
+  fileChanged(filePath) {
+    this.logLine_(`File changed: ${chalk.yellow(filePath)}`);
+  }
+
   complete() {
     const durationInSeconds = (Date.now() - this.startTimeMs_) / 1000;
     this.logLine_(chalk.green(`✨  Done in ${durationInSeconds.toFixed(2)}s.`));
