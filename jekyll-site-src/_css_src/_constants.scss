@@ -21,12 +21,12 @@ $pink-900: #880E4F;
 $teal-400: #26A69A;
 $white: #fff;
 
-$accent: #00e871;
+$accent-color: #00e871;
 
 $content-width: 1280px;
 
 $ui-font-family: 'Roboto Mono';
 
 // MDC overrides
-$mdc-theme-accent: $accent;
+$mdc-theme-accent: $accent-color;
 $mdc-theme-background: $white;
