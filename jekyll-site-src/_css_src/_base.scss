@@ -14,7 +14,13 @@ strong {
 }
 
 code {
+  &::before,
+  &::after {
+    content: '\00a0';
+    letter-spacing: -0.4em;
+  }
   font-family: $ui-font-family;
+  background: $black-05;
 }
 
 ol {
