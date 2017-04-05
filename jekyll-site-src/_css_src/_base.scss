@@ -17,6 +17,35 @@ code {
   font-family: $ui-font-family;
 }
 
+ol {
+    list-style-type: decimal;
+  }
+
+ul {
+  list-style-type: disc;
+}
+
+ol,
+ul {
+  margin-left: 18px;
+}
+
+li {
+  padding-bottom: 8px;
+}
+
+nav {
+  ol,
+  ul {
+    list-style-type: none;
+    margin-left: 0;
+  }
+
+  li {
+    padding-bottom: 0;
+  }
+}
+
 a {
   @include link-styles {
     @include mdc-typography(body1);
