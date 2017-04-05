@@ -17,7 +17,7 @@ const { processJekyllFile, processSupplementaryDirectory } = require('./lib/proc
 const { sync: globSync } = require('glob');
 
 
-// Parse and validate command line arguments.
+// Parses and validates command line arguments.
 const cli = initCli();
 const docsRepoPath = cli.input[0];
 
@@ -25,7 +25,6 @@ const docsRepoPath = cli.input[0];
 const projectRootPath = path.join(__dirname, '..');
 process.chdir(projectRootPath);
 
-// Check prerequisites
 reporter.step('Cleaning...', () => {
   try {
     assert(process.cwd() == projectRootPath);
