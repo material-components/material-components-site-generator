@@ -1,0 +1,19 @@
+.welcome {
+  @include pad-to-page-width;
+
+  background: $header-background;
+  color: $header-text-color;
+
+  &__content {
+    height: 640px - $toolbar-height;
+    background: right center url('/images/welcome.svg') no-repeat;
+  }
+
+  &__title {
+    font-family: $ui-font-family;
+    font-size: 56px;
+    line-height: 72px;
+    max-width: 412px;
+    padding-top: 180px - $toolbar-height;
+  }
+}
