@@ -17,6 +17,7 @@
   }
 
   h4 {
+    font-style: italic;
     margin: 12px 0;
   }
 
@@ -35,25 +36,6 @@
   p {
     margin: 16px 0;
   }
-
-  // TODO(shyndman): Lists need some figuring as to not conflict with our
-  // special lists. Pre-processing required? :not()?
-  // ol {
-  //   list-style-type: decimal;
-  // }
-
-  // ul {
-  //   list-style-type: disc;
-  // }
-
-  // ol,
-  // ul {
-  //   margin-left: 18px;
-
-  //   > li {
-  //     height: 40px;
-  //   }
-  // }
 
   &__asset {
     display: flex;
