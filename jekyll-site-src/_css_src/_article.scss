@@ -44,12 +44,12 @@
 
     background: $black-05;
     padding: 24px;
-    margin: 28px 0;
+    margin: 24px 0 28px;
 
     &--screenshot {
       > video,
       > img {
-        width: 320px;
+        width: 240px;
       }
     }
 
