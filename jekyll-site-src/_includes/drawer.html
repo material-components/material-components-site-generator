@@ -1,23 +1,23 @@
-{% comment %}
-  {% case page.categories %}
-  {% when 'components' %}
-    {% assign section = site.data.navigation.components %}
-  {% when 'howto' %}
-    {% assign section = site.data.navigation.howto %}
-  {% when 'contributing' %}
-    {% assign section = site.data.navigation.contributing %}
-  {% endcase %}
-{% endcomment %}
+{% case page.categories %}
+{% when 'components' %}
+  {% assign section = site.data.navigation.components %}
+{% when 'howto' %}
+  {% assign section = site.data.navigation.howto %}
+{% when 'contributing' %}
+  {% assign section = site.data.navigation.contributing %}
+{% endcase %}
 <nav class="mdc-permanent-drawer">
-  <ul class="drawer-list mdc-list mdc-list--dense">
-    {% comment %}
-      {% for top in section.children %}
-        <li class="toplevel">
-          <a {% if top.url %} href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ top.url }}" {% endif %}>
-            {{ top.name }}
-          </a>
-          {% if top.children %}
-            <ul>
+  <ul class="drawer-list">
+    {% for top in section.children %}
+      <li class="drawer-list__item">
+        <a class="drawer-list__link"
+           {% if top.url %}
+             href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ top.url }}"
+           {% endif %}>
+          {{ top.name }}
+        </a>
+        {% if top.children %}
+          <ul class="drawer-list drawer-list--sublevel">
             {% for second in top.children %}
               {% assign lcpage = page.url | downcase %}
               {% assign lcitem = second.url | downcase %}
@@ -32,23 +32,22 @@
                   {% endif %}
                 {% endfor %}
               {% endif %}
-              <li class="sublevel {{ activepage }}">
-                <a href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ second.url }}">{{ second.name }}</a>
+              <li class="drawer-list__item {{ activepage }}">
+                <a class="drawer-list__link" href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ second.url }}">{{ second.name }}</a>
                 {% if second.children %}
-                  <ul>
+                  <ul class="drawer-list drawer-list--sublevel">
                   {% for third in second.children %}
-                    <li class="thirdlevel">
-                      <a href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ third.url }}">{{ third.name }}</a>
+                    <li class="drawer-list__item thirdlevel">
+                      <a class="drawer-list__link" href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ third.url }}">{{ third.name }}</a>
                     </li>
                   {% endfor %}
                   </ul>
                 {% endif %}
               </li>
             {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
-      {% endfor %}
-    {% endcomment %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
   </ul>
 </nav>

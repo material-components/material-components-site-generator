@@ -1,13 +1,31 @@
+.mdc-permanent-drawer {
+  border: 0;
+  height: auto;
+  min-width: 304px;
+  margin-top: -8px;
+  margin-right: 24px;
+}
+
 // Notes:
-// 36px between baselines
 .drawer-list {
   font-family: $ui-font-family;
   font-weight: 500;
-}
 
-.mdc-permanent-drawer {
-  border: 1px solid magenta;
-  height: auto;
-  min-width: 304px;
-  margin-right: 24px;
+  &--sublevel {
+    margin-left: 16px;
+  }
+
+  &__item {
+
+  }
+
+  &__link {
+    display: inline-block;
+    padding: 8px 0;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

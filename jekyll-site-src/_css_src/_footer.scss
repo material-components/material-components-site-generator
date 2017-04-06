@@ -3,7 +3,7 @@
 
   background: $black-02;
   height: 192px;
-  margin-top: 200px;
+  margin-top: 144px;
 
   &__content {
     display: flex;
@@ -29,6 +29,9 @@
     display: flex;
     position: relative;
     left: -8px;
+
+    list-style-type: none;
+    margin-left: 0;
   }
 
   &__link {

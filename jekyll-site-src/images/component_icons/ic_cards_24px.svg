@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<g id="XMLID_289_">
+	<defs>
+		<path id="XMLID_290_" d="M-240.34-61.17c-18.22,0-33,15.15-33,33.84c0,14.95,9.45,27.63,22.57,32.11
+			c1.65,0.31,2.25-0.74,2.25-1.63c0-0.8-0.03-2.93-0.04-5.75c-9.18,2.04-11.12-4.54-11.12-4.54c-1.5-3.91-3.66-4.95-3.66-4.95
+			c-3-2.1,0.23-2.06,0.23-2.06c3.31,0.24,5.05,3.49,5.05,3.49c2.94,5.17,7.72,3.68,9.6,2.81c0.3-2.19,1.15-3.68,2.09-4.52
+			c-7.33-0.85-15.03-3.76-15.03-16.72c0-3.69,1.29-6.71,3.4-9.08c-0.34-0.86-1.47-4.3,0.32-8.95c0,0,2.77-0.91,9.08,3.47
+			c2.63-0.75,5.46-1.13,8.26-1.14c2.8,0.01,5.63,0.39,8.26,1.14c6.3-4.38,9.07-3.47,9.07-3.47c1.8,4.66,0.67,8.1,0.33,8.95
+			c2.11,2.37,3.39,5.39,3.39,9.08c0,13-7.72,15.86-15.07,16.7c1.19,1.04,2.24,3.11,2.24,6.27c0,4.52-0.04,8.17-0.04,9.28
+			c0,0.91,0.59,1.96,2.27,1.63c13.1-4.48,22.55-17.16,22.55-32.1C-207.33-46.02-222.11-61.17-240.34-61.17"/>
+	</defs>
+	<clipPath id="XMLID_3_">
+		<use xlink:href="#XMLID_290_"  overflow="visible"/>
+	</clipPath>
+	<g id="XMLID_291_" clip-path="url(#XMLID_3_)">
+		<defs>
+			<rect id="XMLID_292_" x="-1121.33" y="-2515.17" width="1680" height="3369"/>
+		</defs>
+		<clipPath id="XMLID_4_">
+			<use xlink:href="#XMLID_292_"  overflow="visible"/>
+		</clipPath>
+		<rect id="XMLID_293_" x="-278.33" y="-66.17" clip-path="url(#XMLID_4_)" width="76" height="76"/>
+	</g>
+</g>
+<g id="XMLID_1_">
+	<path id="XMLID_1249_" d="M20,4v16H4V4H20 M22,2H2v20h20V2L22,2z"/>
+	<g id="XMLID_1257_">
+		<rect id="XMLID_2771_" x="5" y="12.54" width="6.46" height="6.46"/>
+	</g>
+	<g id="XMLID_1254_">
+		<rect id="XMLID_2772_" x="12.54" y="12.54" width="6.46" height="6.46"/>
+	</g>
+	<g id="XMLID_1256_">
+		<rect id="XMLID_2792_" x="5" y="5" width="6.46" height="6.46"/>
+	</g>
+	<g id="XMLID_1252_">
+		<rect id="XMLID_2793_" x="12.54" y="5" width="6.46" height="6.46"/>
+	</g>
+	<rect id="XMLID_585_" fill="none" width="24" height="24"/>
+</g>
+</svg>
