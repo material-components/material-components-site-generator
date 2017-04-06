@@ -1,0 +1,11 @@
+.components.detail .article h1 {
+  // Default icons
+  &::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 24px;
+    background: center/100% url('/images/component_icons/ic_components_24px.svg');
+  }
+}

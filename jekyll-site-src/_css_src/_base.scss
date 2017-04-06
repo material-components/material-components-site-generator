@@ -21,6 +21,12 @@ code {
   }
   font-family: $ui-font-family;
   background: $black-05;
+
+  // Links are already underlined, and use Roboto Mono. Keeping the background
+  // doesn't look good.
+  a & {
+    background: none;
+  }
 }
 
 ol {

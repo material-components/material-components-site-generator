@@ -2,8 +2,9 @@
   @include mdc-typography(body1);
 
   h1 {
+    // See _component-icons.scss for additional mutations in component pages.
     @include mdc-typography(headline);
-    margin: 24px 0;
+    margin-bottom: 24px;
   }
 
   h2 {
@@ -46,16 +47,15 @@
     padding: 24px;
     margin: 24px 0 28px;
 
+    > video,
+    > img {
+      max-width: 100%;
+    }
+
     &--screenshot {
       > video,
       > img {
         width: 240px;
-      }
-    }
-
-    &--illustration {
-      > img {
-        max-width: 100%;
       }
     }
   }
