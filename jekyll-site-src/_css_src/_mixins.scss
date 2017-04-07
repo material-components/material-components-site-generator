@@ -1,5 +1,29 @@
+// TODO(shyndman): This needs a better name.
 @mixin pad-to-page-width {
+  $min-content-padding: 16px;
+
   padding: 0 calc((100% - #{$content-width}) / 2);
+  @include breakpoint($max: $content-width + 2 * $min-content-padding) {
+    padding: 0 16px;
+  }
+}
+
+@mixin breakpoint($min: 0, $max: 0) {
+  @if $min != 0 and $max != 0 {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else if $max != 0 {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @error "$min or $max must be specified";
+  }
 }
 
 @mixin link-styles {
