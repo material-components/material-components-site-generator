@@ -41,8 +41,9 @@ class Reporter {
     this.logLine_(`File changed: ${chalk.yellow(filePath)}`);
   }
 
-  complete() {
+  complete(distPath) {
     const durationInSeconds = (Date.now() - this.startTimeMs_) / 1000;
+    this.logLine_(`Site written to ${chalk.yellow(distPath)}`);
     this.logLine_(chalk.green(`✨  Done in ${durationInSeconds.toFixed(2)}s.`));
   }
 

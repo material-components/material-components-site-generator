@@ -88,7 +88,7 @@ function buildJekyll() {
   });
 
   if (!cli.flags.watch) {
-    reporter.complete();
+    reporter.complete(path.resolve(BuildDir.DIST));
   }
 }
 
