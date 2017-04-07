@@ -83,9 +83,9 @@ function buildJekyll() {
         --config ${path.join(BuildDir.STAGE, '_config.yml')}`,
       {
         env: jekyllEnv,
-        stdio: 'inherit',
+        stdio: ['ignore', 'ignore', 'inherit'],
       });
-  }, { noCheck: true });
+  });
 
   if (!cli.flags.watch) {
     reporter.complete();
