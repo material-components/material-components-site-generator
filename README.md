@@ -14,9 +14,10 @@
 
 ```sh
 $ gem install bundler
-$ bundle i
+$ bundle install
 $ brew update
 $ brew install yarn
+$ yarn install
 ```
 
 ### Building the Site
