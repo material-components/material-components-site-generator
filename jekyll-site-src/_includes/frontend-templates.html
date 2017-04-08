@@ -1,10 +1,14 @@
-    <div style="display:none;">
-      <label id="tmpl-radio-button" class="radio">
-        <input class='radio-input' type="radio" name="" value="" />
-        <span class="icons">
-          <div class="source-radio checked"></div>
-          <div class="source-radio unchecked"></div>
-        </span>
-        <span class='language-name'></span>
-      </label>
+<template id="language-radio-template">
+  <div class="mdc-form-field">
+    <div class="mdc-radio">
+      <input class="mdc-radio__native-control"
+             type="radio"
+             id="" name="" value="">
+      <div class="mdc-radio__background">
+        <div class="mdc-radio__outer-circle"></div>
+        <div class="mdc-radio__inner-circle"></div>
+      </div>
     </div>
+    <label class="language-name" for=""></label>
+  </div>
+</template>

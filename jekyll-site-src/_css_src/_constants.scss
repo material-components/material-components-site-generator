@@ -30,5 +30,6 @@ $toolbar-height: 72px;
 $ui-font-family: 'Roboto Mono';
 
 // MDC overrides
+$mdc-theme-primary: $accent-color;
 $mdc-theme-accent: $accent-color;
 $mdc-theme-background: $white;

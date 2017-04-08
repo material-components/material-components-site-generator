@@ -48,21 +48,6 @@ $code-lineheight: 20px;
   margin: 12px 0;
 }
 
-// Text and border for line number area
-.CodeMirror-gutters {
-  border: none;
-  background-color: $grey-50;
-  @extend %code-text-style;
-}
-
-// Add period and left padding to line numbers
-.material-code-render .CodeMirror-linenumber {
-  padding: 0 24px 0 16px;
-  &:after {
-    content: '';
-  }
-}
-
 // Padding between code lines and their line number
 pre.CodeMirror-line {
   padding-left: 24px;
@@ -104,7 +89,7 @@ pre.CodeMirror-line {
   }
 
   .language {
-    padding: 16px 0 16px 24px;
+    padding: 8px 0 8px 14px;
     border: 1px solid $code-divider-color;
     font-family: Roboto;
     font-weight: 400;
