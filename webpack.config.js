@@ -42,7 +42,7 @@ module.exports = [{
     publicPath: '/js',
     filename: 'index.js',
   },
-  devtool: IS_DEV ? 'cheap-source-map' : false,
+  devtool: IS_DEV ? 'source-map' : false,
   module: {
     rules: [{
       test: /\.js$/,
