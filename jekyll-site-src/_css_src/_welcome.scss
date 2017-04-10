@@ -6,7 +6,7 @@
 
   &__content {
     height: 640px - $toolbar-height;
-    background: right center url('/images/welcome.svg') no-repeat;
+    background: right center / 800px url('/images/welcome.svg') no-repeat;
   }
 
   &__title {
