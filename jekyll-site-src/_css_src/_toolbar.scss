@@ -1,32 +1,45 @@
 .mdc-toolbar {
-  @include pad-to-page-width;
-
   display: flex;
+  align-items: center;
   justify-content: center;
 
-  height: $toolbar-height;
   background: $header-background;
   color: $header-text-color;
-  // margin-bottom: 78px;
+  height: $toolbar-height;
+  transition: box-shadow 200ms ease-in-out;
 
-  // TODO(shyndman): This increase in specificity is temporary. Remove when the
-  // latest MDC is released.
-  & &__title {
-    background: no-repeat left/45px url('/images/mdc-logo.svg');
+  &__title {
+    background: no-repeat left/44px url('/images/mdc-logo.svg');
     font-family: $ui-font-family;
-    padding: 2px 0 4px 64px;
+    padding: 2px 0 5px 64px;
     text-transform: uppercase;
+  }
+
+  &__title-link {
+    @include link-styles {
+      color: $header-text-color;
+      text-decoration: none;
+    }
+  }
+
+  &__row {
+    max-width: $content-width + nth($mdc-toolbar-padding, 2) * 2;
+    height: $toolbar-height;
+  }
+
+  &--no-shadow {
+    box-shadow: none;
   }
 }
 
 .toolbar-nav {
+  margin-top: -1 * nth($mdc-toolbar-padding, 1);
   height: $toolbar-height;
 
   &__links {
     display: flex;
     height: 100%;
   }
-
 }
 
 .toolbar-nav-link {
