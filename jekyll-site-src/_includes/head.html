@@ -9,14 +9,30 @@
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="{% if page.title and page.title != site.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}" />
-  <meta property="og:image" content="{{ site.url }}{{ site.folder }}/images/social.png" />
   <meta property="og:site_name" content="{{ site.title | escape }}" />
+  <meta property="og:image" content="https://material.io/static/images/simple-lp/components-share.png">
   <meta property="article:section" content="{% if page.title %}{{ page.title | escape }}{% endif %}" />
+
+  <!-- Favicons -->
+  <link rel="icon" sizes="192x192" href="https://material.io/static/images/simple-lp/favicons/components-192x192.png">
+  <link rel="shortcut icon" href="https://material.io/static/images/simple-lp/favicons/components-72x72.png">
+  <link rel="apple-touch-icon" href="https://material.io/static/images/simple-lp/favicons/components-72x72.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://material.io/static/images/simple-lp/favicons/components-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="https://material.io/static/images/simple-lp/favicons/components-144x144.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://material.io/static/images/simple-lp/favicons/components-180x180.png">
+  <meta name="msapplication-TileImage" content="https://material.io/static/images/hub/favicons/hub-ms-icon-144x144.png">
+  <meta name="msapplication-tap-highlight" content="no">
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500|Roboto+Mono" rel="stylesheet" type="text/css">
   <!-- TODO(shyndman): Merge these stylesheets together -->
   <link rel="stylesheet" href="{{ site.url }}{{ site.folder }}/css/codemirror.css">
   <link rel="stylesheet" href="{{ site.url }}{{ site.folder }}/css/app.css">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.folder | prepend: site.url }}">
-  <link rel='shortcut icon' type='image/x-icon' href='{{ site.url }}{{ site.folder }}/favicon.ico' />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@googledesign">
+  <meta name="twitter:title" content="Material Components">
+  <meta name="twitter:description" content="Create beautiful apps with modular and customizable UI components">
+  <meta name="twitter:image" content="https://material.io/static/images/simple-lp/components-share.png">
 </head>
