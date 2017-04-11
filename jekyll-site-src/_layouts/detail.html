@@ -6,7 +6,7 @@
 
     <div class="page-content">
       {% include drawer.html %}
-      <article class="article">
+      <article class="article {% if page.iconId %}article--icon-{{ page.iconId }}{% endif %}">
         {{ content }}
       </article>
     </div>

@@ -1,11 +1,43 @@
-.components.detail .article h1 {
-  // Default icons
-  &::before {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 80px;
-    margin-bottom: 24px;
-    background: center/100% url('/images/component_icons/ic_components_24px.svg');
+// From: material-components-site-generator/jekyll-site-src/images/component_icons/
+$icon-ids:
+  'bottom_navigation',
+  'bottom_sheet',
+  'button',
+  'card',
+  'chip',
+  'color',
+  'data_table',
+  'dialog',
+  'expansion_panel',
+  'feature_highlight',
+  'header',
+  'list',
+  'menu',
+  'progress_activity',
+  'responsive_layout',
+  'ripple',
+  'slider',
+  'stepper',
+  'subheader',
+  'switch',
+  'tabs',
+  'text_field',
+  'toast',
+  'toolbar',
+  'tooltip',
+  ;
+
+.components.detail .article h1::before {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 24px;
+  background: center/100% url('/images/component_icons/ic_component_24px.svg');
+}
+
+@each $icon-id in $icon-ids {
+  .components.detail .article.article--icon-#{$icon-id} h1::before {
+    background-image: url('/images/component_icons/ic_#{$icon-id}_24px.svg');
   }
 }
