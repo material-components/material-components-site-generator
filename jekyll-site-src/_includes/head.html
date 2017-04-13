@@ -5,8 +5,9 @@
   <title>{% if page.title and page.title != site.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}</title>
 
   <meta itemprop="name" content="{% if page.title and page.title != site.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}" />
-  <meta itemprop="image" content="{{ site.url }}{{ site.folder }}/images/social.png" />
+  <meta itemprop="image" content="https://material.io/static/images/simple-lp/components-share.png" />
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+
   <meta property="og:type" content="article" />
   <meta property="og:title" content="{% if page.title and page.title != site.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}" />
   <meta property="og:site_name" content="{{ site.title | escape }}" />
@@ -31,7 +32,7 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@googledesign">
+  <meta name="twitter:site" content="@materialdesign">
   <meta name="twitter:title" content="Material Components">
   <meta name="twitter:description" content="Create beautiful apps with modular and customizable UI components">
   <meta name="twitter:image" content="https://material.io/static/images/simple-lp/components-share.png">
