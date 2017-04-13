@@ -19,7 +19,7 @@
 
   h4 {
     font-style: italic;
-    margin: 12px 0;
+    margin: 20px 0 12px;
   }
 
   h1,
@@ -37,6 +37,39 @@
   p {
     margin: 16px 0;
   }
+
+  // Data table
+
+  table {
+    margin: 8px 0 32px;
+  }
+
+  th {
+    color: $black-54;
+    font-weight: 500;
+    padding: 18px 0;
+    text-align: left;
+  }
+
+  td {
+    padding: 14px 0;
+    border-top: 1px solid $grey-300;
+
+    &:first-child code {
+      background: 0;
+    }
+
+    &:last-child {
+      padding-right: 24px;
+    }
+  }
+
+  th + th,
+  td + td {
+    padding-left: 56px;
+  }
+
+  // Screenshots/videos
 
   &__asset {
     display: flex;
