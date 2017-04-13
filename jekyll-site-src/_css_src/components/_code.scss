@@ -22,6 +22,7 @@ $code-lineheight: 20px;
   border: none;
   pre {
     @extend %code-text-style;
+    z-index: 0;
   }
 }
 

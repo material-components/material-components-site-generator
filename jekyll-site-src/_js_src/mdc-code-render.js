@@ -6,9 +6,14 @@
  */
 import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/clike/clike';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/ruby/ruby';
 import 'codemirror/mode/shell/shell';
 import 'codemirror/mode/swift/swift';
+import 'codemirror/mode/xml/xml';
+
 import { MDCRadio, MDCRadioFoundation } from '@material/radio';
 
 
@@ -27,30 +32,47 @@ const LANGUAGE_RADIO_TEMPLATE_ID = 'language-radio-template';
  * A mapping between kramdown language name and codeMirror name.
  */
 const kramdownToCodeMirrorMap = {
-  objc: {
-    language: 'Objective-C',
-    mode: 'text/x-objectivec'
-  },
-  swift: {
-    language: 'Swift',
-    mode: 'text/x-swift'
-  },
   bash: {
     language: 'Shell',
-    mode: 'text/x-sh'
+    mode: 'text/x-sh',
   },
-  shell: {
-    language: 'Shell',
-    mode: 'text/x-sh'
+  css: {
+    language: 'CSS',
+    mode: 'text/css',
+  },
+  html: {
+    language: 'HTML',
+    mode: 'text/html',
+  },
+  js: {
+    language: 'JavaScript',
+    mode: 'text/javascript',
+  },
+  objc: {
+    language: 'Objective-C',
+    mode: 'text/x-objectivec',
   },
   ruby: {
     language: 'Ruby',
-    mode: 'text/x-ruby'
+    mode: 'text/x-ruby',
+  },
+  scss: {
+    language: 'SCSS',
+    // This is strange but it works, and text/x-scss does not.
+    mode: 'text/x-less',
+  },
+  shell: {
+    language: 'Shell',
+    mode: 'text/x-sh',
+  },
+  swift: {
+    language: 'Swift',
+    mode: 'text/x-swift',
   },
   text: {
     language: 'Text',
-    mode: 'text/plain'
-  }
+    mode: 'text/plain',
+  },
 };
 
 
@@ -110,6 +132,9 @@ function renderSimpleCodeRenderer(source, lineno) {
 
   const kramdownLanguage = source.classList.length == 0 ?
       DEFAULT_LANG : source.classList[0].replace('language-', '');
+  console.log(kramdownLanguage);
+  console.log(kramdownToCodeMirrorMap[kramdownLanguage]);
+
   const { mode, language } = kramdownToCodeMirrorMap[kramdownLanguage];
 
   const cm = CodeMirror(function(elt) {
