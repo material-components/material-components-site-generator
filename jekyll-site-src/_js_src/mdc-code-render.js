@@ -28,6 +28,11 @@ const DEFAULT_LANG = 'swift';
 /** ID of the <template> element for language radio buttons. */
 const LANGUAGE_RADIO_TEMPLATE_ID = 'language-radio-template';
 
+const JS_CODE_MIRROR_SETTINGS = {
+  language: 'JavaScript',
+  mode: 'text/javascript',
+};
+
 /**
  * A mapping between kramdown language name and codeMirror name.
  */
@@ -44,10 +49,8 @@ const kramdownToCodeMirrorMap = {
     language: 'HTML',
     mode: 'text/html',
   },
-  js: {
-    language: 'JavaScript',
-    mode: 'text/javascript',
-  },
+  javascript: JS_CODE_MIRROR_SETTINGS,
+  js: JS_CODE_MIRROR_SETTINGS,
   objc: {
     language: 'Objective-C',
     mode: 'text/x-objectivec',
