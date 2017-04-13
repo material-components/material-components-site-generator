@@ -79,6 +79,7 @@ const kramdownToCodeMirrorMap = {
 };
 
 
+
 /**
  * The number of language radios that have been constructed on this page. Used
  * for unique ID generation.
@@ -133,10 +134,12 @@ function renderSimpleCodeRenderer(source, lineno) {
     }
   }
 
-  const kramdownLanguage = source.classList.length == 0 ?
+  let kramdownLanguage = source.classList.length == 0 ?
       DEFAULT_LANG : source.classList[0].replace('language-', '');
-  console.log(kramdownLanguage);
-  console.log(kramdownToCodeMirrorMap[kramdownLanguage]);
+  if (!(kramdownLanguage in kramdownToCodeMirrorMap)) {
+    console.warn(`${kramdownLanguage} not supported.`)
+    kramdownLanguage = 'text';
+  }
 
   const { mode, language } = kramdownToCodeMirrorMap[kramdownLanguage];
 
