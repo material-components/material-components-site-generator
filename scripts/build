@@ -19,7 +19,7 @@ const { sync: globSync } = require('glob');
 
 // Parses and validates command line arguments.
 const cli = initCli();
-const docsRepoPath = cli.input[0];
+const docsRepoPath = path.resolve(cli.input[0]);
 
 // Ensure that the working directory is the project root
 const projectRootPath = path.join(__dirname, '..');
