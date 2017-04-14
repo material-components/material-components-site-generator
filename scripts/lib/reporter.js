@@ -9,7 +9,7 @@ class Reporter {
   }
 
   step(stepLabel, runStep, { noCheck } = { noCheck: false }) {
-    this.log_(chalk.cyan(stepLabel) + (noCheck ? '\n' : ''));
+    this.log_(chalk.cyan(stepLabel) + '...' + (noCheck ? '\n' : ''));
     this.inStep_ = true;
 
     try {

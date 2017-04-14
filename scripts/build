@@ -8,25 +8,24 @@ const fs = require('fs-extra');
 const path = require('path');
 const reporter = require('./lib/reporter');
 const webpack = require('webpack');
-const { ASSET_EXTENSIONS, JEKYLL_CONFIG_PATH, PLATFORM_CONFIG_PATH, BuildDir, FilePattern } = require('./lib/project-paths');
+const { ASSET_EXTENSIONS, JEKYLL_CONFIG_PATH, BuildDir } = require('./lib/project-paths');
 const { JekyllConfiguration } = require('./lib/jekyll-config');
-const { JekyllFile } = require('./lib/jekyll-file');
+const { PlatformSite } = require('./lib/platform-site');
 const { addWatchToWebpackConfig, setupFileWatches } = require('./lib/watch');
 const { execSync } = require('child_process');
 const { initCli } = require('./lib/cli');
-const { processJekyllFile, processSupplementaryDirectory } = require('./lib/processors');
-const { sync: globSync } = require('glob');
+const { processJekyllFile, processDocsDirectory } = require('./lib/processors');
 
 
 // Parses and validates command line arguments.
 const cli = initCli();
-const platformPath = cli.input[0];
+const platformSites = cli.input.map((repoPath) => new PlatformSite(repoPath));
 
 // Ensure that the working directory is the project root
 const projectRootPath = path.join(__dirname, '..');
 process.chdir(projectRootPath);
 
-reporter.step('Cleaning...', () => {
+reporter.step('Cleaning', () => {
   try {
     assert(process.cwd() == projectRootPath);
     fs.removeSync(BuildDir.STAGE);
@@ -39,25 +38,25 @@ reporter.step('Cleaning...', () => {
 
 fs.copySync(BuildDir.JEKYLL, BuildDir.STAGE);
 
-reporter.step('Processing Jekyll files...', () => {
-  const files = globSync(path.join(platformPath, FilePattern.JEKYLL_FILES))
-      .map((filePath) => JekyllFile.readFromPath(filePath, platformPath))
-  files.forEach(processJekyllFile);
+reporter.step('Processing Jekyll files', () => {
+  platformSites.forEach((site) => {
+    site.files.forEach((f) => processJekyllFile(site, f));
+  });
 });
 
-reporter.step('Copying supplementary directories...', () => {
-  const docsDirectoryPaths = globSync(
-      path.join(platformPath, FilePattern.DOCS_DIRS));
-  docsDirectoryPaths.forEach((docsDirPath) =>
-      processSupplementaryDirectory(platformPath, docsDirPath));
+reporter.step('Copying supplementary directories', () => {
+  platformSites.forEach((site) => {
+    site.directoryPaths.forEach((d) => processDocsDirectory(site, d));
+  });
 });
 
-const config = reporter.step('Preparing configuration...', () => {
-  return new JekyllConfiguration(path.join(BuildDir.STAGE, JEKYLL_CONFIG_PATH))
-      .addPlatform(path.join(platformPath, PLATFORM_CONFIG_PATH));
+const config = reporter.step('Preparing configuration', () => {
+  const c = new JekyllConfiguration(path.join(BuildDir.STAGE, JEKYLL_CONFIG_PATH));
+  platformSites.forEach((site) => c.addPlatformConfig(site.config));
+  return c;
 });
 
-reporter.step('Building assets...', () => {
+reporter.step('Building assets', () => {
   // TODO(shyndman): Periodically check if we can uncomment this. There's some
   // noisy deprecation deep in Webpack.
   process.noDeprecation = true;
@@ -79,7 +78,7 @@ reporter.step('Building assets...', () => {
 }, { noCheck: true });
 
 function buildJekyll() {
-  reporter.step('Building Jekyll site...', () => {
+  reporter.step('Building Jekyll site', () => {
     // Write out the merged config.
     config.write(path.join(BuildDir.STAGE, JEKYLL_CONFIG_PATH));
 

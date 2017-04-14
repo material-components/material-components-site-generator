@@ -1,4 +1,4 @@
-{% case page.categories %}
+{% case page.section %}
 {% when 'components' %}
   {% assign section = site.data.navigation.components %}
 {% when 'howto' %}
@@ -12,7 +12,7 @@
       <li class="drawer-list__item">
         <a class="drawer-list__link"
            {% if top.url %}
-             href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ top.url }}"
+             href="{{ page.basepath }}{{ top.url }}"
            {% endif %}>
           {{ top.name }}
         </a>
@@ -33,12 +33,12 @@
                 {% endfor %}
               {% endif %}
               <li class="drawer-list__item {{ activepage }}">
-                <a class="drawer-list__link" href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ second.url }}">{{ second.name }}</a>
+                <a class="drawer-list__link" href="{{ page.basepath }}{{ second.url }}">{{ second.name }}</a>
                 {% if second.children %}
                   <ul class="drawer-list drawer-list--sublevel">
                   {% for third in second.children %}
                     <li class="drawer-list__item thirdlevel">
-                      <a class="drawer-list__link" href="{{ site.url | prepend: site.github.url }}{{ site.folder }}{{ third.url }}">{{ third.name }}</a>
+                      <a class="drawer-list__link" href="{{ page.basepath }}{{ third.url }}">{{ third.name }}</a>
                     </li>
                   {% endfor %}
                   </ul>
