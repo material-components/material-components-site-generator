@@ -11,13 +11,15 @@ analytics_id: "UA-51798601-9"
 link_to_site: "false"
 
 
-# Build settings
-markdown: kramdown
+# Plugins
+gems: [jekyll-tidy]
+jekyll_tidy:
+  compress_html: false
 
-# Kramdown settings
+# Markdown settings
+markdown: kramdown
 kramdown:
-  # Don't use a highlighter.
-  # This will output raw code blocks that can be
+  # Don't use a highlighter. This will output raw code blocks that can be
   # highlighted in javascript with CodeMirror.
   syntax_highlighter: none
   auto_ids: true
