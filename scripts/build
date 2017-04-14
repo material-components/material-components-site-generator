@@ -8,8 +8,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const reporter = require('./lib/reporter');
 const webpack = require('webpack');
-const { ASSET_EXTENSIONS, BuildDir, FilePattern } = require('./lib/conf');
-const { JekyllFile } = require('./lib/file');
+const { ASSET_EXTENSIONS, JEKYLL_CONFIG_PATH, PLATFORM_CONFIG_PATH, BuildDir, FilePattern } = require('./lib/project-paths');
+const { JekyllConfiguration } = require('./lib/jekyll-config');
+const { JekyllFile } = require('./lib/jekyll-file');
 const { addWatchToWebpackConfig, setupFileWatches } = require('./lib/watch');
 const { execSync } = require('child_process');
 const { initCli } = require('./lib/cli');
@@ -19,7 +20,7 @@ const { sync: globSync } = require('glob');
 
 // Parses and validates command line arguments.
 const cli = initCli();
-const docsRepoPath = path.resolve(cli.input[0]);
+const platformPath = cli.input[0];
 
 // Ensure that the working directory is the project root
 const projectRootPath = path.join(__dirname, '..');
@@ -39,16 +40,21 @@ reporter.step('Cleaning...', () => {
 fs.copySync(BuildDir.JEKYLL, BuildDir.STAGE);
 
 reporter.step('Processing Jekyll files...', () => {
-  const files = globSync(path.join(docsRepoPath, FilePattern.JEKYLL_FILES))
-      .map((filePath) => JekyllFile.readFromPath(filePath, docsRepoPath))
+  const files = globSync(path.join(platformPath, FilePattern.JEKYLL_FILES))
+      .map((filePath) => JekyllFile.readFromPath(filePath, platformPath))
   files.forEach(processJekyllFile);
 });
 
 reporter.step('Copying supplementary directories...', () => {
   const docsDirectoryPaths = globSync(
-      path.join(docsRepoPath, FilePattern.DOCS_DIRS));
+      path.join(platformPath, FilePattern.DOCS_DIRS));
   docsDirectoryPaths.forEach((docsDirPath) =>
-      processSupplementaryDirectory(docsRepoPath, docsDirPath));
+      processSupplementaryDirectory(platformPath, docsDirPath));
+});
+
+const config = reporter.step('Preparing configuration...', () => {
+  return new JekyllConfiguration(path.join(BuildDir.STAGE, JEKYLL_CONFIG_PATH))
+      .addPlatform(path.join(platformPath, PLATFORM_CONFIG_PATH));
 });
 
 reporter.step('Building assets...', () => {
@@ -74,6 +80,9 @@ reporter.step('Building assets...', () => {
 
 function buildJekyll() {
   reporter.step('Building Jekyll site...', () => {
+    // Write out the merged config.
+    config.write(path.join(BuildDir.STAGE, JEKYLL_CONFIG_PATH));
+
     const jekyllEnv = Object.assign({}, process.env, {
       BUNDLE_GEMFILE: path.join(projectRootPath, 'GEMFILE'),
     });

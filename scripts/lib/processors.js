@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
-const { BuildDir } = require('./conf');
+const { BuildDir } = require('./project-paths');
 
 
 function processJekyllFile(file) {

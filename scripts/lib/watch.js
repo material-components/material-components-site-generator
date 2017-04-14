@@ -1,5 +1,5 @@
 const chokidar = require('chokidar');
-const { BuildDir, FilePatterns } = require('./conf');
+const { BuildDir, FilePatterns } = require('./project-paths');
 
 
 function addWatchToWebpackConfig(webpackConfig) {

@@ -1,7 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const { BuildDir } = require('./scripts/lib/conf');
+const { BuildDir } = require('./scripts/lib/project-paths');
 
 
 const buildEnv = process.env.BUILD_ENV || 'development';
