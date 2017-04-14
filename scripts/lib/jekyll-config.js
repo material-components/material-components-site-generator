@@ -9,8 +9,7 @@ class JekyllConfiguration {
     this.platformConfigs = new Map();
   }
 
-  addPlatform(platformConfigPath) {
-    const platformConfig = readYaml(platformConfigPath);
+  addPlatformConfig(platformConfig) {
     this.validatePlatformConfig_(platformConfig);
     this.platformConfigs.set(platformConfig.basepath, platformConfig);
 
@@ -44,13 +43,17 @@ class JekyllConfiguration {
     for (const [basepath, platformConfig] of this.platformConfigs) {
       mergedConfig['defaults'].push({
         scope: {
-          basepath,
+          path: this.sanitizeScopePath_(basepath),
         },
         values: platformConfig,
       });
     }
 
     return mergedConfig;
+  }
+
+  sanitizeScopePath_(path) {
+    return path.trim().replace(/^\/?([^/]*)\//g, '$1');
   }
 }
 

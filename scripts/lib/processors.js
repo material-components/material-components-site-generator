@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const { BuildDir } = require('./project-paths');
 
 
-function processJekyllFile(file) {
+function processJekyllFile(platformSite, file) {
   if (!file.isValidJekyll) {
     return false;
   }
@@ -13,14 +13,14 @@ function processJekyllFile(file) {
     file.basename = 'index.md';
   }
 
-  file.path = path.resolve(BuildDir.STAGE, file.relative);
+  file.path = path.resolve(path.join(BuildDir.STAGE, platformSite.basepath), file.relative);
   file.basedir = BuildDir.STAGE;
   file.write();
 }
 
-function processSupplementaryDirectory(docsRepoPath, docsDirPath) {
-  const relativePath = path.relative(docsRepoPath, docsDirPath);
-  const newPath = path.resolve(BuildDir.STAGE, relativePath);
+function processDocsDirectory(platformSite, docsDirPath) {
+  const relativePath = path.relative(platformSite.repoPath, docsDirPath);
+  const newPath = path.resolve(path.join(BuildDir.STAGE, platformSite.basepath), relativePath);
   fs.ensureDirSync(newPath);
   fs.copySync(docsDirPath, newPath);
 }
@@ -28,5 +28,5 @@ function processSupplementaryDirectory(docsRepoPath, docsDirPath) {
 
 module.exports = {
   processJekyllFile,
-  processSupplementaryDirectory,
+  processDocsDirectory,
 };
