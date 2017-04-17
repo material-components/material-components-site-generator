@@ -13,13 +13,24 @@
   }
 
   h3 {
-    @include mdc-typography(body2);
+    @include mdc-typography(subheading2);
+    font-weight: 500;
     margin: 24px 0;
   }
 
   h4 {
-    font-style: italic;
+    @include mdc-typography(subheading2);
     margin: 20px 0 12px;
+  }
+
+  h5 {
+    @include mdc-typography(body2);
+    font-weight: 500;
+    margin: 20px 0 12px;
+  }
+
+  h6 {
+    @include mdc-typography(body1);
   }
 
   h1,
