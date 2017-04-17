@@ -43,13 +43,13 @@ class JekyllFile extends VinylFile {
    * @return {Object}
    */
   get jekyllMetadata() {
-    if (this.jekyllMetadata_) {
-      return this.jekyllMetadata_;
-    } else if (!this.isValidJekyll) {
+    if (!this.isValidJekyll) {
       return null;
+    } else if (!this.jekyllMetadata_) {
+      this.jekyllMetadata_ = this.parseMetadata_();
     }
 
-    return this.jekyllMetadata_ = this.parseMetadata_();
+    return this.jekyllMetadata_;
   }
 
   /**

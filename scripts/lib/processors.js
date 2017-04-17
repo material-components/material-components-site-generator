@@ -9,7 +9,11 @@ function processJekyllFile(platformSite, file) {
   }
 
   file.uncommentHiddenCode();
-  if (file.shouldBecomeIndex) {
+
+  const fileMetadata = file.jekyllMetadata;
+  if (fileMetadata.path) {
+    applyPathRemapping(file, fileMetadata.path);
+  } else if (file.shouldBecomeIndex) {
     file.basename = 'index.md';
   }
 
@@ -23,6 +27,17 @@ function processDocsDirectory(platformSite, docsDirPath) {
   const newPath = path.resolve(path.join(BuildDir.STAGE, platformSite.basepath), relativePath);
   fs.ensureDirSync(newPath);
   fs.copySync(docsDirPath, newPath);
+}
+
+function applyPathRemapping(file, destPath) {
+  if (destPath.endsWith('/')) {
+    destPath += 'index.md';
+  } else if (destPath.endsWith('.html')) {
+    destPath = destPath.replace(/(.*)\.html$/, '$1.md');
+  }
+
+  file.base = '/';
+  file.path = destPath;
 }
 
 
