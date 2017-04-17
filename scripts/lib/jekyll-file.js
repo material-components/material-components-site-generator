@@ -110,8 +110,8 @@ class JekyllFile extends VinylFile {
    * Parses Front Matter (YAML) metadata out of the file header.
    */
   parseMetadata_() {
-    const metadataMatch = this.stringContents.match(/^---([^]*?)^---/m);
-    return metadataMatch && yaml.safeLoad(metadataMatch[1]);
+    const metadataMatch = this.stringContents.match(/^(---|<!--docs:)([^]*?)^(---|-->)/m);
+    return metadataMatch && yaml.safeLoad(metadataMatch[2]);
   }
 
   /**
