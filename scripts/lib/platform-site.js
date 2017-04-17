@@ -6,6 +6,11 @@ const { PLATFORM_CONFIG_PATH, FilePattern } = require('./project-paths');
 const { sync: globSync } = require('glob');
 
 
+const GLOB_OPTIONS = {
+  ignore: ['**/node_modules/**'],
+  dot: true,
+};
+
 class PlatformSite {
   constructor(repoPath) {
     this.repoPath = repoPath;
@@ -19,14 +24,15 @@ class PlatformSite {
 
   get files() {
     if (!this.files_) {
-      this.files_ = globSync(path.join(this.repoPath, FilePattern.JEKYLL_FILES))
-          .map((filePath) => JekyllFile.readFromPath(filePath, this.repoPath));
+      this.files_ = globSync(path.join(this.repoPath, FilePattern.JEKYLL_FILES), GLOB_OPTIONS)
+          .map((filePath) => JekyllFile.readFromPath(filePath, this.repoPath))
+          .filter((file) => file.isValidJekyll);
     }
     return this.files_;
   }
 
   get directoryPaths() {
-    return globSync(path.join(this.repoPath, FilePattern.DOCS_DIRS));
+    return globSync(path.join(this.repoPath, FilePattern.DOCS_DIRS), GLOB_OPTIONS);
   }
 }
 
