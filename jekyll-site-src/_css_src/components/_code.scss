@@ -20,9 +20,9 @@ $code-lineheight: 20px;
   margin: 24px 0;
   background: $code-background-color;
   border: none;
+
   pre {
     @extend %code-text-style;
-    z-index: 0;
   }
 }
 

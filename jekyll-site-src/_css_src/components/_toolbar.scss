@@ -7,6 +7,7 @@
   color: $header-text-color;
   height: $toolbar-height;
   transition: box-shadow 200ms ease-in-out;
+  z-index: 3;
 
   &__title {
     background: no-repeat left/44px url('/images/mdc-logo.svg');
@@ -45,6 +46,7 @@
 .toolbar-nav-link {
   @include link-styles {
     color: $white;
+    fill: $white;
   }
 
   display: inline-flex;
