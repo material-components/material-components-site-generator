@@ -17,7 +17,7 @@ const ASSET_EXTENSIONS = new Set([
 ]);
 
 const JEKYLL_CONFIG_PATH = '_config.yml';
-const PLATFORM_CONFIG_PATH = '.mdc-docs.yaml';
+const PLATFORM_CONFIG_PATH = '.mdc-docsite.yml';
 
 
 module.exports = {
