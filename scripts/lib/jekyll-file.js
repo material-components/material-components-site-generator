@@ -5,6 +5,8 @@ const yaml = require('js-yaml');
 
 const JEKYLL_README_PREFIX = '<!--docs:'
 const FRONT_MATTER_DELIMITER = '---';
+const FRONT_MATTER_PATTERN = /^(---|<!--docs:)([^]*?)^(---|-->)/m;
+
 
 /**
  * The set of extensions to the Vinyl file interface.
@@ -16,6 +18,7 @@ const BUILT_IN_PROPS = new Set([
   'shouldBecomeIndex',
   'stringContents',
 ]);
+
 
 /**
  * A grab bag of convenience extensions to vinyl files for working with Jekyll.
@@ -50,6 +53,21 @@ class JekyllFile extends VinylFile {
     }
 
     return this.jekyllMetadata_;
+  }
+
+  /**
+   * Sets the Jekyll Front Matter metadata.
+   */
+  set jekyllMetadata(metadata) {
+    this.jekyllMetadata_ = metadata;
+
+    const { stringContents } = this;
+    const metadataYaml = yaml.safeDump(metadata);
+    if (!this.isValidJekyll) {
+      this.stringContents = `---\n${metadataYaml}\n---\n${stringContents}`;
+    } else {
+      this.stringContents = stringContents.replace(FRONT_MATTER_PATTERN, `$1${metadataYaml}$3`);
+    }
   }
 
   /**
@@ -110,7 +128,7 @@ class JekyllFile extends VinylFile {
    * Parses Front Matter (YAML) metadata out of the file header.
    */
   parseMetadata_() {
-    const metadataMatch = this.stringContents.match(/^(---|<!--docs:)([^]*?)^(---|-->)/m);
+    const metadataMatch = this.stringContents.match(FRONT_MATTER_PATTERN);
     return metadataMatch && yaml.safeLoad(metadataMatch[2]);
   }
 
