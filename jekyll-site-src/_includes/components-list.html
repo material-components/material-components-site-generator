@@ -1,0 +1,11 @@
+<nav>
+  <ul class="component-list">
+    {% for component in page.components %}
+      <li class="component-list-item {% if component.iconId %}component-list-item--icon-{{ component.iconId }}{% endif %}">
+        <a href="{{ page.basepath }}/{{  component.path  }}">
+          {{ component.name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
