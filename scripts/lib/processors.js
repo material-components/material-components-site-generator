@@ -18,7 +18,7 @@ function processJekyllFile(platformSite, file) {
   }
 
   file.path = path.resolve(path.join(BuildDir.STAGE, platformSite.basepath), file.relative);
-  file.basedir = BuildDir.STAGE;
+  file.base = BuildDir.STAGE;
   file.write();
 }
 
