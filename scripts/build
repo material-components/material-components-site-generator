@@ -14,7 +14,6 @@ const { PlatformSite } = require('./lib/platform-site');
 const { addWatchToWebpackConfig, setupFileWatches } = require('./lib/watch');
 const { execSync } = require('child_process');
 const { initCli } = require('./lib/cli');
-const { processJekyllFile, processDocsDirectory } = require('./lib/processors');
 
 
 // Parses and validates command line arguments.
@@ -38,15 +37,9 @@ reporter.step('Cleaning', () => {
 
 fs.copySync(BuildDir.JEKYLL, BuildDir.STAGE);
 
-reporter.step('Processing Jekyll files', () => {
+reporter.step('Processing files/directories', () => {
   platformSites.forEach((site) => {
-    site.files.forEach((f) => processJekyllFile(site, f));
-  });
-});
-
-reporter.step('Copying supplementary directories', () => {
-  platformSites.forEach((site) => {
-    site.directoryPaths.forEach((d) => processDocsDirectory(site, d));
+    site.prepareForBuild();
   });
 });
 
