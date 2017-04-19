@@ -1,0 +1,16 @@
+<li class="drawer-list__item">
+  <a class="drawer-list__link"
+     {% if top.url %}
+       href="{{ page.basepath }}{{ include.nav_item.url }}"
+     {% endif %}>
+    {{ include.nav_item.name }}
+  </a>
+
+  {% if include.nav_item.children %}
+    <ul class="drawer-list drawer-list--sublevel">
+      {% for child_nav_item in include.nav_item.children %}
+        {% include drawer-nav-item.html nav_item=child_nav_item %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>

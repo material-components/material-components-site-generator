@@ -1,53 +1,7 @@
-{% case page.section %}
-{% when 'components' %}
-  {% assign section = site.data.navigation.components %}
-{% when 'howto' %}
-  {% assign section = site.data.navigation.howto %}
-{% when 'contributing' %}
-  {% assign section = site.data.navigation.contributing %}
-{% endcase %}
 <nav class="mdc-permanent-drawer">
   <ul class="drawer-list">
-    {% for top in section.children %}
-      <li class="drawer-list__item">
-        <a class="drawer-list__link"
-           {% if top.url %}
-             href="{{ page.basepath }}{{ top.url }}"
-           {% endif %}>
-          {{ top.name }}
-        </a>
-        {% if top.children %}
-          <ul class="drawer-list drawer-list--sublevel">
-            {% for second in top.children %}
-              {% assign lcpage = page.url | downcase %}
-              {% assign lcitem = second.url | downcase %}
-              {% assign activepage = "" %}
-              {% if lcpage == lcitem %}
-                {% assign activepage = "active" %}
-              {% else %}
-                {% for third in second.children %}
-                  {% assign lcchild = third.url | downcase %}
-                  {% if lcpage == lcchild %}
-                    {% assign activepage = "active" %}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-              <li class="drawer-list__item {{ activepage }}">
-                <a class="drawer-list__link" href="{{ page.basepath }}{{ second.url }}">{{ second.name }}</a>
-                {% if second.children %}
-                  <ul class="drawer-list drawer-list--sublevel">
-                  {% for third in second.children %}
-                    <li class="drawer-list__item thirdlevel">
-                      <a class="drawer-list__link" href="{{ page.basepath }}{{ third.url }}">{{ third.name }}</a>
-                    </li>
-                  {% endfor %}
-                  </ul>
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </li>
+    {% for nav_item in page.navigation %}
+      {% include drawer-list-item.html nav_item=nav_item %}
     {% endfor %}
   </ul>
 </nav>
