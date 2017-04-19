@@ -1,4 +1,4 @@
-const deepcopy = require('deepcopy');
+const _ = require('lodash');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
 
@@ -34,7 +34,7 @@ class JekyllConfiguration {
   }
 
   mergeConfigs_() {
-    const mergedConfig = deepcopy(this.siteConfig);
+    const mergedConfig = _.cloneDeep(this.siteConfig);
 
     if (!mergedConfig['defaults']) {
       mergedConfig['defaults'] = [];
