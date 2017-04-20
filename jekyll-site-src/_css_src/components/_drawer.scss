@@ -27,5 +27,11 @@
     &:hover {
       text-decoration: underline;
     }
+
+    &--active {
+      @include link-styles {
+        color: $accent-color;
+      }
+    }
   }
 }

@@ -66,7 +66,7 @@ class JekyllFile extends VinylFile {
     if (!this.isValidJekyll) {
       this.stringContents = `---\n${metadataYaml}\n---\n${stringContents}`;
     } else {
-      this.stringContents = stringContents.replace(FRONT_MATTER_PATTERN, `$1${metadataYaml}$3`);
+      this.stringContents = stringContents.replace(FRONT_MATTER_PATTERN, `$1\n${metadataYaml}$3`);
     }
   }
 

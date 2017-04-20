@@ -1,9 +1,10 @@
 <li class="drawer-list__item">
-  <a class="drawer-list__link"
-     {% if top.url %}
+  <a class="drawer-list__link
+            {% if include.nav_item.url == page.path %}drawer-list__link--active{% endif %}"
+     {% if include.nav_item.url %}
        href="{{ page.basepath }}{{ include.nav_item.url }}"
      {% endif %}>
-    {{ include.nav_item.name }}
+    {{ include.nav_item.title }}
   </a>
 
   {% if include.nav_item.children %}
