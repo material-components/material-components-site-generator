@@ -1,10 +1,9 @@
 .welcome {
-  @include pad-to-page-width;
-
   background: $header-background;
   color: $header-text-color;
 
   &__content {
+    @include content-element;
     height: 640px - $toolbar-height;
     background: right -80px/800px url("/images/welcome-ios.svg") no-repeat;
   }

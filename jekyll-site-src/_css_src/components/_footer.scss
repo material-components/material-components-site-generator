@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    @include pad-to-page-width;
+    @include content-element;
     padding-top: 32px;
     padding-bottom: 24px;
     height: 100%;

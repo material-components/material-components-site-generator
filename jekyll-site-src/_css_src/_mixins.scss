@@ -1,11 +1,11 @@
-// TODO(shyndman): This needs a better name.
-@mixin pad-to-page-width {
+@mixin content-element {
   $min-content-padding: 16px;
 
-  padding: 0 calc((100% - #{$content-width}) / 2);
-  @include breakpoint($max: $content-width + 2 * $min-content-padding) {
-    padding: 0 16px;
-  }
+  max-width: $content-width + 2 * $min-content-padding;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 @mixin breakpoint($min: 0, $max: 0) {

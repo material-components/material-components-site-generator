@@ -24,7 +24,7 @@
   }
 
   &__row {
-    max-width: $content-width + nth($mdc-toolbar-padding, 2) * 2;
+    @include content-element;
     height: $toolbar-height;
   }
 
