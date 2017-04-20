@@ -55,5 +55,5 @@ function convertMarkedTextToHtml(markedText) {
 
 
 function htmlForMarkType(type) {
-  return `<span class="hidden-mark hidden-mark--${ type }"></span>`;
+  return `<span class="hidden-mark hidden-mark--${ type }"> </span>`;
 }
