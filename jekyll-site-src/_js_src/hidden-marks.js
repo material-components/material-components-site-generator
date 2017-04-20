@@ -10,7 +10,9 @@ const Selector = {
  * on the page.
  */
 const SPECIAL_CASES = {
-  'Material Components for iOS': 'Material•Components for•iOS¬'
+  'Material Components for iOS': 'Material•Components for•iOS¬',
+  'Material Components for Web': 'Material•Components for•Web¬',
+  'Material Components for Android': 'Material•Components for•Android¬',
 };
 
 
