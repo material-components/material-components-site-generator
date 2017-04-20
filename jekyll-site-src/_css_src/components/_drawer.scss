@@ -31,6 +31,7 @@
     &--active {
       @include link-styles {
         color: $accent-color;
+        text-decoration: none;
       }
     }
   }
