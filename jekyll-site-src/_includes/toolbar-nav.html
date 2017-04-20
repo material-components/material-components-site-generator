@@ -5,17 +5,22 @@ TODO(shyndman): This should be data driven.
 <nav class="toolbar-nav">
   <ul class="toolbar-nav__links">
     <li>
-      <a class="toolbar-nav-link" href="{{ page.basepath }}/docs/">
+      <a href="{{ page.basepath }}/docs/"
+         class="toolbar-nav-link
+             {% if page.section == 'docs' %}toolbar-nav-link--active{% endif %}">
         <span class="toolbar-nav-link__text">Docs</span>
       </a>
     </li>
     <li>
-      <a class="toolbar-nav-link" href="{{ page.basepath }}/listing.html">
+      <a href="{{ page.basepath }}/listing.html"
+         class="toolbar-nav-link
+             {% if page.section == 'components' %}toolbar-nav-link--active{% endif %}">
         <span class="toolbar-nav-link__text">Components</span>
       </a>
     </li>
     <li>
-      <a class="toolbar-nav-link" href="{{ page.repo_url }}">
+      <a href="{{ page.repo_url }}"
+         class="toolbar-nav-link">
         <span class="toolbar-nav-link__text">View on GitHub</span>
       </a>
     </li>
