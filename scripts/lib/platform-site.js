@@ -132,10 +132,6 @@ class PlatformSite {
     // configuration.
     switch (sectionNav.name) {
       case 'components':
-        return sectionNav.items.filter((item) => {
-          return item.url != 'listing.html'
-        });
-
       case 'docs':
         return sectionNav.items[0].children;
 
