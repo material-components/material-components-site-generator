@@ -41,14 +41,24 @@ class SectionNavigation {
     const metadata = file.jekyllMetadata;
     const dir = this.ensureDir_(file.relative);
 
+    const child = {
+      title: metadata.navTitle || metadata.title,
+    };
+
+    if (metadata.iconId) {
+      child.iconId = metadata.iconId;
+    }
+
+    if (metadata.excerpt) {
+      child.excerpt = metadata.excerpt;
+    }
+
     if (file.basename == 'index.md' || file.basename == 'index.html') {
-      dir.title = metadata.navTitle || metadata.title;
+      Object.assign(dir, child);
     } else {
       file.extname = '.html';
-      dir.children.push({
-        title: metadata.title,
-        url: file.relative,
-      });
+      child.url = file.relative;
+      dir.children.push(child);
     }
   }
 
