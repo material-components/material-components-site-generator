@@ -149,7 +149,7 @@ function renderSimpleCodeRenderer(source, lineno) {
     value: source.innerText.trim(),
     mode: mode,
     lineNumbers: lineno || false,
-    readOnly: 'true'
+    readOnly: true
   });
 
   // If the language is Shell, this piece of logic process user path properly
@@ -175,7 +175,7 @@ function renderSimpleCodeRenderer(source, lineno) {
  */
 function renderComplexCodeRenderer(renderer, id) {
   // Allowed Language for complex material code render.
-  var complexRendererAllowedLang = ['Objective-C', 'Swift'];
+  var complexRendererAllowedLang = ['Swift', 'Objective-C'];
 
   // A Utility class to set/get page selected language.
   var selectedLanguage = {
@@ -246,8 +246,7 @@ function renderComplexCodeRenderer(renderer, id) {
   var availableLanguage = [];
   // Before generate:
   // 1. Take care of invalid code snippet case.
-  for (let i = 0; sources && i < sources.length; i++) {
-    var source = sources[i];
+  Array.from(sources).forEach((source) => {
     var kramdownLanguage = source.classList.length == 0 ? '' :
       source.classList[0].replace('language-', '');
     var language = kramdownToCodeMirrorMap[kramdownLanguage].language;
@@ -256,7 +255,8 @@ function renderComplexCodeRenderer(renderer, id) {
     } else {
       availableLanguage.push(language);
     }
-  }
+  });
+
   // 2. Take care of non code snippet case after invalid snippets are deleted.
   if (!sources || sources.length === 0) {
     renderer.parentNode.removeChild(renderer);
