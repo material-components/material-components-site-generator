@@ -104,12 +104,7 @@ class PlatformSite {
 
   buildNavigation_() {
     for (const [section, sectionFiles] of this.filesBySection) {
-      const sectionNav = new SectionNavigation(section, this.basepath);
-      for (const file of sectionFiles) {
-        sectionNav.add(file);
-      }
-
-      // Apply application-specific tweaks to the navigation.
+      const sectionNav = new SectionNavigation(section, sectionFiles, this.basepath);
       const navItems = this.tweakNavigation_(sectionNav);
 
       // Now that we've constructed the navigation for this section, we write

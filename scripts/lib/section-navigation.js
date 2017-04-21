@@ -10,14 +10,18 @@ class SectionNavigation {
    * @param {string} name The name of the section to which this navigation
    *     applies. This corresponds to the section field in the Front Matter
    *     metadata.
+   * @
    */
-  constructor(name, basepath='') {
+  constructor(name, files, basepath='') {
     this.name = name;
     this.basepath_ = basepath;
     this.root_ = {
       name,
       children: [],
     };
+
+    this.addAll_(files);
+    this.sort_();
   }
 
   /**
@@ -28,9 +32,19 @@ class SectionNavigation {
   }
 
   /**
-   * Adds a navigation entry for the provided file.
+   * @private
    */
-  add(file) {
+  addAll_(files) {
+    for (const file of files) {
+      this.add_(file);
+    }
+  }
+
+  /**
+   * Adds a navigation entry for the provided file.
+   * @private
+   */
+  add_(file) {
     // Clone the file so we can mutate it without worry.
     file = file.clone();
 
@@ -43,12 +57,11 @@ class SectionNavigation {
 
     const child = {
       title: metadata.navTitle || metadata.title,
+      navPriority: metadata.navPriority || 0,
     };
-
     if (metadata.iconId) {
       child.iconId = metadata.iconId;
     }
-
     if (metadata.excerpt) {
       child.excerpt = metadata.excerpt;
     }
@@ -65,6 +78,7 @@ class SectionNavigation {
   /**
    * Creates the directory in the navigation datastructure if it doesn't already
    * exist.
+   * @private
    */
   ensureDir_(docPath) {
     const dir = path.dirname(docPath);
@@ -91,6 +105,23 @@ class SectionNavigation {
     }
 
     return node;
+  }
+
+  /**
+   * Sorts each branch of the tree. This is called after construction because
+   * not enough information is available while the nodes are being added.
+   * @private
+   */
+  sort_(node=this.root_) {
+    node.children.sort((a, b) => {
+      return  a.navPriority != b.navPriority ?
+          b.navPriority - a.navPriority : // desc
+          a.title.localeCompare(b.title); // asc
+    });
+
+    for (const child of node.children) {
+      this.sort_(child);
+    }
   }
 }
 
