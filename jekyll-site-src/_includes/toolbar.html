@@ -1,7 +1,7 @@
 <header class="mdc-toolbar mdc-toolbar--fixed {% if include.no_shadow %}mdc-toolbar--no-shadow{% endif %}">
   <div class="mdc-toolbar__row">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-      <a class="mdc-toolbar__title-link" href="{{ page.basepath }}">
+      <a class="mdc-toolbar__title-link" href="{{ include.title_link | default: page.basepath }}">
         <h1 class="mdc-toolbar__title">
           {{ include.title }}
         </h1>
