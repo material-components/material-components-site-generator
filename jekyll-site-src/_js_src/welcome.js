@@ -19,9 +19,8 @@ export function initWelcome() {
   }
 
   invalidateScroll();
-  window.addEventListener('scroll', () => {
-    invalidateScroll();
-  });
+  window.addEventListener('scroll', invalidateScroll);
+  window.addEventListener('resize', invalidateScroll);
 }
 
 

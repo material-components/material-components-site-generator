@@ -116,7 +116,8 @@ class PlatformSite {
         }
 
         metadata.navigation = navItems;
-        // TODO(shyndman): You have to set this to write it back. That's weird.
+        // TODO(shyndman): You have to set this to write it back...which is
+        // weird.
         file.jekyllMetadata = metadata;
       }
     }

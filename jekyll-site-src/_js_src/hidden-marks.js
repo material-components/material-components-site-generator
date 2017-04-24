@@ -41,9 +41,8 @@ function addMarksToElement(el) {
 function addMarksToText(text) {
   return text in SPECIAL_CASES ?
       SPECIAL_CASES[text] :
-      text
-        .replace(/\s/g, '•')
-        .replace(/$/, '¬');
+      text.replace(/\s/g, '•')
+          .replace(/$/, '¬');
 }
 
 

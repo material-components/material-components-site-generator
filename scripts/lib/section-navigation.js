@@ -10,7 +10,6 @@ class SectionNavigation {
    * @param {string} name The name of the section to which this navigation
    *     applies. This corresponds to the section field in the Front Matter
    *     metadata.
-   * @
    */
   constructor(name, files, basepath='') {
     this.name = name;
