@@ -1,0 +1,30 @@
+.platform-link-list {
+  display: flex;
+  list-style: none;
+  margin-left: 0;
+}
+
+.platform-link-list-item {
+  &:first-child {
+    margin-left: -23px;
+  }
+
+  > a {
+    @include link-styles {
+      color: $white;
+      text-decoration: none;
+    }
+
+    position: relative;
+    padding: 24px 23px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 14px;
+      border-bottom: 2px solid $white;
+    }
+  }
+}

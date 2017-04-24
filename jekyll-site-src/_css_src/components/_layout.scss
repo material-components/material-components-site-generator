@@ -3,6 +3,9 @@
 
   display: flex;
   align-items: stretch;
-
   margin-top: 78px + $toolbar-height;
+
+  &--dense {
+    margin-top: 56px + $toolbar-height;
+  }
 }

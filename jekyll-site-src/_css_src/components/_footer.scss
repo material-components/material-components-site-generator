@@ -1,9 +1,13 @@
 .footer {
   @include mdc-typography(body1);
 
-  background: $black-02;
+  background: $grey-50;
   height: 192px;
   margin-top: 144px;
+
+  &--dense {
+    margin-top: 86px;
+  }
 
   &__content {
     display: flex;

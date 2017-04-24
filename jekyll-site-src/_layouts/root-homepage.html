@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html class="mdc-typography">
   {% include head.html %}
-  <body id="homepage" class="mdc-typography">
-    {% include toolbar.html title="Material Design" title_link="/" github_only=true %}
-
-    {% include footer.html %}
+  <body class="root-homepage mdc-typography">
+    {% include toolbar.html title="Material Design" logo="material-logo.svg" title_link="/" is_root=true %}
+    {% include welcome.html is_root=true %}
+    <div class="page-content page-content--dense root-homepage__content">
+      {{ content }}
+    </div>
+    {% include footer.html is_dense=true %}
     {% include frontend-templates.html %}
     {% include scripts.html %}
   </body>

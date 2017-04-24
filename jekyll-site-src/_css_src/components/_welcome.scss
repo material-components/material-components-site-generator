@@ -1,11 +1,40 @@
 .welcome {
+  $component: &;
   background: $header-background;
   color: $header-text-color;
 
   &__content {
     @include content-element;
-    height: 640px - $toolbar-height;
-    background: right -80px/800px url("/images/welcome-ios.svg") no-repeat;
+
+    display: flex;
+    flex-direction: row;
+    height: 640px;
+
+    &::after {
+      content: '';
+      background: right top / contain url("/images/welcome-ios.svg") no-repeat;
+      flex: 1;
+      margin: 140px 64px 0 24px;
+    }
+
+    #{$component}--root & {
+      flex-direction: row-reverse;
+
+      &::after {
+        background-position: top left;
+        background-image: url("/images/welcome-root.svg");
+        margin-top: 180px;
+      }
+    }
+
+    @include breakpoint($max: 1280px) {
+      height: 50vw;
+    }
+  }
+
+  &__text {
+    margin: 180px 0 240px;
+    max-width: 412px;
   }
 
   &__title {
@@ -13,10 +42,20 @@
     font-size: 56px;
     line-height: 72px;
     max-width: 412px;
-    padding-top: 160px;
 
     .hidden-mark {
       color: $white-50;
     }
+  }
+
+  &__blurb {
+    font-family: $ui-font-family;
+    font-size: 24px;
+    line-height: 40px;
+    margin-top: 32px;
+  }
+
+  &__platforms {
+    margin-top: 48px;
   }
 }
