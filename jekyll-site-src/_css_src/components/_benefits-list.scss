@@ -1,0 +1,14 @@
+.benefits-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.benefits-list-item {
+  line-height: 24px;
+  margin-right: 48px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
