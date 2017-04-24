@@ -1,4 +1,6 @@
 .mdc-toolbar {
+  $component: &;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,14 +8,19 @@
   background: $header-background;
   color: $header-text-color;
   height: $toolbar-height;
-  transition: box-shadow 200ms ease-in-out;
   z-index: 3;
 
   &__title {
-    background: no-repeat left/44px url('/images/mdc-logo.svg');
+    background: no-repeat left/contain url('/images/mdc-logo.svg');
     font-family: $ui-font-family;
-    padding: 2px 0 5px 64px;
+    height: 32px;
+    padding: 2px 0 5px 50px;
     text-transform: uppercase;
+
+    #{$component}--root & {
+      background-image: url('/images/material-logo.svg');
+      background-size: contain;
+    }
   }
 
   &__title-link {

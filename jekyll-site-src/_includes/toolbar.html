@@ -1,4 +1,6 @@
-<header class="mdc-toolbar mdc-toolbar--fixed {% if include.no_shadow %}mdc-toolbar--no-shadow{% endif %}">
+<header class="mdc-toolbar mdc-toolbar--fixed
+    {% if include.no_shadow %}mdc-toolbar--no-shadow{% endif %}
+    {% if include.is_root %}mdc-toolbar--root{% endif %}">
   <div class="mdc-toolbar__row">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
       <a class="mdc-toolbar__title-link" href="{{ include.title_link | default: page.basepath }}">
@@ -8,7 +10,7 @@
       </a>
     </section>
     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-      {% include toolbar-nav.html %}
+      {% include toolbar-nav.html github_only=include.is_root %}
     </section>
   </div>
 </header>
