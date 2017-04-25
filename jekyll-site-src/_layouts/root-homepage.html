@@ -2,7 +2,12 @@
 <html class="mdc-typography">
   {% include head.html %}
   <body class="root-homepage mdc-typography">
-    {% include toolbar.html title="Material Design" logo="material-logo.svg" title_link="/" is_root=true %}
+    {% include toolbar.html
+        title="Material Design"
+        title_link="/"
+        logo="material-logo.svg"
+        no_shadow=true
+        is_root=true %}
     {% include welcome.html is_root=true %}
     <div class="page-content page-content--dense root-homepage__content">
       {{ content }}

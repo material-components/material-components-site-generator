@@ -50,7 +50,6 @@ class PlatformSite {
         if (!map.has(section)) {
           map.set(section, []);
         }
-
         map.get(section).push(file);
         return map;
       }, new Map);

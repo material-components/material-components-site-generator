@@ -13,6 +13,7 @@ export function initAnchorScrollCorrection(toolbarSelector) {
   });
 }
 
+
 function scrollToAnchor(anchor, toolbarSelector) {
   if (anchor[0] != '#') {
     return false;
