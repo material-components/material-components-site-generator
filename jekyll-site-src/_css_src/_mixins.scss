@@ -26,6 +26,12 @@
   }
 }
 
+@mixin media-phone {
+  @include breakpoint($max: 720px) {
+    @content;
+  }
+}
+
 @mixin link-styles {
   &,
   &:link,

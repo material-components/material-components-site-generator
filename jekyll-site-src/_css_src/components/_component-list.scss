@@ -1,30 +1,77 @@
 .component-list {
   display: flex;
   flex-wrap: wrap;
+
+  @include media-phone {
+    flex-direction: column;
+    margin-top: 32px;
+  }
+
+  margin-top: 72px;
 }
 
 .component-list-item {
-  display: inline-flex;
-  width: calc(50% - 100px);
+  @include breakpoint($min: 720px, $max: 1280px) {
+    width: calc(284px + 240 * (100vw - 720px) / (1280 - 720));
+  }
+
+  @include media-phone {
+    width: 100%;
+  }
+
+  width: 524px;
   margin-bottom: 64px;
 
-  &::before {
-    content: '';
-    display: inline-block;
+  &__link {
+    @include link-styles {
+      text-decoration: none;
+    }
 
-    min-width: 80px;
-    height: 80px;
-    margin-right: 48px;
+    display: inline-flex;
 
-    background-image: url('/images/component_icons/ic_component_24px.svg');
-    background-size: cover;
+    &::before {
+      content: '';
+      display: inline-block;
+
+      min-width: 80px;
+      height: 80px;
+
+      background-image: url('/images/component_icons/ic_component_24px.svg');
+      background-size: cover;
+
+      @include breakpoint($min: 720px, $max: 1280px) {
+        margin-right: calc(24px + 24 * (100vw - 720px) / (1280 - 720));
+      }
+
+      @include media-phone {
+        margin-right: 24px;
+      }
+
+      margin-right: 48px;
+    }
   }
 
-  &:nth-child(2n + 1) {
+  // Ugh...needed a little bit of extra specificity.
+  & &__title {
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__description {
+    font-family: Roboto;
+    line-height: 24px;
+  }
+
+  &:nth-child(odd) {
+    @include media-phone {
+      margin-right: 80px;
+    }
+
+    @include breakpoint($min: 720px, $max: 1280px) {
+      margin-right: calc(80px + 120 * (100vw - 720px) / (1280 - 720));
+    }
+
     margin-right: 200px;
-  }
-
-  &__title {
-    margin-top: 0 !important;
   }
 }

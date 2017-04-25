@@ -8,4 +8,8 @@
   &--dense {
     margin-top: 56px + $toolbar-height;
   }
+
+  @include media-phone {
+    margin-top: 32px + $toolbar-height;
+  }
 }

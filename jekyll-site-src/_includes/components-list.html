@@ -1,15 +1,17 @@
+<h1>Components</h1>
 <nav>
   <ul class="component-list">
     {% for component in page.navigation %}
       <li class="component-list-item {% if component.iconId %}component-list-item--icon-{{ component.iconId }}{% endif %}">
-        <div class="component-list-item__content">
-          <a href="{{ page.basepath }}{{  component.url  }}">
+        <a class="component-list-item__link"
+           href="{{ page.basepath }}{{  component.url  }}">
+          <div class="component-list-item__text">
             <h2 class="component-list-item__title">{{ component.title }}</h2>
-          </a>
-          <div>
-            {{ component.excerpt }}
+            <div class="component-list-item__description">
+              {{ component.excerpt }}
+            </div>
           </div>
-        </div>
+        </a>
       </li>
     {% endfor %}
   </ul>
