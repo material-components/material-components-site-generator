@@ -44,4 +44,19 @@
     color: $black-54;
     text-decoration: none;
   }
+
+  @include media-phone {
+    height: 114px;
+
+    &__content {
+      padding-bottom: 12px;
+      padding-top: 24px;
+    }
+
+    &__link {
+      @include link-styles {
+        font-size: .75rem;
+      }
+    }
+  }
 }
