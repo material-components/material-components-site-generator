@@ -101,10 +101,25 @@ class JekyllFile extends VinylFile {
     }
 
     this.stringContents = stringContents
+        // Uncomment liquid tags and HTML.
+        //
         // Note that [^] matches any character including newlines, whereas "."
         // does not. For anyone who's wondering, [^] the negation of the empty
         // set.
         .replace(/<!--([{<][^]*?[>}])-->/g, '$1')
+        // Move list item styling template tags into the correct position.
+        //
+        // Custom list item styling syntax had to be introduced so that the
+        // template tags could be successfully commented out when displayed in
+        // GitHub, which was not an option with the syntax supported by Jekyll.
+        //
+        // From:
+        //     * This is a list item
+        //       {: .list-item-css-class }
+        // To:
+        //     * {: .list-item-css-class } This is a list item
+        //
+        .replace(/^(\s*)([*-])(\s+)([^\n]+)\n\1\s\3({:[^}]+})/gm, '$1$2 $5 $4')
         // Rewrite links that point to markdown files to point to html files
         // instead.
         .replace(/\[([^\]]+)\]\((.*)\.md\)/g, (match, p1, p2) => {
