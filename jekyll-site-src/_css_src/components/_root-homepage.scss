@@ -4,4 +4,10 @@
   &__content {
     color: $white;
   }
+
+  a {
+    @include link-styles {
+      color: $white;
+    }
+  }
 }

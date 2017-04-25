@@ -12,4 +12,8 @@
   @include media-phone {
     margin-top: 32px + $toolbar-height;
   }
+
+  #homepage & {
+    margin-top: 80px;
+  }
 }

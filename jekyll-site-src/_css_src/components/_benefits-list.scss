@@ -1,10 +1,15 @@
 .benefits-list {
   display: flex;
   list-style: none;
-  margin: 0;
+  margin: 0 0 168px;
+
+  &--dense {
+    margin: 0;
+  }
 }
 
 .benefits-list-item {
+  flex: 1 0 0;
   line-height: 24px;
   margin-right: 48px;
 
