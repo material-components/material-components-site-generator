@@ -20,11 +20,18 @@
 
     &::after {
       content: '';
+
       position: absolute;
+      bottom: 18px;
       left: 22px;
       right: 22px;
-      bottom: 14px;
+
       border-bottom: 2px solid $white;
+      transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    &:hover::after {
+      transform: translateY(3px);
     }
   }
 }
