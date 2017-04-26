@@ -8,7 +8,7 @@
   background: $header-background;
   color: $header-text-color;
   height: $toolbar-height;
-  z-index: 3;
+  z-index: 7; // Highest z-index used by CodeMirror + 1
 
   &__title {
     background: no-repeat left/40px url('/images/mdc-logo.svg');
