@@ -9,6 +9,7 @@
 
   h2 {
     @include mdc-typography(subheading2);
+    font-size: 20px;
     margin: 24px 0 12px;
   }
 
