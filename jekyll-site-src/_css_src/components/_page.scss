@@ -35,11 +35,11 @@
 
     #{$component}__content {
       color: $white;
-    }
 
-    a {
-      @include link-styles {
-        color: $white;
+      a {
+        @include link-styles {
+          color: $white;
+        }
       }
     }
   }
