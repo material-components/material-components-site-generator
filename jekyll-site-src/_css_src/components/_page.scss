@@ -1,0 +1,46 @@
+.page {
+  $component: &;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  &__content {
+    @include content-element;
+
+    display: flex;
+    margin-top: 78px + $toolbar-height;
+
+    &--dense {
+      margin-top: 56px + $toolbar-height;
+    }
+
+    @include media-phone {
+      margin-top: 32px + $toolbar-height;
+    }
+  }
+
+  &__flex-element {
+    flex: 1;
+  }
+
+  &--homepage {
+    #{$component}__content {
+      margin-top: 80px;
+    }
+  }
+
+  &--root-homepage {
+    background: $grey-900;
+
+    #{$component}__content {
+      color: $white;
+    }
+
+    a {
+      @include link-styles {
+        color: $white;
+      }
+    }
+  }
+}

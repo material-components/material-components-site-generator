@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="mdc-typography">
   {% include head.html %}
-  <body class="{{ page.layout }} {{ page.section }}">
+  <body class="page page--detail page--{{ page.section }}">
     {% include toolbar.html title=page.site_title %}
 
-    <div class="page-content">
+    <div class="page__content page__flex-element">
       {% include drawer.html %}
       <article class="article {% if page.iconId %}article--icon-{{ page.iconId }}{% endif %}">
         {{ content }}

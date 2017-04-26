@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="mdc-typography">
   {% include head.html %}
-  <body class="{{ page.layout }} {{ page.section }} mdc-typography">
+  <body class="page page--landing-no-drawer page--{{ page.section }}">
     {% include toolbar.html title=page.site_title %}
 
-    <div class="page-content">
+    <div class="page__content page__flex-element">
       <article class="article">
         {{ content }}
       </article>
