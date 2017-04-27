@@ -1,12 +1,24 @@
 .page {
   $component: &;
+  $drawer-width: 304px;
+  $drawer-right-margin: 24px;
 
   display: flex;
   flex-direction: column;
+
+  // The footer should always appear beneath the viewport, regardless of its
+  // size.
   min-height: calc(100vh + #{$footer-height});
+
+  // The flex element expands to fill up the page vertically. This has the
+  // effect of pushing the footer below the fold.
+  &__flex-element {
+    flex: 1;
+  }
 
   &__content {
     @include content-element;
+    width: 100%;
 
     display: flex;
     margin-top: 78px + $toolbar-height;
@@ -14,14 +26,20 @@
     &--dense {
       margin-top: 56px + $toolbar-height;
     }
-
-    @include media-phone {
-      margin-top: 32px + $toolbar-height;
-    }
   }
 
-  &__flex-element {
-    flex: 1;
+  &__article {
+    width: 100%;
+  }
+
+  &__drawer + &__article {
+    width: calc(100% - (#{$drawer-width} + #{$drawer-right-margin}))
+  }
+
+  &__drawer {
+    width: $drawer-width;
+    margin-top: -8px;
+    margin-right: $drawer-right-margin;
   }
 
   &--homepage {
@@ -46,5 +64,17 @@
 
   @include media-phone {
     min-height: calc(100vh + #{$mobile-footer-height});
+
+    &__content {
+      margin-top: 32px + $toolbar-height;
+    }
+
+    &__drawer {
+      display: none;
+    }
+
+    &__drawer + &__article {
+      width: 100%;
+    }
   }
 }
