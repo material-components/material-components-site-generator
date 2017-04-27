@@ -62,6 +62,12 @@
   // Data table
 
   table {
+    // Display as block so that we can introduce a horizontal scroll on smaller
+    // screens.
+    display: block;
+    border: 1px solid $grey-200;
+    overflow-x: auto;
+
     margin: 8px 0 32px;
   }
 
@@ -69,10 +75,19 @@
   td {
     border: 1px solid $grey-200;
     padding: 12px 12px 12px 24px;
+
+    &:first-child {
+      border-left: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
   }
 
   th {
     background: $grey-50;
+    border-top: none;
     color: $black-54;
     font-weight: 500;
     text-align: left;
@@ -82,6 +97,10 @@
     &:first-child code {
       background: 0;
     }
+  }
+
+  tr:last-child > td {
+    border-bottom: none;
   }
 
   &--full-width {
