@@ -4,7 +4,7 @@ const path = require('path');
 const reporter = require('./reporter');
 const yaml = require('js-yaml');
 
-const { JekyllFile } = require('./jekyll-file');
+const { DocumentationFile } = require('./documentation-file');
 const { PLATFORM_CONFIG_PATH, BuildDir, FilePattern } = require('./project-paths');
 const { SectionNavigation } = require('./section-navigation');
 const { sync: globSync } = require('glob');
@@ -30,7 +30,7 @@ class PlatformSite {
   get files() {
     if (!this.files_) {
       this.files_ = globSync(path.join(this.repoPath, FilePattern.JEKYLL_FILES), GLOB_OPTIONS)
-          .map((filePath) => JekyllFile.readFromPath(filePath, this.repoPath))
+          .map((filePath) => DocumentationFile.readFromPath(filePath, this.repoPath))
           .filter((file) => file.isValidJekyll);
     }
 

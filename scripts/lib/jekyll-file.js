@@ -3,7 +3,6 @@ const fs = require('fs-extra');
 const yaml = require('js-yaml');
 
 
-const JEKYLL_README_PREFIX = '<!--docs:'
 const FRONT_MATTER_DELIMITER = '---';
 const FRONT_MATTER_PATTERN = /^(---|<!--docs:)([^]*?)^(---|-->)/m;
 
@@ -75,47 +74,7 @@ class JekyllFile extends VinylFile {
    */
   get isValidJekyll() {
     const { stringContents } = this;
-    return stringContents.startsWith(JEKYLL_README_PREFIX) ||
-           stringContents.startsWith(FRONT_MATTER_DELIMITER);
-  }
-
-  /**
-   * Uncomments all Liquid/HTML code that was commented out as to not appear
-   * in Github.
-   */
-  uncommentHiddenCode() {
-    let { stringContents } = this;
-    if (stringContents.includes(JEKYLL_README_PREFIX)) {
-      stringContents = stringContents
-          .replace(JEKYLL_README_PREFIX, FRONT_MATTER_DELIMITER)
-          .replace(/-->/, FRONT_MATTER_DELIMITER)
-    }
-
-    this.stringContents = stringContents
-        // Uncomment liquid tags and HTML.
-        //
-        // Note that [^] matches any character including newlines, whereas "."
-        // does not. For anyone who's wondering, [^] the negation of the empty
-        // set.
-        .replace(/<!--([{<][^]*?[>}])-->/g, '$1')
-        // Move list item styling template tags into the correct position.
-        //
-        // Custom list item styling syntax had to be introduced so that the
-        // template tags could be successfully commented out when displayed in
-        // GitHub, which was not an option with the syntax supported by Jekyll.
-        //
-        // From:
-        //     * This is a list item
-        //       {: .list-item-css-class }
-        // To:
-        //     * {: .list-item-css-class } This is a list item
-        //
-        .replace(/^(\s*)([*-])(\s+)([^\n]+)\n\1\s\3({:[^}]+})/gm, '$1$2 $5 $4')
-        // Rewrite links that point to markdown files to point to html files
-        // instead.
-        .replace(/\[([^\]]+)\]\((.*)\.md\)/g, (match, p1, p2) => {
-          return /^https?:\/\//.test(p2) ? match : `[${p1}](${p2}.html)`;
-        });
+    return stringContents.startsWith(FRONT_MATTER_DELIMITER);
   }
 
   /**
@@ -139,20 +98,6 @@ class JekyllFile extends VinylFile {
   }
 
   /**
-   * Reads the file at path, and constructs a new JekyllFile instance with its
-   * contents.
-   */
-  static readFromPath(filePath, base, encoding='utf8') {
-    return new JekyllFile({
-      path: filePath,
-      base,
-      encoding,
-      stat: fs.lstatSync(filePath),
-      contents: fs.readFileSync(filePath),
-    });
-  }
-
-  /**
    * Required by Vinyl subclasses.
    */
   static isCustomProp(name) {
@@ -163,4 +108,5 @@ class JekyllFile extends VinylFile {
 
 module.exports = {
   JekyllFile,
+  FRONT_MATTER_DELIMITER,
 };
