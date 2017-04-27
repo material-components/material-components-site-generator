@@ -9,7 +9,7 @@ class Reporter {
   }
 
   step(stepLabel, runStep, { noCheck } = { noCheck: false }) {
-    this.log_(chalk.cyan(stepLabel) + '...' + (noCheck ? '\n' : ''));
+    this.log_(chalk.cyan(stepLabel + '...') + (noCheck ? '\n' : ''));
     this.inStep_ = true;
 
     try {
@@ -22,6 +22,15 @@ class Reporter {
       this.loggedInStep_ = false;
       this.inStep_ = false;
     }
+  }
+
+  fileWarning(filePath, warningMessage) {
+    if (this.inStep_) {
+      this.logLine_();
+    }
+
+    this.logLine_(`  Warning: ${chalk.yellow(filePath)}`);
+    this.logLine_(`  ${warningMessage}`);
   }
 
   fatal(err) {
