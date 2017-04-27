@@ -1,7 +1,9 @@
 const _ = require('lodash');
 const fs = require('fs-extra');
 const path = require('path');
+const reporter = require('./reporter');
 const yaml = require('js-yaml');
+
 const { JekyllFile } = require('./jekyll-file');
 const { PLATFORM_CONFIG_PATH, BuildDir, FilePattern } = require('./project-paths');
 const { SectionNavigation } = require('./section-navigation');
@@ -73,12 +75,12 @@ class PlatformSite {
     file.uncommentHiddenCode();
 
     const fileMetadata = file.jekyllMetadata;
-    if (fileMetadata.path) {
-      this.applyPathRemapping_(file, fileMetadata.path);
-    } else if (file.shouldBecomeIndex) {
-      file.basename = 'index.md';
+    if (!fileMetadata.path) {
+      reporter.fileWarning(file.path, 'Cannot copy. No path metadata defined.');
+      return;
     }
 
+    this.applyPathRemapping_(file, fileMetadata.path);
     file.path = path.resolve(path.join(BuildDir.STAGE, this.basepath), file.relative);
     file.base = BuildDir.STAGE;
   }

@@ -15,7 +15,6 @@ const BUILT_IN_PROPS = new Set([
   'isValidJekyll',
   'jekyllMetadata_',
   'jekyllMetadata',
-  'shouldBecomeIndex',
   'stringContents',
 ]);
 
@@ -78,14 +77,6 @@ class JekyllFile extends VinylFile {
     const { stringContents } = this;
     return stringContents.startsWith(JEKYLL_README_PREFIX) ||
            stringContents.startsWith(FRONT_MATTER_DELIMITER);
-  }
-
-  /**
-   * @return {boolean} Whether the file is intended to be used as index.html for
-   *     its directory.
-   */
-  get shouldBecomeIndex() {
-    return /(site-index|README)\.md$/.test(this.basename);
   }
 
   /**
