@@ -1,11 +1,14 @@
 <header class="mdc-toolbar mdc-toolbar--fixed
     {% if include.no_shadow %}mdc-toolbar--no-shadow{% endif %}
-    {% if include.is_root %}mdc-toolbar--root{% endif %}">
+    {% if include.is_root %}mdc-toolbar--root{% else %}mdc-toolbar--platform{% endif %}">
   <div class="mdc-toolbar__row">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
       <a class="mdc-toolbar__title-link" href="{{ include.title_link | default: page.basepath }}">
-        <h1 class="mdc-toolbar__title">
+        <h1 class="mdc-toolbar__title mdc-toolbar__title--full">
           {{ include.title }}
+        </h1>
+        <h1 class="mdc-toolbar__title mdc-toolbar__title--mini">
+          {{ include.title | replace: 'Material Components for ', '' }}
         </h1>
       </a>
     </section>

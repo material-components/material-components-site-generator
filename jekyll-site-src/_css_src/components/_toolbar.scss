@@ -17,10 +17,15 @@
     height: 32px;
     padding: 2px 0 5px 50px;
     text-transform: uppercase;
+    white-space: nowrap;
 
     #{$component}--root & {
       background-image: url('/images/material-logo.svg');
       background-size: contain;
+    }
+
+    &--mini {
+      display: none;
     }
   }
 
@@ -39,6 +44,39 @@
   &--no-shadow {
     box-shadow: none;
   }
+
+  @include breakpoint($max: 820px) {
+    &__title {
+      &--full {
+        display: none;
+      }
+
+      &--mini {
+        display: block;
+      }
+    }
+  }
+
+  &--platform {
+    @include breakpoint($max: 640px) {
+      height: auto;
+
+      #{$component}__title-link {
+        padding: 16px 0 0 16px;
+      }
+
+      // Regardless of alignment class, justify to the start.
+      #{$component}__section {
+        justify-content: flex-start;
+      }
+
+      #{$component}__row {
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+      }
+    }
+  }
 }
 
 .toolbar-nav {
@@ -49,9 +87,19 @@
     display: flex;
     height: 100%;
   }
+
+  .mdc-toolbar--platform & {
+    @include breakpoint($max: 640px) {
+      align-self: flex-start;
+      height: 48px;
+      margin-top: 0;
+    }
+  }
 }
 
 .toolbar-nav-link {
+  $component: &;
+
   @include link-styles {
     color: $white;
     fill: $white;
@@ -79,5 +127,42 @@
     }
 
     border-bottom: 2px solid $accent-color;
+  }
+
+  // Icon representations are only used for mobile layouts.
+  &__icon {
+    display: none;
+  }
+
+  .mdc-toolbar--platform & {
+    @include breakpoint($max: 960px) {
+      &--github #{$component}__text {
+        display: none;
+      }
+
+      &--github #{$component}__icon {
+        display: block;
+      }
+    }
+
+    @include breakpoint($min: 451px, $max: 640px) {
+      &--github #{$component}__text {
+        display: block;
+      }
+
+      &--github #{$component}__icon {
+        display: none;
+      }
+    }
+  }
+
+  @include breakpoint($max: 450px) {
+    &--github &__text {
+      display: none;
+    }
+
+    &--github &__icon {
+      display: block;
+    }
   }
 }
