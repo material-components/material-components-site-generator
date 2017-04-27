@@ -2,8 +2,8 @@
   @include mdc-typography(body1);
 
   background: $grey-50;
-  height: 192px;
   margin-top: 144px;
+  height: $footer-height;
 
   &--dense {
     margin-top: 86px;
@@ -46,7 +46,7 @@
   }
 
   @include media-phone {
-    height: 114px;
+    height: $mobile-footer-height;
 
     &__content {
       padding-bottom: 12px;
