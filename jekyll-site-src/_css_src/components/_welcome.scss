@@ -44,7 +44,10 @@
     max-width: 412px;
 
     .hidden-mark {
-      color: $white-50;
+      &::before,
+      &::after {
+        color: $white-50;
+      }
     }
   }
 

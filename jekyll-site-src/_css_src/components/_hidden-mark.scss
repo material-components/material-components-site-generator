@@ -1,12 +1,17 @@
 .hidden-mark {
   display: inline-block;
-  color: #9b9b9b;
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    color: #9b9b9b;
+  }
 
   &--dot::before {
     content: '•';
   }
 
-  &--return::before {
+  &--return::after {
     content: '¬';
   }
 }

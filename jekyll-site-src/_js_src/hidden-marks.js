@@ -49,10 +49,11 @@ function addMarksToText(text) {
 function convertMarkedTextToHtml(markedText) {
   return markedText
       .replace(/•/g, htmlForMarkType('dot'))
-      .replace(/¬/, htmlForMarkType('return'));
+      .replace(/(\w+)¬/, (match, precedingWord) =>
+          htmlForMarkType('return', precedingWord));
 }
 
 
-function htmlForMarkType(type) {
-  return `<span class="hidden-mark hidden-mark--${ type }"> </span>`;
+function htmlForMarkType(type, content=' ') {
+  return `<span class="hidden-mark hidden-mark--${ type }">${ content }</span>`;
 }
