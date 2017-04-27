@@ -36,6 +36,11 @@ module.exports.initCli = () => {
     printErrorAndQuit(`Path argument must point to a directory containing ${PLATFORM_CONFIG_PATH} site configuration.\npath: ${invalidPath}`);
   }
 
+  // Mixin the build environment
+  cli.buildEnvironment = process.env.BUILD_ENV || 'development';
+
+
+
   return cli;
 };
 

@@ -75,13 +75,18 @@ function buildJekyll() {
     // Write out the merged config.
     config.write(path.join(BuildDir.STAGE, JEKYLL_CONFIG_PATH));
 
+    const configPaths = [path.join(BuildDir.STAGE, '_config.yml')];
+    if (cli.buildEnvironment == 'production') {
+      configPaths.push(path.join(BuildDir.STAGE, '_prod-config.yml'));
+    }
+
     const jekyllEnv = Object.assign({}, process.env, {
       BUNDLE_GEMFILE: path.join(projectRootPath, 'GEMFILE'),
     });
     execSync(`bundle exec jekyll build \
         --source ${BuildDir.STAGE} \
         --destination ${BuildDir.DIST} \
-        --config ${path.join(BuildDir.STAGE, '_config.yml')}`,
+        --config ${configPaths.join(',')}`,
       {
         env: jekyllEnv,
         stdio: ['ignore', 'ignore', 'inherit'],
