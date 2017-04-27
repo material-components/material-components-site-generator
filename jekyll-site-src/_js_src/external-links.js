@@ -2,16 +2,29 @@ export function watchForExternalLinkClicks() {
   document.addEventListener('click', elementClicked);
 }
 
+
 function elementClicked(e) {
   const { target } = e;
-  if (target.tagName != 'A') {
+  const closestLinkEl = findClosestLink(target);
+
+  if (!closestLinkEl) {
     return;
   }
 
-  if (target.hostname == window.location.hostname) {
+  if (closestLinkEl.hostname == window.location.hostname) {
     return;
   }
 
-  window.open(target.href);
+  window.open(closestLinkEl.href);
   e.preventDefault();
+}
+
+
+function findClosestLink(element) {
+  do {
+    if (element.tagName == 'A') {
+      return element;
+    }
+  } while (element = element.parentElement);
+  return null;
 }
