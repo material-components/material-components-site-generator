@@ -23,7 +23,7 @@ export function addHiddenMarks() {
 
 
 function addMarksToAllMatching(selector) {
-  const matchingElements = Array.from(document.querySelectorAll(selector))
+  const matchingElements = Array.from(document.querySelectorAll(selector));
   matchingElements.forEach((el) => addMarksToElement(el));
 }
 

@@ -13,11 +13,11 @@ export function initFeedback() {
 
 
 function startFeedback() {
-  if (!userfeedback) {
+  if (!window.userfeedback) {
     return;
   }
 
-  userfeedback.api.startFeedback({
+  window.userfeedback.api.startFeedback({
     productId: PRODUCT_ID,
     bucket: BUCKET_NAME,
     enableAnonymousFeedback: true,

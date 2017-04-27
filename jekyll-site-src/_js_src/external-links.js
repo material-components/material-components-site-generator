@@ -26,5 +26,6 @@ function findClosestLink(element) {
       return element;
     }
   } while (element = element.parentElement);
+
   return null;
 }

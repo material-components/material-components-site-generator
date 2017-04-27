@@ -1,5 +1,6 @@
 /**
- * Initializes anchor scroll correction. This
+ * Initializes anchor scroll correction. This ensures that the linked element
+ * is visible instead of being hidden by the fixed toolbar.
  */
 export function initAnchorScrollCorrection(toolbarSelector) {
   window.addEventListener('DOMContentLoaded', () => {
