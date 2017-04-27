@@ -61,24 +61,24 @@ class PlatformSite {
   }
 
   prepareForBuild() {
-    this.files.forEach((file) => this.processFile_(file));
+    this.files.forEach((file) => this.prepareFile_(file));
     this.directoryPaths.forEach((path) => this.processDocsDirectory_(path));
     this.buildNavigation_();
     this.files.forEach((file) => file.write());
   }
 
-  processFile_(file) {
+  prepareFile_(file) {
     if (!file.isValidJekyll) {
       return;
     }
-
-    file.uncommentHiddenCode();
 
     const fileMetadata = file.jekyllMetadata;
     if (!fileMetadata.path) {
       reporter.fileWarning(file.path, 'Cannot copy. No path metadata defined.');
       return;
     }
+
+    file.prepareForDocSite();
 
     this.applyPathRemapping_(file, fileMetadata.path);
     file.path = path.resolve(path.join(BuildDir.STAGE, this.basepath), file.relative);
