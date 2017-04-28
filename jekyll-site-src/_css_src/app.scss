@@ -1,5 +1,6 @@
 @import 'mixins';
 @import 'constants'; // Includes mdc-web overrides
+@import 'functions';
 
 @import 'reset-css/_reset';
 @import "@material/theme/mdc-theme";

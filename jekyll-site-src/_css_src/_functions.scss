@@ -1,0 +1,27 @@
+/**
+ * Returns a calc expression that interpolates between $value[1] and $value[2]
+ * between viewport widths of $viewport-width[1] and $viewport-width[2].
+ *
+ * @param {!Array<number>} $value 2 element array
+ * @param {!Array<number>} $viewport-width 2 element array [min, max]
+ */
+@function vw-lerp($value, $viewport-width) {
+  $from: nth($value, 1);
+  $to: nth($value, 2);
+  $delta-value: strip-units($to - $from);
+
+  $min-viewport: nth($viewport-width, 1);
+  $max-viewport: nth($viewport-width, 2);
+  $delta-viewport: strip-units($max-viewport - $min-viewport);
+
+  @return calc(
+      #{$from} + #{$delta-value} *
+      (100vw - #{$min-viewport}) / (#{$delta-viewport}));
+}
+
+/**
+ * Strips units from a SASS number.
+ */
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
