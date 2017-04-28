@@ -14,7 +14,7 @@
       content: '';
       background: right top / contain url("/images/welcome-ios.svg") no-repeat;
       flex: 1;
-      margin: 140px 64px 0 24px;
+      margin: 140px 64px 80px 24px;
     }
 
     #{$component}--root & {
@@ -24,6 +24,7 @@
         background-position: top left;
         background-image: url("/images/welcome-root.svg");
         margin-top: 180px;
+        margin-bottom: 0;
       }
     }
 

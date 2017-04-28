@@ -15,15 +15,18 @@
 
 .benefits-list-item {
   flex: 1 0 0;
-  line-height: 24px;
   margin-right: 48px;
 
   h3 {
-    margin-top: 0;
+    @include mdc-typography(subheading2);
+    font-weight: 500;
+    margin: 0;
   }
 
   p {
-    margin-bottom: 0;
+    @include mdc-typography(body1);
+    line-height: 24px;
+    margin: 16px 0 0;
   }
 
   &:last-child {
