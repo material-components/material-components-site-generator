@@ -12,21 +12,23 @@
 
     &::after {
       content: '';
-      background: right top / contain url('/images/welcome-ios.svg') no-repeat;
+      background-position: right top;
+      background-repeat: no-repeat;
+      background-size: contain;
       flex: 1;
-      margin: 140px 64px 80px 24px;
+      margin: 140px 64px 56px 24px;
+    }
 
-      .page--platform-android & {
-        background-image: url('/images/welcome-android.svg');
-      }
+    #{$component}--platform-android &::after {
+      background-image: url('/images/welcome-android.svg');
+    }
 
-      .page--platform-ios & {
-        background-image: url('/images/welcome-ios.svg');
-      }
+    #{$component}--platform-ios &::after {
+      background-image: url('/images/welcome-ios.svg');
+    }
 
-      .page--platform-web & {
-        background-image: url('/images/welcome-web.svg');
-      }
+    #{$component}--platform-web &::after {
+      background-image: url('/images/welcome-web.svg');
     }
 
     #{$component}--root & {

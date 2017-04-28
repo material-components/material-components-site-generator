@@ -1,5 +1,6 @@
 <section class="welcome
-    {% if include.is_root == true %}welcome--root{% endif %}">
+    {% if include.is_root == true %}welcome--root{% endif %}
+    {% if page.site_platform %}welcome--platform-{{ page.site_platform }}{% endif %}">
   <div class="welcome__content">
     <div class="welcome__text">
       <h1 class="welcome__title">
