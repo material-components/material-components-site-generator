@@ -6,6 +6,11 @@
   &--dense {
     margin: 0;
   }
+
+  @include media-phone {
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
 }
 
 .benefits-list-item {
@@ -13,7 +18,20 @@
   line-height: 24px;
   margin-right: 48px;
 
+  h3 {
+    margin-top: 0;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
   &:last-child {
+    margin-right: 0;
+  }
+
+  @include media-phone {
+    margin-bottom: 24px;
     margin-right: 0;
   }
 }

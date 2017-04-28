@@ -76,5 +76,11 @@
     &__drawer + &__article {
       width: 100%;
     }
+
+    &--homepage {
+      #{$component}__content {
+        margin-top: 24px;
+      }
+    }
   }
 }
