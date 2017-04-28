@@ -1,4 +1,7 @@
 .footer {
+  // The minimum width at which the "Made with MDC web" link is visible.
+  $made-with-min-visible-width: 420px;
+
   @include mdc-typography(body1);
 
   background: $grey-50;
@@ -38,6 +41,15 @@
     margin-left: 0;
   }
 
+  &__link-container--right {
+    flex: 1;
+    text-align: right;
+  }
+
+  &__made-with-mobile-link {
+    display: none;
+  }
+
   &__link {
     padding: 8px 8px;
 
@@ -57,6 +69,20 @@
       @include link-styles {
         font-size: .75rem;
       }
+    }
+
+    &__made-with-desktop-link {
+      display: none;
+    }
+
+    &__made-with-mobile-link {
+      display: inline;
+    }
+  }
+
+  @include breakpoint($max: $made-with-min-visible-width) {
+    &__made-with-mobile-link {
+      display: none;
     }
   }
 }
