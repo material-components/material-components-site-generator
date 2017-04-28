@@ -33,7 +33,7 @@ module.exports.initCli = () => {
   // Ensure that all site paths are valid directories containing metadata.
   const invalidPath = cli.input.find((sitePath) => !isValidSitePath(sitePath));
   if (invalidPath) {
-    printErrorAndQuit(`Path argument must point to a directory containing ${PLATFORM_CONFIG_PATH} site configuration.\npath: ${invalidPath}`);
+    printErrorAndQuit(`Path argument must point to a directory that exists, and contains ${PLATFORM_CONFIG_PATH} site configuration.\npath: ${invalidPath}`);
   }
 
   // Mixin the build environment
@@ -46,7 +46,8 @@ module.exports.initCli = () => {
 
 
 function isValidSitePath(sitePath) {
-  return fs.lstatSync(sitePath).isDirectory() &&
+  return fs.existsSync(sitePath) &&
+         fs.lstatSync(sitePath).isDirectory() &&
          fs.existsSync(path.join(sitePath, PLATFORM_CONFIG_PATH));
 }
 
