@@ -1,4 +1,6 @@
 const fs = require('fs-extra');
+const patterns = require('./patterns');
+const url = require('url');
 const { JekyllFile, FRONT_MATTER_DELIMITER } = require('./jekyll-file');
 
 
@@ -37,12 +39,13 @@ class DocumentationFile extends JekyllFile {
    * and format it for material.io/components.
    */
   prepareForDocSite() {
+    let links;
     let { stringContents: contents } = this;
 
     contents = this.uncommentMetadata_(contents);
     contents = this.uncommentJekyllSpecifics_(contents);
     contents = this.transformListItemStyles_(contents);
-    contents = this.rewriteMarkdownLinks_(contents);
+    this.processRelativeLinks_(contents);
 
     this.stringContents = contents;
   }
@@ -89,12 +92,32 @@ class DocumentationFile extends JekyllFile {
   }
 
   /**
-   * Rewrite links that point to markdown files to point to html files instead.
+   * Searches through the provided contents for relative hrefs and srcs, and
+   * replaces them with liquid template variable references. A mapping of
    */
-  rewriteMarkdownLinks_(contents) {
-    return contents.replace(/\[([^\]]+)\]\((.*)\.md\)/g, (match, p1, p2) => {
-      return /^https?:\/\//.test(p2) ? match : `[${p1}](${p2}.html)`;
-    });
+  processRelativeLinks_(contents) {
+    const self = this;
+    const links = new Map;
+
+    contents = contents.replace(patterns.newMarkdownLinkPattern(), processMatch);
+
+    // contents = contents.replace(patterns.newHrefPattern(), processMatch);
+    // contents = contents.replace(patterns.newMarkdownImagePattern(), processMatch);
+    // contents = contents.replace(patterns.newSrcPattern(), processMatch);
+
+    return {contents, links};
+
+    function processMatch(match, capturedUrl) {
+      const parsedUrl = url.parse(capturedUrl);
+      if (parsedUrl.host || parsedUrl.href[0] == '#') {
+        return match;
+      }
+
+      console.log('\n' + self.path);
+      console.log(parsedUrl);
+
+      return match;
+    }
   }
 
   /**
