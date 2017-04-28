@@ -58,14 +58,6 @@ class JekyllFile extends VinylFile {
    */
   set jekyllMetadata(metadata) {
     this.jekyllMetadata_ = metadata;
-
-    const { stringContents } = this;
-    const metadataYaml = yaml.safeDump(metadata);
-    if (!this.isValidJekyll) {
-      this.stringContents = `---\n${metadataYaml}\n---\n${stringContents}`;
-    } else {
-      this.stringContents = stringContents.replace(FRONT_MATTER_PATTERN, `$1\n${metadataYaml}$3`);
-    }
   }
 
   /**
@@ -81,12 +73,25 @@ class JekyllFile extends VinylFile {
    * Writes the file to disk, ensuring that its target directory exists.
    */
   write() {
+    // Always rewrite the page's metadata in case it's changed.
+    this.applyMetadataChanges_();
+
     const { path, encoding, contents, stat: { mode } } = this;
     fs.ensureDirSync(this.dirname);
     fs.writeFileSync(path, contents, {
       encoding,
       mode,
     });
+  }
+
+  applyMetadataChanges_() {
+    const { stringContents } = this;
+    const metadataYaml = yaml.safeDump(this.jekyllMetadata_);
+    if (!this.isValidJekyll) {
+      this.stringContents = `---\n${metadataYaml}\n---\n${stringContents}`;
+    } else {
+      this.stringContents = stringContents.replace(FRONT_MATTER_PATTERN, `$1\n${metadataYaml}$3`);
+    }
   }
 
   /**

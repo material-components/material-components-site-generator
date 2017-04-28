@@ -29,8 +29,17 @@ class Reporter {
       this.logLine_();
     }
 
-    this.logLine_(`  Warning: ${chalk.yellow(filePath)}`);
-    this.logLine_(`  ${warningMessage}`);
+    this.logLine_(`  Warning: ${ chalk.yellow(filePath) }`);
+    this.logLine_(`  ${ warningMessage }`);
+  }
+
+  linkWarning(href, filePath, warningMessage) {
+    if (this.inStep_) {
+      this.logLine_();
+    }
+
+    this.logLine_(`  Warning: ${ chalk.yellow(href) } in ${ chalk.yellow(filePath) }`);
+    this.logLine_(`  ${ warningMessage }`);
   }
 
   fileDestinationConflict(destPath, srcPath1, srcPath2) {
@@ -41,7 +50,7 @@ class Reporter {
     }
 
     this.logLine_(chalk.bgRed('Error:'));
-    this.logLine_(`${chalk.yellow(srcPath1)} and \n${chalk.yellow(srcPath2)} both attempting to write to ${chalk.yellow(destPath)}`);
+    this.logLine_(`${ chalk.yellow(srcPath1) } and \n${ chalk.yellow(srcPath2) } both attempting to write to ${ chalk.yellow(destPath) }`);
   }
 
   fatal(err) {
@@ -58,13 +67,13 @@ class Reporter {
   }
 
   fileChanged(filePath) {
-    this.logLine_(`File changed: ${chalk.yellow(filePath)}`);
+    this.logLine_(`File changed: ${ chalk.yellow(filePath) }`);
   }
 
   complete(distPath) {
     const durationInSeconds = (Date.now() - this.startTimeMs_) / 1000;
-    this.logLine_(`Site written to ${chalk.yellow(distPath)}`);
-    this.logLine_(chalk.green(`✨  Done in ${durationInSeconds.toFixed(2)}s.`));
+    this.logLine_(`Site written to ${ chalk.yellow(distPath) }`);
+    this.logLine_(chalk.green(`✨  Done in ${ durationInSeconds.toFixed(2) }s.`));
   }
 
   log_(msg) {
@@ -75,7 +84,7 @@ class Reporter {
   }
 
   logLine_(msg) {
-    this.log_(`${msg || ''}\n`);
+    this.log_(`${ msg || '' }\n`);
   }
 }
 

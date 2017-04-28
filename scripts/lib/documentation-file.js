@@ -1,11 +1,18 @@
 const fs = require('fs-extra');
+const patterns = require('./patterns');
+const url = require('url');
 const { JekyllFile, FRONT_MATTER_DELIMITER } = require('./jekyll-file');
 
 
 /**
  * The set of extensions to the Vinyl file interface.
  */
-const BUILT_IN_PROPS = new Set([]);
+const BUILT_IN_PROPS = new Set([
+  'localLinkTemplateVars',
+  'originalPath',
+  'originalDir',
+  'prepared_',
+]);
 
 
 /**
@@ -22,6 +29,28 @@ const HIDDEN_FRONT_MATTER_POSTFIX = '-->'
 class DocumentationFile extends JekyllFile {
   constructor(fileInfo) {
     super(fileInfo);
+
+    this.prepared_ = false;
+
+    /**
+     * A mapping of template variables to repo local links that have been found
+     * in the documentation. The links can then be modified at any time prior to
+     * the file being written, to have the changes be reflected in the output.
+     * @type {!Map<string, string>}
+     */
+    this.localLinkTemplateVars = new Map();
+
+    /**
+     * The original path to the documentation markdown.
+     */
+    this.originalPath = this.path;
+
+    /**
+     * The original directory of the documentation markdown. This is used later
+     * for rewriting local links, and should not be modified.
+     * @const {string}
+     */
+    this.originalDir = this.dirname;
   }
 
   /**
@@ -37,14 +66,19 @@ class DocumentationFile extends JekyllFile {
    * and format it for material.io/components.
    */
   prepareForDocSite() {
+    if (this.prepared_) {
+      return;
+    }
+
     let { stringContents: contents } = this;
 
     contents = this.uncommentMetadata_(contents);
     contents = this.uncommentJekyllSpecifics_(contents);
     contents = this.transformListItemStyles_(contents);
-    contents = this.rewriteMarkdownLinks_(contents);
+    contents = this.templatizeLocalLinks_(contents);
 
     this.stringContents = contents;
+    this.prepared_ = true;
   }
 
   /**
@@ -89,12 +123,43 @@ class DocumentationFile extends JekyllFile {
   }
 
   /**
-   * Rewrite links that point to markdown files to point to html files instead.
+   * Searches through the provided contents for relative hrefs and srcs, and
+   * replaces them with liquid template variable references. A mapping of
    */
-  rewriteMarkdownLinks_(contents) {
-    return contents.replace(/\[([^\]]+)\]\((.*)\.md\)/g, (match, p1, p2) => {
-      return /^https?:\/\//.test(p2) ? match : `[${p1}](${p2}.html)`;
+  templatizeLocalLinks_(contents) {
+    contents = contents.replace(patterns.newMarkdownLinkPattern(), (_, text, url, title='') => {
+      return `[${ text }](${ this.templatizeLinkIfLocal_(url) }${ title })`;
     });
+    contents = contents.replace(patterns.newHrefPattern(), (_, url) => {
+      return `href="${ this.templatizeLinkIfLocal_(url) }"`;
+    });
+    contents = contents.replace(patterns.newSrcPattern(), (_, url) => {
+      return `src="${ this.templatizeLinkIfLocal_(url) }"`;
+    });
+
+    return contents;
+  }
+
+  templatizeLinkIfLocal_(capturedUrl) {
+    const parsedUrl = url.parse(capturedUrl);
+    // We don't rewrite qualified URLs or hash links.
+    // TODO(shyndman): What if this is a qualified link?
+    if (parsedUrl.host || parsedUrl.href[0] == '#') {
+      return capturedUrl;
+    }
+
+    const varName = `link_${ this.localLinkTemplateVars.size }`;
+    this.localLinkTemplateVars.set(varName, capturedUrl);
+
+    return `{{ page.local_links.${varName} }}`;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  write() {
+    this.jekyllMetadata.local_links = stringMapToObject(this.localLinkTemplateVars);
+    super.write();
   }
 
   /**
@@ -117,6 +182,15 @@ class DocumentationFile extends JekyllFile {
   static isCustomProp(name) {
     return super.isCustomProp(name) && !BUILT_IN_PROPS.has(name);
   }
+}
+
+// TODO(shyndman): Extract to util class.
+function stringMapToObject(map) {
+  const obj = {};
+  for (const [k, v] of map) {
+    obj[k] = v;
+  }
+  return obj;
 }
 
 

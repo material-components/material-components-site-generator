@@ -7,6 +7,7 @@ const yaml = require('js-yaml');
 const { DocumentationFile } = require('./documentation-file');
 const { PLATFORM_CONFIG_PATH, BuildDir, FilePattern } = require('./project-paths');
 const { SectionNavigation } = require('./section-navigation');
+const { rewriteLocalLinks } = require('./rewrite-local-links');
 const { sync: globSync } = require('glob');
 
 
@@ -21,6 +22,10 @@ class PlatformSite {
     this.repoPath = repoPath;
     this.config = readYaml(path.join(repoPath, PLATFORM_CONFIG_PATH));
     this.files_ = null;
+  }
+
+  get repoUrl() {
+    return this.config.repo_url;
   }
 
   get basepath() {
@@ -65,9 +70,8 @@ class PlatformSite {
       throw new Error(`Repo at ${ this.repoPath } invalid.`);
     }
 
-    this.files.forEach((file) => this.prepareFile_(file));
-    this.directoryPaths.forEach((path) => this.processDocsDirectory_(path));
-    this.buildNavigation_();
+    this.prepareFiles_(this.files);
+    this.buildNavigation_(this.filesBySection);
     this.files.forEach((file) => file.write());
   }
 
@@ -92,6 +96,13 @@ class PlatformSite {
     }
 
     return false;
+  }
+
+  prepareFiles_(files) {
+    const srcPathsToFiles = this.files.reduce((accMap, file) =>
+        accMap.set(file.path, file), new Map());
+    this.files.forEach((file) => this.prepareFile_(file));
+    this.files.forEach((file) => rewriteLocalLinks(file, this, srcPathsToFiles));
   }
 
   prepareFile_(file) {
@@ -119,15 +130,8 @@ class PlatformSite {
     file.path = destPath;
   }
 
-  processDocsDirectory_(docsDirPath) {
-    const relativePath = path.relative(this.repoPath, docsDirPath);
-    const newPath = path.resolve(path.join(BuildDir.STAGE, this.basepath), relativePath);
-    fs.ensureDirSync(newPath);
-    fs.copySync(docsDirPath, newPath);
-  }
-
-  buildNavigation_() {
-    for (const [section, sectionFiles] of this.filesBySection) {
+  buildNavigation_(filesBySection) {
+    for (const [section, sectionFiles] of filesBySection) {
       const sectionNav = new SectionNavigation(section, sectionFiles, this.basepath);
       const navItems = this.tweakNavigation_(sectionNav);
 
@@ -140,9 +144,6 @@ class PlatformSite {
         }
 
         metadata.navigation = navItems;
-        // TODO(shyndman): You have to set this to write it back...which is
-        // weird.
-        file.jekyllMetadata = metadata;
       }
     }
   }
