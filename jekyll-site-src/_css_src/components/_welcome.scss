@@ -12,9 +12,21 @@
 
     &::after {
       content: '';
-      background: right top / contain url("/images/welcome-ios.svg") no-repeat;
+      background: right top / contain url('/images/welcome-ios.svg') no-repeat;
       flex: 1;
       margin: 140px 64px 80px 24px;
+
+      .page--platform-android & {
+        background-image: url('/images/welcome-android.svg');
+      }
+
+      .page--platform-ios & {
+        background-image: url('/images/welcome-ios.svg');
+      }
+
+      .page--platform-web & {
+        background-image: url('/images/welcome-web.svg');
+      }
     }
 
     #{$component}--root & {
@@ -22,7 +34,7 @@
 
       &::after {
         background-position: top left;
-        background-image: url("/images/welcome-root.svg");
+        background-image: url('/images/welcome-root.svg');
         margin-top: 180px;
         margin-bottom: 0;
       }
