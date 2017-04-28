@@ -5,8 +5,8 @@
   @include mdc-typography(body1);
 
   background: $grey-50;
-  margin-top: 144px;
   height: $footer-height;
+  margin-top: 144px;
 
   &--dense {
     margin-top: 86px;
@@ -46,14 +46,17 @@
     text-align: right;
   }
 
-  &__made-with-mobile-link {
+  &__made-with-mobile {
     display: none;
   }
 
   &__link {
-    padding: 8px 8px;
+    @include link-styles {
+      font-family: 'Roboto';
+    }
 
     color: $black-54;
+    padding: 8px 8px;
     text-decoration: none;
   }
 
@@ -71,17 +74,17 @@
       }
     }
 
-    &__made-with-desktop-link {
+    &__made-with-desktop {
       display: none;
     }
 
-    &__made-with-mobile-link {
+    &__made-with-mobile {
       display: inline;
     }
   }
 
   @include breakpoint($max: $made-with-min-visible-width) {
-    &__made-with-mobile-link {
+    &__made-with-mobile {
       display: none;
     }
   }
