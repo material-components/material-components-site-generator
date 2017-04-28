@@ -59,6 +59,13 @@
     margin-top: 4px;
   }
 
+  // Lists
+
+  li > ul,
+  li > ol {
+    padding-top: 8px;
+  }
+
   // Data table
 
   table {
