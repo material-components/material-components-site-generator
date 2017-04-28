@@ -69,9 +69,9 @@
   // Data table
 
   table {
-    // Display as block so that we can introduce a horizontal scroll on smaller
-    // screens.
-    display: block;
+    // Display as inline-block so that we can introduce a horizontal scroll on
+    // smaller screens.
+    display: inline-block;
     border: 1px solid $grey-200;
     overflow-x: auto;
 
