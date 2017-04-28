@@ -5,8 +5,8 @@
   align-items: center;
   justify-content: center;
 
-  background: $header-background;
-  color: $header-text-color;
+  background: $toolbar-background;
+  color: $toolbar-text-color;
   height: $toolbar-height;
   z-index: 7; // Highest z-index used by CodeMirror + 1
 
@@ -31,7 +31,7 @@
 
   &__title-link {
     @include link-styles {
-      color: $header-text-color;
+      color: $toolbar-text-color;
       text-decoration: none;
     }
   }
@@ -58,8 +58,8 @@
   }
 
   &--platform {
-    @include breakpoint($max: 640px) {
-      height: auto;
+    @include breakpoint($max: $mobile-toolbar-max-width) {
+      height: $mobile-toolbar-height;
 
       #{$component}__title-link {
         padding: 16px 0 0 16px;
@@ -72,7 +72,7 @@
 
       #{$component}__row {
         flex-direction: column;
-        height: auto;
+        height: $mobile-toolbar-height;
         padding: 0;
       }
     }
@@ -89,7 +89,7 @@
   }
 
   .mdc-toolbar--platform & {
-    @include breakpoint($max: 640px) {
+    @include breakpoint($max: $mobile-toolbar-max-width) {
       align-self: flex-start;
       height: 48px;
       margin-top: 0;
@@ -145,7 +145,7 @@
       }
     }
 
-    @include breakpoint($min: 451px, $max: 640px) {
+    @include breakpoint($min: 451px, $max: $mobile-toolbar-max-width) {
       &--github #{$component}__text {
         display: block;
       }

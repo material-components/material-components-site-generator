@@ -83,4 +83,10 @@
       }
     }
   }
+
+  @include breakpoint($max: $mobile-toolbar-max-width) {
+    &__content {
+      margin-top: 32px + $mobile-toolbar-height;
+    }
+  }
 }

@@ -24,15 +24,17 @@ $white-50: rgba(255, 255, 255, .5);
 $white: #fff;
 
 $accent-color: #00e871;
-$header-background: $grey-900;
-$header-text-color: $white;
-
 $content-width: 1280px;
-$toolbar-height: 72px;
 $ui-font-family: 'Roboto Mono';
 
 $footer-height: 192px;
 $mobile-footer-height: 114px;
+
+$toolbar-background: $grey-900;
+$toolbar-text-color: $white;
+$toolbar-height: 72px;
+$mobile-toolbar-height: 96px;
+$mobile-toolbar-max-width: 640px;
 
 // MDC overrides
 $mdc-theme-primary: $accent-color;

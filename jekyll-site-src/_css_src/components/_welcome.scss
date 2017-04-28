@@ -1,7 +1,7 @@
 .welcome {
   $component: &;
-  background: $header-background;
-  color: $header-text-color;
+  background: $toolbar-background;
+  color: $toolbar-text-color;
 
   &__content {
     @include content-element;
