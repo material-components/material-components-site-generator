@@ -10,6 +10,7 @@
     flex-direction: row;
     height: 640px;
 
+    // This element is the hero graphic.
     &::after {
       content: '';
       background-position: right top;
@@ -17,26 +18,28 @@
       background-size: contain;
       flex: 1;
       margin: 140px 64px 56px 24px;
+      min-width: 280px;
     }
 
     #{$component}--platform-android &::after {
-      background-image: url('/images/welcome-android.svg');
+      background-image: url('/images/welcome/android.svg');
     }
 
     #{$component}--platform-ios &::after {
-      background-image: url('/images/welcome-ios.svg');
+      background-image: url('/images/welcome/ios.svg');
     }
 
     #{$component}--platform-web &::after {
-      background-image: url('/images/welcome-web.svg');
+      background-image: url('/images/welcome/web.svg');
     }
 
     #{$component}--root & {
+      // The hero is shown on the left side of the root homepage.
       flex-direction: row-reverse;
 
       &::after {
         background-position: top left;
-        background-image: url('/images/welcome-root.svg');
+        background-image: url('/images/welcome/root.svg');
         margin-top: 180px;
         margin-bottom: 0;
       }
