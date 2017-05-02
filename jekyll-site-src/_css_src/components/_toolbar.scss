@@ -11,7 +11,7 @@
   z-index: 7; // Highest z-index used by CodeMirror + 1
 
   &__title {
-    background: no-repeat left/40px url('/images/mdc-logo.svg');
+    background: no-repeat left/32px url('/images/mdc-logo.svg');
     font-family: $ui-font-family;
     font-weight: 400;
     height: 32px;
@@ -21,7 +21,6 @@
 
     #{$component}--root & {
       background-image: url('/images/material-logo.svg');
-      background-size: contain;
     }
 
     &--mini {
@@ -60,16 +59,21 @@
   @include breakpoint($max: $mobile-toolbar-max-width) {
     height: $mobile-toolbar-height;
 
-    #{$component}__title-link {
+    &__title {
+      background-size: 24px;
+      padding-left: 40px;
+    }
+
+    &__title-link {
       padding: 16px 0 0 16px;
     }
 
     // Regardless of alignment class, justify to the start.
-    #{$component}__section {
+    &__section {
       justify-content: flex-start;
     }
 
-    #{$component}__row {
+    &__row {
       flex-direction: column;
       height: $mobile-toolbar-height;
       padding: 0;

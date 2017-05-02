@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 152 152">
-  <path fill="#212121" d="M0 0h152v152H0z"/>
-  <path fill="none" d="M130 130H22V22h108z"/>
-  <path fill="#fff" d="M22 94h36l36-36V22H22z"/>
-  <circle fill="#00E676" cx="94" cy="94" r="36"/>
-  <path fill="#B2FF59" d="M94 58c-19.88 0-36 16.12-36 36h36V58z"/>
-</svg>
+<svg width="152" height="152" viewBox="0 0 152 152" xmlns="http://www.w3.org/2000/svg"><title>Slice 1</title><g fill="none" fill-rule="evenodd"><path fill="#212121" fill-rule="nonzero" d="M0 0h152v152H0z"/><path d="M152 152H0V0h152z"/><path fill="#FFF" fill-rule="nonzero" d="M0 101.333h50.667l50.666-50.666V0H0z"/><circle fill="#00E676" fill-rule="nonzero" cx="101.333" cy="101.333" r="50.667"/><path d="M101.333 50.667c-27.979 0-50.666 22.687-50.666 50.666h50.666V50.667z" fill="#B2FF59" fill-rule="nonzero"/></g></svg>

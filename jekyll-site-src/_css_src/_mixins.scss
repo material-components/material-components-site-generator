@@ -34,6 +34,12 @@
   }
 }
 
+@mixin media-lt-large {
+  @include breakpoint($max: $media-medium-max) {
+    @content;
+  }
+}
+
 @mixin link-styles {
   &,
   &:link,
