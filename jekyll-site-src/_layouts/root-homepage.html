@@ -11,8 +11,10 @@
 
     <div class="page__flex-element">
       {% include welcome.html is_root=true %}
-      <div class="page__content page__content--dense">
-        {{ content }}
+      <div class="page__content">
+        <article class="page__article article">
+          {{ content }}
+        </article>
       </div>
     </div>
 

@@ -61,8 +61,9 @@
     text-decoration: none;
   }
 
-  @include media-phone {
+  @include media-small {
     height: $mobile-footer-height;
+    margin-top: 120px;
 
     &__content {
       padding-bottom: 12px;

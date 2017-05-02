@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  @include media-phone {
+  @include media-small {
     flex-direction: column;
     margin-top: 32px;
   }
@@ -15,7 +15,7 @@
     width: vw-lerp($value: 284px 524px, $viewport-width: 720px 1280px);
   }
 
-  @include media-phone {
+  @include media-small {
     width: 100%;
   }
 
@@ -44,7 +44,7 @@
         margin-right: vw-lerp($value: 24px 48px, $viewport-width: 720px 1280px);
       }
 
-      @include media-phone {
+      @include media-small {
         margin-right: 24px;
       }
 
@@ -65,7 +65,7 @@
   }
 
   &:nth-child(odd) {
-    @include media-phone {
+    @include media-small {
       margin-right: 80px;
     }
 

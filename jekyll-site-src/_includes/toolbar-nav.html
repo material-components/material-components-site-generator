@@ -1,6 +1,25 @@
 <nav class="toolbar-nav">
   <ul class="toolbar-nav__links">
-    {% unless include.github_only %}
+    {% if include.is_root %}
+      <li>
+        <a href="ios/"
+           class="toolbar-nav-link toolbar-nav-link--platform">
+          <span class="toolbar-nav-link__text">iOS</span>
+        </a>
+      </li>
+      <li>
+        <a href="android/"
+           class="toolbar-nav-link toolbar-nav-link--platform">
+          <span class="toolbar-nav-link__text">Android</span>
+        </a>
+      </li>
+      <li>
+        <a href="web/"
+           class="toolbar-nav-link toolbar-nav-link--platform">
+          <span class="toolbar-nav-link__text">Web</span>
+        </a>
+      </li>
+    {% else %}
       <li>
         <a href="{{ page.basepath }}/catalog/"
            class="toolbar-nav-link
@@ -15,7 +34,7 @@
           <span class="toolbar-nav-link__text">Documentation</span>
         </a>
       </li>
-    {% endunless %}
+    {% endif %}
     <li>
       <a href="{{ page.repo_url }}"
          class="toolbar-nav-link toolbar-nav-link--github">

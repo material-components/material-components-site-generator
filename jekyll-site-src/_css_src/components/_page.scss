@@ -42,27 +42,14 @@
     margin-right: $drawer-right-margin;
   }
 
-  &--homepage {
+  &--homepage,
+  &--root-homepage {
     #{$component}__content {
       margin-top: 80px;
     }
   }
 
-  &--root-homepage {
-    background: $grey-900;
-
-    #{$component}__content {
-      color: $white;
-
-      a {
-        @include link-styles {
-          color: $white;
-        }
-      }
-    }
-  }
-
-  @include media-phone {
+  @include media-small {
     min-height: calc(100vh + #{$mobile-footer-height});
 
     &__content {
@@ -77,7 +64,8 @@
       width: 100%;
     }
 
-    &--homepage {
+    &--homepage,
+    &--root-homepage {
       #{$component}__content {
         margin-top: 24px;
       }
@@ -91,14 +79,21 @@
   }
 }
 
-%page-element {
-  $min-content-padding: 16px;
+@mixin page-content-width($padding) {
+  max-width: $content-width + 2 * $padding;
+  padding-left: $padding;
+  padding-right: $padding;
+}
 
-  max-width: $content-width + 2 * $min-content-padding;
+%page-element {
+  @include page-content-width(16px);
+
   margin-left: auto;
   margin-right: auto;
-  padding-left: $min-content-padding;
-  padding-right: $min-content-padding;
+
+  @include breakpoint($min: $media-medium-min, $max: $media-medium-max + (2 * 16px)) {
+    @include page-content-width(80px);
+  }
 }
 
 

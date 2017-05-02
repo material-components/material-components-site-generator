@@ -1,14 +1,15 @@
 .welcome {
   $component: &;
+
   background: $toolbar-background;
   color: $toolbar-text-color;
+  padding-bottom: 60px;
 
   &__content {
     @extend %page-element;
 
     display: flex;
     flex-direction: row;
-    height: 640px;
 
     // This element is the hero graphic.
     &::after {
@@ -18,7 +19,7 @@
       background-size: contain;
       flex: 1;
       margin: 140px 64px 56px 24px;
-      min-width: 280px;
+      min-width: 400px;
     }
 
     #{$component}--platform-android &::after {
@@ -44,14 +45,10 @@
         margin-bottom: 0;
       }
     }
-
-    @include breakpoint($max: 1280px) {
-      height: 50vw;
-    }
   }
 
   &__text {
-    margin: 180px 0 240px;
+    margin: 130px 0 0;
     max-width: 412px;
   }
 
@@ -76,7 +73,72 @@
     margin-top: 32px;
   }
 
-  &__platforms {
+  &__links {
     margin-top: 48px;
+  }
+
+  &__benefits {
+    @extend %page-element;
+
+    margin-top: 108px;
+  }
+
+  @include media-small {
+    padding-bottom: 0;
+
+    &__content,
+    &--root &__content {
+      flex-direction: column;
+
+      &::after {
+        flex: none;
+        background-position: center;
+        margin: 44px 0 0;
+        padding-top: 68%; // Proportional scaling.
+      }
+    }
+
+    &__text {
+      max-width: none;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 34px;
+    }
+
+    &__blurb {
+      font-size: 16px;
+      line-height: 24px;
+      margin-top: 24px;
+    }
+
+    &__links {
+      display: none;
+    }
+
+    &__benefits {
+      margin-top: 80px;
+    }
+  }
+
+  @include media-medium {
+    &__content,
+    &--root &__content {
+      &::after {
+        margin: 130px 0 -20px 20px;
+      }
+    }
+
+    &__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    &__blurb {
+      font-size: 24px;
+      line-height: 32px;
+      margin-top: 24px;
+    }
   }
 }

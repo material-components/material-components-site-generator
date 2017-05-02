@@ -1,0 +1,91 @@
+.toolbar-nav {
+  margin-top: -1 * nth($mdc-toolbar-padding, 1);
+  height: $toolbar-height;
+
+  &__links {
+    display: flex;
+    height: 100%;
+  }
+
+  @include breakpoint($max: $mobile-toolbar-max-width) {
+    align-self: flex-start;
+    height: 48px;
+    margin-top: 0;
+  }
+}
+
+.toolbar-nav-link {
+  $component: &;
+
+  @include link-styles {
+    color: $white;
+    fill: $white;
+  }
+
+  display: inline-flex;
+  align-items: center;
+
+  height: 100%;
+  padding: 0 14px;
+
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &__text {
+    position: relative;
+    top: 2px;
+  }
+
+  &--active {
+    @include link-styles {
+      color: $accent-color;
+    }
+
+    border-bottom: 2px solid $accent-color;
+  }
+
+  // Icon representations are only shown on mobile layouts.
+  &__icon {
+    display: none;
+  }
+
+  @include breakpoint($min: $mobile-toolbar-max-width + 1) {
+    &--platform {
+      display: none;
+    }
+  }
+
+  @include breakpoint($max: 450px) {
+    &--github &__text {
+      display: none;
+    }
+
+    &--github &__icon {
+      display: block;
+    }
+  }
+
+  .mdc-toolbar--platform & {
+    @include breakpoint($min: 451px, $max: $mobile-toolbar-max-width) {
+      &--github #{$component}__text {
+        display: block;
+      }
+
+      &--github #{$component}__icon {
+        display: none;
+      }
+    }
+
+    @include breakpoint($max: 960px) {
+      &--github #{$component}__text {
+        display: none;
+      }
+
+      &--github #{$component}__icon {
+        display: block;
+      }
+    }
+  }
+}

@@ -1,23 +1,22 @@
 .benefits-list {
   display: flex;
   list-style: none;
-  margin: 0 0 168px;
+  margin: 0;
 
-  &--dense {
-    margin: 0;
-  }
-
-  @include media-phone {
+  @include media-small {
     flex-direction: column;
-    margin-bottom: 40px;
   }
 }
 
 .benefits-list-item {
+  display: flex;
+  flex-direction: column;
+
   flex: 1 0 0;
   margin-right: 48px;
 
   h3 {
+    display: none;
     @include mdc-typography(subheading2);
     font-weight: 500;
     margin: 0;
@@ -29,11 +28,36 @@
     margin: 16px 0 0;
   }
 
+  a {
+    @include link-styles {
+      color: $white;
+    }
+  }
+
   &:last-child {
     margin-right: 0;
   }
 
-  @include media-phone {
+  // Add platform specific benefit images.
+  @each $homepage-modifier, $asset-prefix in $homepages {
+    .welcome--#{$homepage-modifier} & {
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i})::before {
+          content: '';
+          align-self: center;
+
+          width: 192px;
+          height: 192px;
+          margin-bottom: 24px;
+
+          background: center / contain url('/images/benefits/#{$asset-prefix}-#{$i}.svg');
+        }
+      }
+    }
+  }
+
+  @include media-small {
+    flex: none;
     margin-bottom: 24px;
     margin-right: 0;
   }

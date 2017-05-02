@@ -1,10 +1,14 @@
-.platform-link-list {
+.welcome-link-list {
   display: flex;
   list-style: none;
   margin-left: 0;
+
+  @include media-small {
+    display: none;
+  }
 }
 
-.platform-link-list-item {
+.welcome-link-list-item {
   &:first-child {
     margin-left: -23px;
   }

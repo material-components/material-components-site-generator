@@ -27,6 +27,10 @@ $accent-color: #00e871;
 $content-width: 1280px;
 $ui-font-family: 'Roboto Mono';
 
+$media-small-max: 720px;
+$media-medium-min: $media-small-max + 1px;
+$media-medium-max: 1280px;
+
 $footer-height: 192px;
 $mobile-footer-height: 114px;
 
@@ -35,6 +39,11 @@ $toolbar-text-color: $white;
 $toolbar-height: 72px;
 $mobile-toolbar-height: 96px;
 $mobile-toolbar-max-width: 640px;
+
+$homepages: (platform-android android)
+            (platform-ios ios)
+            (platform-web web)
+            (root root);
 
 // MDC overrides
 $mdc-theme-primary: $accent-color;

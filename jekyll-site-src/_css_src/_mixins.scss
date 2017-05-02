@@ -16,8 +16,20 @@
   }
 }
 
-@mixin media-phone {
-  @include breakpoint($max: 720px) {
+@mixin media-small {
+  @include breakpoint($max: $media-small-max) {
+    @content;
+  }
+}
+
+@mixin media-gt-small {
+  @include breakpoint($min: $media-medium-min) {
+    @content;
+  }
+}
+
+@mixin media-medium {
+  @include breakpoint($min: 720px + 1, $max: $media-medium-max) {
     @content;
   }
 }

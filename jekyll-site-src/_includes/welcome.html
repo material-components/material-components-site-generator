@@ -6,16 +6,24 @@
       <h1 class="welcome__title">
         {{ page.site_title }}
       </h1>
+      <h2 class="welcome__blurb">
+        Create beautiful apps with modular and customizable UI components.
+      </h2>
       {% if include.is_root == true %}
-        <h2 class="welcome__blurb">
-          Create beautiful apps with modular and customizable UI components.
-        </h2>
-        <ul class="welcome__platforms platform-link-list">
-          <li class="platform-link-list-item"><a href="ios/">iOS</a></li>
-          <li class="platform-link-list-item"><a href="android/">ANDROID</a></li>
-          <li class="platform-link-list-item"><a href="web/">WEB</a></li>
+        <ul class="welcome__links welcome-link-list">
+          <li class="welcome-link-list-item"><a href="ios/">iOS</a></li>
+          <li class="welcome-link-list-item"><a href="android/">ANDROID</a></li>
+          <li class="welcome-link-list-item"><a href="web/">WEB</a></li>
+        </ul>
+      {% else %}
+        <ul class="welcome__links welcome-link-list">
+          <li class="welcome-link-list-item"><a href="{{ page.basepath }}/catalog/">COMPONENTS</a></li>
+          <li class="welcome-link-list-item"><a href="{{ page.basepath }}/docs/">DOCUMENTATION</a></li>
         </ul>
       {% endif %}
     </div>
+  </div>
+  <div class="welcome__benefits">
+    {% contentblock benefits %}
   </div>
 </section>

@@ -8,6 +8,7 @@ import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/clike/clike';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/groovy/groovy';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/ruby/ruby';
 import 'codemirror/mode/shell/shell';
@@ -49,6 +50,14 @@ const kramdownToCodeMirrorMap = {
     language: 'HTML',
     mode: 'text/html',
   },
+  groovy: {
+    language: 'Groovy',
+    mode: 'text/x-groovy',
+  },
+  java: {
+    language: 'Java',
+    mode: 'text/x-java',
+  },
   javascript: JS_CODE_MIRROR_SETTINGS,
   js: JS_CODE_MIRROR_SETTINGS,
   objc: {
@@ -75,6 +84,10 @@ const kramdownToCodeMirrorMap = {
   text: {
     language: 'Text',
     mode: 'text/plain',
+  },
+  xml: {
+    language: 'XML',
+    mode: 'text/x-xml',
   },
 };
 
