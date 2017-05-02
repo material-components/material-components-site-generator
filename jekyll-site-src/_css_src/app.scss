@@ -13,6 +13,9 @@
 
 // Site
 @import 'base';
+// This is a core component. It needs to be imported first.
+@import 'components/page';
+
 @import 'components/article';
 @import 'components/benefits-list';
 @import 'components/code';
@@ -23,7 +26,6 @@
 @import 'components/footer';
 @import 'components/hidden-mark';
 @import 'components/icon-list';
-@import 'components/page';
 @import 'components/platform-link-list';
 @import 'components/toolbar';
 @import 'components/welcome';

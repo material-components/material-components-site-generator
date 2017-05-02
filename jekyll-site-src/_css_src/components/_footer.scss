@@ -13,11 +13,12 @@
   }
 
   &__content {
+    @extend %page-element;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    @include content-element;
     padding-top: 32px;
     padding-bottom: 24px;
     height: 100%;

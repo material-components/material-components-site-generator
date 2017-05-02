@@ -17,7 +17,7 @@
   }
 
   &__content {
-    @include content-element;
+    @extend %page-element;
     width: 100%;
 
     display: flex;
@@ -90,3 +90,15 @@
     }
   }
 }
+
+%page-element {
+  $min-content-padding: 16px;
+
+  max-width: $content-width + 2 * $min-content-padding;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $min-content-padding;
+  padding-right: $min-content-padding;
+}
+
+

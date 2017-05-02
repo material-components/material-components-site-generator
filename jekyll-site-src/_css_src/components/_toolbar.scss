@@ -37,7 +37,7 @@
   }
 
   &__row {
-    @include content-element;
+    @extend %page-element;
     height: $toolbar-height;
   }
 
