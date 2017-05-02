@@ -8,7 +8,7 @@
           {{ include.title }}
         </h1>
         <h1 class="mdc-toolbar__title mdc-toolbar__title--mini">
-          {{ include.title | replace: 'Material Components for ', '' }}
+          {{ include.short_title | default: include.title }}
         </h1>
       </a>
     </section>

@@ -2,7 +2,9 @@
 <html class="mdc-typography">
   {% include head.html %}
   <body class="page page--landing page--{{ page.section }}">
-    {% include toolbar.html title=page.site_title no_shadow=true %}
+    {% include toolbar.html
+        title=page.site_title
+        short_title=page.site_short_title %}
 
     <div class="page__content page__flex-element">
       {% include drawer.html %}
