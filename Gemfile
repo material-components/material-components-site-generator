@@ -3,4 +3,8 @@ source 'https://rubygems.org'
 # Last tested working with Ruby 2.4.1
 gem 'jazzy'
 gem 'jekyll'
-gem 'jekyll-tidy'
+
+group :jekyll_plugins do
+  gem 'jekyll-tidy'
+  gem 'jekyll-contentblocks'
+end
