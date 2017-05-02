@@ -39,8 +39,6 @@ module.exports.initCli = () => {
   // Mixin the build environment
   cli.buildEnvironment = process.env.BUILD_ENV || 'development';
 
-
-
   return cli;
 };
 
