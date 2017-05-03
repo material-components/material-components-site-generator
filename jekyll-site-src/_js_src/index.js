@@ -2,7 +2,7 @@ import './mdc-code-render';
 import { addHiddenMarks } from './hidden-marks';
 import { initAnchorScrollCorrection } from './anchor-scroll';
 import { initFeedback } from './feedback';
-import { initPlatformMenu } from './platform-menu';
+import { initMenus } from './menus';
 import { initWelcome } from './welcome';
 import { watchForExternalLinkClicks } from './external-links';
 
@@ -10,6 +10,6 @@ import { watchForExternalLinkClicks } from './external-links';
 addHiddenMarks();
 initAnchorScrollCorrection('.mdc-toolbar');
 initFeedback();
-initPlatformMenu();
+initMenus();
 initWelcome();
 watchForExternalLinkClicks();

@@ -43,6 +43,14 @@
     height: $toolbar-height;
   }
 
+  &__platform-chooser {
+    align-self: center;
+  }
+
+  &__section:first-child  {
+    z-index: 2;
+  }
+
   &--no-shadow {
     box-shadow: none;
   }
@@ -84,6 +92,12 @@
 
     &__platform-chooser {
       margin-top: 16px;
+    }
+  }
+
+  @include breakpoint($max: 344px) {
+    &__platform-chooser {
+      display: none;
     }
   }
 }

@@ -1,12 +1,9 @@
 .toolbar-platform-chooser__button {
-  width: 48px;
-  height: 48px;
-
-  align-self: center;
   background: none;
   border: none;
 
-  outline: 0; // TODO(shyndman): Add a reasonable focus state.
+  width: 48px;
+  height: 48px;
 }
 
 .toolbar-platform-chooser__menu {
