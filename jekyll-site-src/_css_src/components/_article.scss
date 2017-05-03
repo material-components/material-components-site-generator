@@ -12,13 +12,13 @@
   h2 {
     @include mdc-typography(subheading2);
     font-size: 1.25rem;
-    margin: 24px 0;
+    margin: 56px 0 24px;
   }
 
   h3 {
     @include mdc-typography(subheading2);
     font-weight: 500;
-    margin: 24px 0 0;
+    margin: 32px 0 0;
   }
 
   h4 {

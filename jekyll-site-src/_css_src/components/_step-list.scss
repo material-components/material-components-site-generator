@@ -5,6 +5,8 @@
 }
 
 .step-list-item {
+  margin-top: 32px;
+
   &::before {
     content: 'Step ' counter(step, decimal) '. ';
     display: inline-block;
