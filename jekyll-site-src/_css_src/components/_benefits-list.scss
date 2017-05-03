@@ -1,10 +1,11 @@
 .benefits-list {
   display: flex;
+  justify-content: space-between;
   list-style: none;
   margin: 0;
 
   @include media-small {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 }
 
@@ -13,10 +14,10 @@
   flex-direction: column;
 
   flex: 1 0 0;
-  margin-right: 48px;
+  margin-right: 24px;
+  max-width: 340px;
 
   h3 {
-    display: none;
     @include mdc-typography(subheading2);
     font-weight: 500;
     margin: 0;
@@ -57,8 +58,18 @@
   }
 
   @include media-small {
-    flex: none;
     margin-bottom: 24px;
     margin-right: 0;
+    max-width: none;
+    min-width: 100%;
+  }
+
+  @include breakpoint($min: 500px, $max: $media-small-max) {
+    flex: 0;
+    min-width: calc((100% - 24px) / 2);
+
+    &:nth-child(odd) {
+      margin-right: 24px;
+    }
   }
 }

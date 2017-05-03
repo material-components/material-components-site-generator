@@ -2,10 +2,6 @@
   display: flex;
   list-style: none;
   margin-left: 0;
-
-  @include media-small {
-    display: none;
-  }
 }
 
 .welcome-link-list-item {

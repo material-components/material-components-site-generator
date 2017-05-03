@@ -92,7 +92,7 @@
   margin-right: auto;
 
   @include breakpoint($min: $media-medium-min, $max: $media-medium-max + (2 * 16px)) {
-    @include page-content-width(80px);
+    @include page-content-width(60px);
   }
 }
 

@@ -1,3 +1,5 @@
+@import './welcome-link-list';
+
 .welcome {
   $component: &;
 
@@ -18,8 +20,8 @@
       background-repeat: no-repeat;
       background-size: contain;
       flex: 1;
-      margin: 140px 64px 56px 24px;
-      min-width: 400px;
+      margin: 140px 48px 0 48px;
+      min-width: 312px;
     }
 
     #{$component}--platform-android &::after {
@@ -41,8 +43,7 @@
       &::after {
         background-position: top left;
         background-image: url('/images/welcome/root.svg');
-        margin-top: 180px;
-        margin-bottom: 0;
+        margin: 158px 48px 0 0;
       }
     }
   }
@@ -54,22 +55,27 @@
 
   &__title {
     font-family: $ui-font-family;
-    font-size: 56px;
-    line-height: 72px;
+    font-size: 3.5rem;
+    line-height: 4.5rem;
     max-width: 412px;
 
     .hidden-mark {
-      &::before,
       &::after {
         color: $white-50;
+      }
+
+      // The second dot is hidden in the largest breakpoint, because we're
+      // fancy.
+      &:nth-child(2)::after {
+        visibility: hidden;
       }
     }
   }
 
   &__blurb {
     font-family: $ui-font-family;
-    font-size: 24px;
-    line-height: 40px;
+    font-size: 1.5em;
+    line-height: 2.5rem;
     margin-top: 32px;
   }
 
@@ -83,6 +89,61 @@
     margin-top: 108px;
   }
 
+  @include media-lt-large {
+    .hidden-mark:nth-child(2)::after {
+      visibility: visible;
+    }
+  }
+
+  // Shrink the text and hero a little as the screen width decreases.
+  @include media-medium {
+    &__content {
+      &::after {
+        margin: 130px 0 0 48px;
+      }
+    }
+
+    &--root &__content {
+      &::after {
+        margin: 130px 48px 0 0;
+      }
+    }
+
+    &__title {
+      font-size: 2.125rem;
+      line-height: 2.625rem;
+    }
+
+    &__blurb {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      margin-top: 24px;
+    }
+  }
+
+  // Shrink the text a little MORE as the screen width decreases.
+  @include breakpoint($max: 960px) {
+    &__title {
+      font-size: 1.5rem;
+      line-height: 2.125rem;
+    }
+
+    &__blurb {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-top: 24px;
+    }
+
+    // The platform homepages have longer links, and need to be shrunk a little.
+    &--platform &__links {
+      margin-top: 32px;
+
+      a {
+        font-size: .75rem;
+      }
+    }
+  }
+
   @include media-small {
     padding-bottom: 0;
 
@@ -92,53 +153,27 @@
 
       &::after {
         flex: none;
-        background-position: center;
-        margin: 44px 0 0;
+        background-position: top left;
+        margin: 44px vw-lerp((40px 0), (720px 320px)) 0;
         padding-top: 68%; // Proportional scaling.
       }
-    }
-
-    &__text {
-      max-width: none;
-    }
-
-    &__title {
-      font-size: 24px;
-      line-height: 34px;
-    }
-
-    &__blurb {
-      font-size: 16px;
-      line-height: 24px;
-      margin-top: 24px;
     }
 
     &__links {
       display: none;
     }
 
-    &__benefits {
-      margin-top: 80px;
-    }
-  }
-
-  @include media-medium {
-    &__content,
-    &--root &__content {
-      &::after {
-        margin: 130px 0 -20px 20px;
-      }
-    }
-
     &__title {
-      font-size: 34px;
-      line-height: 42px;
+      max-width: none;
     }
 
-    &__blurb {
-      font-size: 24px;
-      line-height: 32px;
-      margin-top: 24px;
+    &__text {
+      margin-top: 100px;
+      max-width: none;
+    }
+
+    &__benefits {
+      margin-top: 58px;
     }
   }
 }
