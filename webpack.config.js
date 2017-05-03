@@ -8,8 +8,8 @@ const buildEnv = process.env.BUILD_ENV || 'development';
 const buildPath = path.resolve(`${__dirname}/${BuildDir.STAGE}`);
 const modulesPath = path.resolve(`${__dirname}/node_modules`);
 
-const IS_DEV = buildEnv == 'development';
 const IS_PROD = buildEnv == 'production';
+const IS_DEV = !IS_PROD;
 
 const CSS_LOADERS = [
   {
