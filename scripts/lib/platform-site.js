@@ -61,17 +61,40 @@ class PlatformSite {
   }
 
   prepareForBuild() {
+    if (!this.validateFiles_(this.files)) {
+      throw new Error(`Repo at ${ this.repoPath } invalid.`);
+    }
+
     this.files.forEach((file) => this.prepareFile_(file));
     this.directoryPaths.forEach((path) => this.processDocsDirectory_(path));
     this.buildNavigation_();
     this.files.forEach((file) => file.write());
   }
 
-  prepareFile_(file) {
-    if (!file.isValidJekyll) {
-      return;
+  validateFiles_(files) {
+    return !this.isPathConflict_(files);
+  }
+
+  isPathConflict_(files) {
+    const destToSrcPaths = new Map();
+    for (const file of files) {
+      const destPath = file.jekyllMetadata.path;
+      if (!destPath) {
+        continue;
+      }
+
+      if (destToSrcPaths.has(destPath)) {
+        reporter.fileDestinationConflict(destPath, destToSrcPaths.get(destPath), file.path);
+        return true;
+      } else {
+        destToSrcPaths.set(destPath, file.path);
+      }
     }
 
+    return false;
+  }
+
+  prepareFile_(file) {
     const fileMetadata = file.jekyllMetadata;
     if (!fileMetadata.path) {
       reporter.fileWarning(file.path, 'Cannot copy. No path metadata defined.');

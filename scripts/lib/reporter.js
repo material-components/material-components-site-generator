@@ -33,6 +33,17 @@ class Reporter {
     this.logLine_(`  ${warningMessage}`);
   }
 
+  fileDestinationConflict(destPath, srcPath1, srcPath2) {
+    console.log('filePathConflict', arguments);
+
+    if (this.inStep_) {
+      this.logLine_();
+    }
+
+    this.logLine_(chalk.bgRed('Error:'));
+    this.logLine_(`${chalk.yellow(srcPath1)} and \n${chalk.yellow(srcPath2)} both attempting to write to ${chalk.yellow(destPath)}`);
+  }
+
   fatal(err) {
     this.logLine_(chalk.red('Something went wrong'));
     this.logLine_(err.toString());
