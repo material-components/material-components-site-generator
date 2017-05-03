@@ -4,7 +4,8 @@
   <body class="page page--detail page--{{ page.section }}">
     {% include toolbar.html
         title=page.site_title
-        short_title=page.site_short_title %}
+        short_title=page.site_short_title
+        is_root=false %}
 
     <div class="page__content page__flex-element">
       {% include drawer.html %}

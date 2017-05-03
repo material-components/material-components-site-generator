@@ -11,6 +11,10 @@
           {{ include.short_title | default: include.title }}
         </h1>
       </a>
+
+      {% unless include.is_root %}
+        {% include toolbar-platform-chooser.html %}
+      {% endunless %}
     </section>
     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
       {% include toolbar-nav.html is_root=include.is_root %}

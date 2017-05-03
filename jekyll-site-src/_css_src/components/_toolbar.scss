@@ -1,4 +1,5 @@
 @import './toolbar-nav';
+@import './toolbar-platform-chooser';
 
 .mdc-toolbar {
   $component: &;
@@ -79,6 +80,10 @@
       flex-direction: column;
       height: $mobile-toolbar-height;
       padding: 0;
+    }
+
+    &__platform-chooser {
+      margin-top: 16px;
     }
   }
 }
