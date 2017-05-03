@@ -2,25 +2,18 @@
   display: flex;
   flex-wrap: wrap;
 
+  margin-top: 72px;
+
   @include media-small {
     flex-direction: column;
     margin-top: 32px;
   }
-
-  margin-top: 72px;
 }
 
 .component-list-item {
-  @include breakpoint($min: 720px, $max: 1280px) {
-    width: vw-lerp($value: 284px 524px, $viewport-width: 720px 1280px);
-  }
-
-  @include media-small {
-    width: 100%;
-  }
-
-  width: 524px;
+  width: 484px;
   margin-bottom: 64px;
+  overflow-x: hidden;
 
   &__link {
     @include link-styles {
@@ -65,14 +58,29 @@
   }
 
   &:nth-child(odd) {
-    @include media-small {
-      margin-right: 80px;
-    }
+    margin-right: 140px;
+  }
 
-    @include breakpoint($min: 720px, $max: 1280px) {
+  @include media-lt-large {
+    &__link::before {
+      min-width: 72px;
+      height: 72px;
+    }
+  }
+
+  @include media-medium {
+    width: vw-lerp($value: 260px 484px, $viewport-width: 720px 1280px);
+
+    &:nth-child(odd) {
       margin-right: vw-lerp($value: 60px 120px, $viewport-width: 720px 1280px);
     }
+  }
 
-    margin-right: 200px;
+  @include media-small {
+    width: 100%;
+
+    &:nth-child(odd) {
+      margin-right: 80px;
+    }
   }
 }
