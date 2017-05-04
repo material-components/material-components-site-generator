@@ -13,7 +13,7 @@
 
   &__link {
     @include link-styles {
-      color: $grey-800;
+      color: $grey-700;
     }
 
     display: inline-block;
@@ -28,6 +28,7 @@
     &--active {
       @include link-styles {
         color: $black;
+        font-weight: 500;
         text-decoration: none;
       }
 
