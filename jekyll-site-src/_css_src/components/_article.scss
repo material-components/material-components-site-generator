@@ -72,10 +72,11 @@
     // Display as inline-block so that we can introduce a horizontal scroll on
     // smaller screens.
     display: inline-block;
-    border: 1px solid $grey-200;
     overflow-x: auto;
-
     margin: 8px 0 32px;
+    max-width: 100%;
+
+    border: 1px solid $grey-200;
   }
 
   th,
