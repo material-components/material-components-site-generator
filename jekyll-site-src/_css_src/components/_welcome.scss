@@ -6,6 +6,7 @@
   background: $toolbar-background;
   color: $toolbar-text-color;
   padding-bottom: 60px;
+  overflow: auto;
 
   &__content {
     @extend %page-element;
@@ -46,6 +47,10 @@
         margin: 158px 48px 0 0;
       }
     }
+
+    @include breakpoint($min: 1000px, $max: 1280px) {
+      min-height: vw-lerp((410px 536px), (1000px 1280px));
+    }
   }
 
   &__text {
@@ -68,6 +73,10 @@
       // fancy.
       #{$component}--platform &:nth-child(2)::after {
         visibility: hidden;
+
+        @include media-lt-large {
+          visibility: visible;
+        }
       }
     }
   }
@@ -86,13 +95,8 @@
   &__benefits {
     @extend %page-element;
 
-    margin-top: 108px;
-  }
-
-  @include media-lt-large {
-    .hidden-mark:nth-child(2)::after {
-      visibility: visible;
-    }
+    margin-top: 160px;
+    margin-bottom: 128px;
   }
 
   // Shrink the text and hero a little as the screen width decreases.
@@ -107,6 +111,10 @@
       &::after {
         margin: 130px 48px -40px 0;
       }
+    }
+
+    &__text {
+      min-height: 200px;
     }
 
     &__title {
@@ -145,17 +153,20 @@
   }
 
   @include media-small {
+    $content-hmargin: vw-lerp((40px 0), (720px 320px));
     padding-bottom: 0;
 
     &__content,
     &--root &__content {
       flex-direction: column;
+      min-height: 0;
 
       &::after {
         flex: none;
         background-position: top left;
-        margin: 44px vw-lerp((40px 0), (720px 320px)) 0;
+        margin: 44px $content-hmargin 0;
         padding-top: 68%; // Proportional scaling.
+        min-width: 320px - (16px * 2);
       }
     }
 
@@ -173,7 +184,8 @@
     }
 
     &__benefits {
-      margin-top: 58px;
+
+      margin: 58px $content-hmargin 48px;
     }
   }
 }
