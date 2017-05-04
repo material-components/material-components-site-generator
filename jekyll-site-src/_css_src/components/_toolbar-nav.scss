@@ -32,6 +32,7 @@
   cursor: pointer;
   text-decoration: none;
   text-transform: uppercase;
+  white-space: nowrap;
 
   &__text {
     position: relative;
@@ -78,13 +79,23 @@
       }
     }
 
-    @include breakpoint($max: 960px) {
+    @include breakpoint($min: 940px + 1px, $max: 1100px) {
       &--github #{$component}__text {
         display: none;
       }
 
       &--github #{$component}__icon {
         display: block;
+      }
+    }
+
+    @include breakpoint($min: 450px + 1px, $max: 940px) {
+      &--github #{$component}__text {
+        display: block;
+      }
+
+      &--github #{$component}__icon {
+        display: none;
       }
     }
   }

@@ -55,7 +55,7 @@
     box-shadow: none;
   }
 
-  @include breakpoint($max: 820px) {
+  @include breakpoint($max: 940px) {
     &__title {
       &--full {
         display: none;
