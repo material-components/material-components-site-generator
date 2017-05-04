@@ -1,5 +1,5 @@
 const PRODUCT_ID = '5017785';
-const BUCKET_NAME = '6077833045485588665';
+const BUCKET_NAME = 'doc_article';
 
 
 export function initFeedback() {
