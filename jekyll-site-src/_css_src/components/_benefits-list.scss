@@ -39,18 +39,20 @@
     margin-right: 0;
   }
 
+  &::before {
+    content: '';
+    align-self: flex-start;
+
+    width: 192px;
+    height: 192px;
+    margin-bottom: 24px;
+  }
+
   // Add platform specific benefit images.
   @each $homepage-modifier, $asset-prefix in $homepages {
     .welcome--#{$homepage-modifier} & {
       @for $i from 1 through 3 {
         &:nth-child(#{$i})::before {
-          content: '';
-          align-self: center;
-
-          width: 192px;
-          height: 192px;
-          margin-bottom: 24px;
-
           background: center / contain url('/images/benefits/#{$asset-prefix}-#{$i}.svg');
         }
       }
