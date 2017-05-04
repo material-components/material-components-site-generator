@@ -1,8 +1,12 @@
+// TODO(shyndman): This file is leftover from the legacy site. A refactor to
+// bring up to date is necessary.
+
 /**
  * @fileoverview
  * Material code renderer provides a wrapper around CodeMirror and renders code
  * snippets into material design styling. This module is imported for
  * side-effects only.
+ *
  */
 import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/clike/clike';
