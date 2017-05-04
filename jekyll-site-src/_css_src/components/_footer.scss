@@ -1,6 +1,6 @@
 .footer {
   // The minimum width at which the "Made with MDC web" link is visible.
-  $made-with-min-visible-width: 420px;
+  $made-with-min-visible-width: 430px;
 
   @include mdc-typography(body1);
 
@@ -40,6 +40,14 @@
 
     list-style-type: none;
     margin-left: 0;
+
+    > li {
+      margin-left: 24px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
   &__link-container--right {
