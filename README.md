@@ -23,5 +23,5 @@ $ yarn install
 ### Building the Site
 
 ```sh
-$ scripts/build path/to/mdc/repo
+$ scripts/build path/to/mdc/repo_1 [path/to/mdc/repo_2 ...]
 ```
