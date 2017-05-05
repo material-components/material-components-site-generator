@@ -44,7 +44,9 @@ function processHref(href, file, site, srcPathsToFiles) {
     return null;
   }
 
-  // If we're dealing with an asset, copy it over
+  // If we're dealing with an asset, copy it over.
+  // TODO(shyndman): This feels out of place here. These methods are about
+  // rewriting links, not copying assets.
   if (ASSET_PATTERN.test(srcLocalUrl.pathname)) {
     const destLocalPath = path.resolve(file.dirname, href);
     fs.copySync(srcLocalUrl.pathname, destLocalPath);
