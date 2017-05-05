@@ -111,11 +111,18 @@
     border-bottom: none;
   }
 
+  // Modifier
+
   &--full-width {
     max-width: 100%;
   }
 
-  // Screenshots/videos
+  // Screenshots/images/videos
+
+  img,
+  video {
+    max-width: 100%;
+  }
 
   &__asset {
     display: flex;
