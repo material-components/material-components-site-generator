@@ -27,8 +27,8 @@
       content: '';
       display: inline-block;
 
-      min-width: 96px;
-      height: 96px;
+      min-width: 72px;
+      height: 72px;
 
       background-image: url('/images/component_icons/ic_component_24px.svg');
       background-size: cover;
@@ -59,13 +59,6 @@
 
   &:nth-child(odd) {
     margin-right: 140px;
-  }
-
-  @include media-lt-large {
-    &__link::before {
-      min-width: 72px;
-      height: 72px;
-    }
   }
 
   @include media-medium {
