@@ -132,8 +132,7 @@
     }
 
     &--screenshot {
-      > video,
-      > img {
+      > video {
         width: 240px;
       }
     }
