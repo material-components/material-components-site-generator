@@ -75,7 +75,7 @@ function processHref(href, file, site, srcPathsToFiles) {
   }
 
   // If the specified path has an associated markdown file in the site, rewrite
-  // the link to point to it, including the search and has.
+  // the link to point to it, including the search and hash.
   if (srcPathsToFiles.has(srcLocalUrl.pathname)) {
     const destFile = srcPathsToFiles.get(srcLocalUrl.pathname);
     const destLocalUrl = url.parse(path.join(site.basepath, destFile.jekyllMetadata.path));

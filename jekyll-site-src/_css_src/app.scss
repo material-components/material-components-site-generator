@@ -14,9 +14,7 @@
 
 // Site
 @import 'base';
-// This is a core component. It needs to be imported first.
-@import 'components/page';
-
+@import 'components/page'; // This is a core component and needs to be imported first.
 @import 'components/article';
 @import 'components/benefits-list';
 @import 'components/code';
