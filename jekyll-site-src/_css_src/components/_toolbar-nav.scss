@@ -5,6 +5,10 @@
   &__links {
     display: flex;
     height: 100%;
+
+    > li {
+      height: 100%;
+    }
   }
 
   @include breakpoint($max: $mobile-toolbar-max-width) {
@@ -22,7 +26,7 @@
     fill: $white;
   }
 
-  display: inline-flex;
+  display: flex;
   align-items: center;
 
   height: 100%;
