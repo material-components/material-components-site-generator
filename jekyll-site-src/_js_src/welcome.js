@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-const Selector = {
-  WELCOME: '.welcome',
-  TOOLBAR: '.mdc-toolbar',
-};
+import { Selector } from './selectors';
+
 
 const CssClass = {
   NO_SHADOW: 'mdc-toolbar--no-shadow'

@@ -14,24 +14,28 @@
  * limitations under the License.
  */
 
+
+const TOOLBAR_SELECTOR = '.mdc-toolbar';
+
+
 /**
  * Initializes anchor scroll correction. This ensures that the linked element
  * is visible instead of being hidden by the fixed toolbar.
  */
-export function initAnchorScrollCorrection(toolbarSelector) {
+export function initAnchorScrollCorrection() {
   window.addEventListener('DOMContentLoaded', () => {
-    scrollToAnchor(window.location.hash, toolbarSelector);
+    scrollToAnchor(window.location.hash);
   });
 
   window.addEventListener('hashchange', (e) => {
-    if (scrollToAnchor(window.location.hash, toolbarSelector)) {
+    if (scrollToAnchor(window.location.hash)) {
       e.preventDefault();
     }
   });
 }
 
 
-function scrollToAnchor(anchor, toolbarSelector) {
+function scrollToAnchor(anchor) {
   if (anchor[0] != '#') {
     return false;
   }
@@ -41,7 +45,7 @@ function scrollToAnchor(anchor, toolbarSelector) {
     return false;
   }
 
-  const toolbarElement = document.querySelector(toolbarSelector);
+  const toolbarElement = document.querySelector(TOOLBAR_SELECTOR);
   if (!toolbarElement) {
     return false;
   }

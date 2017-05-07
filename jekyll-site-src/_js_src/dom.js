@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-import './mdc-code-render';
-import { addHiddenMarks } from './hidden-marks';
-import { initAnchorScrollCorrection } from './anchor-scroll';
-import { initFeedback } from './feedback';
-import { initMenus } from './menus';
-import { initWelcome } from './welcome';
-import { watchForLinkClicks } from './links';
+export function findClosestLink(element) {
+  do {
+    if (element.tagName == 'A') {
+      return element;
+    }
+  } while (element = element.parentElement);
 
-
-addHiddenMarks();
-initAnchorScrollCorrection();
-initFeedback();
-initMenus();
-initWelcome();
-watchForLinkClicks();
+  return null;
+}

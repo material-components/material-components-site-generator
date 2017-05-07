@@ -36,6 +36,7 @@ import 'codemirror/mode/swift/swift';
 import 'codemirror/mode/xml/xml';
 
 import { MDCRadio, MDCRadioFoundation } from '@material/radio';
+import { sendCodeCopyEvent } from './analytics';
 
 
 
@@ -175,6 +176,7 @@ function renderSimpleCodeRenderer(source, lineno) {
   }
 
   const { mode, language } = kramdownToCodeMirrorMap[kramdownLanguage];
+  const isInstall = source.parentElement.classList.contains('code-renderer--install');
 
   const cm = CodeMirror(function(elt) {
     source.parentNode.parentNode.replaceChild(elt, source.parentNode);
@@ -183,6 +185,10 @@ function renderSimpleCodeRenderer(source, lineno) {
     mode: mode,
     lineNumbers: lineno || false,
     readOnly: true
+  });
+
+  cm.on('copy', (e) => {
+    sendCodeCopyEvent(isInstall ? 'install' : '');
   });
 
   // If the language is Shell, this piece of logic process user path properly
