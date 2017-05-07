@@ -87,7 +87,10 @@ function processHref(href, file, site, srcPathsToFiles) {
   reporter.linkWarning(href, file.path, 'No local link found. Writing GitHub link.')
 
   const githubUrl = url.parse(site.repoUrl, srcLocalUrl.pathname);
-  githubUrl.pathname = path.join(githubUrl.pathname, 'tree/master', srcLocalUrl.pathname.replace(site.repoPath, ''));
+  githubUrl.pathname = path.join(
+    githubUrl.pathname,
+    `tree/${ site.repoStableBranch }`,
+    srcLocalUrl.pathname.replace(site.repoPath, ''));
   githubUrl.search = srcLocalUrl.search;
   githubUrl.hash = srcLocalUrl.hash;
   return githubUrl.format();

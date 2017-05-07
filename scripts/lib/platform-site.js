@@ -44,6 +44,10 @@ class PlatformSite {
     return this.config.repo_url;
   }
 
+  get repoStableBranch() {
+    return this.config.repo_stable_branch || 'master';
+  }
+
   get basepath() {
     return this.config.basepath;
   }
