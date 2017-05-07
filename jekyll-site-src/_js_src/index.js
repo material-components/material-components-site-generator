@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-import './mdc-code-render';
+
 import { addHiddenMarks } from './hidden-marks';
+import { displayUnsupportedMessage, isBrowserSupported } from './supported-browser';
 import { initAnchorScrollCorrection } from './anchor-scroll';
+import { initCodeRenderers } from './mdc-code-render';
 import { initFeedback } from './feedback';
 import { initMenus } from './menus';
 import { initWelcome } from './welcome';
 import { watchForLinkClicks } from './links';
 
-
-addHiddenMarks();
-initAnchorScrollCorrection();
-initFeedback();
-initMenus();
-initWelcome();
-watchForLinkClicks();
+if (isBrowserSupported()) {
+  addHiddenMarks();
+  initAnchorScrollCorrection();
+  initCodeRenderers();
+  initFeedback();
+  initMenus();
+  initWelcome();
+  watchForLinkClicks();
+} else {
+  displayUnsupportedMessage();
+}

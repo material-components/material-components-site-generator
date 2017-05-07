@@ -352,29 +352,32 @@ function renderComplexCodeRenderer(renderer, id) {
   components.codemirror.getWrapperElement().classList.add('active');
 }
 
-var complexRenders = document.querySelectorAll('.material-code-render');
-for (let i = 0; i < complexRenders.length; i++) {
-  // RendererIndex assigns a unique id to each code renderer. The id will
-  // be used by radioForm for each code renderer to form radio button group.
-  renderComplexCodeRenderer(complexRenders[i], i);
-}
 
-// Second: renders all other code snippet
-var simpleRenders = document.querySelectorAll('pre code');
-for (let j = 0; j < simpleRenders.length; j++) {
-  renderSimpleCodeRenderer(simpleRenders[j]);
-}
-
-// Listen to selectLangChange event at document level and forward that event
-// to exsiting material code renders.
-document.addEventListener('selectLangChange', function(e) {
+export function initCodeRenderers() {
+  var complexRenders = document.querySelectorAll('.material-code-render');
   for (let i = 0; i < complexRenders.length; i++) {
-    var evt = new e.constructor(e.type, e);
-    complexRenders[i].querySelector('.language').dispatchEvent(evt);
+    // RendererIndex assigns a unique id to each code renderer. The id will
+    // be used by radioForm for each code renderer to form radio button group.
+    renderComplexCodeRenderer(complexRenders[i], i);
   }
-});
 
-// Scroll to targeted anchor after code renderer completes.
-if (window.location.hash) {
-  window.location.href = window.location.hash;
+  // Second: renders all other code snippet
+  var simpleRenders = document.querySelectorAll('pre code');
+  for (let j = 0; j < simpleRenders.length; j++) {
+    renderSimpleCodeRenderer(simpleRenders[j]);
+  }
+
+  // Listen to selectLangChange event at document level and forward that event
+  // to exsiting material code renders.
+  document.addEventListener('selectLangChange', function(e) {
+    for (let i = 0; i < complexRenders.length; i++) {
+      var evt = new e.constructor(e.type, e);
+      complexRenders[i].querySelector('.language').dispatchEvent(evt);
+    }
+  });
+
+  // Scroll to targeted anchor after code renderer completes.
+  if (window.location.hash) {
+    window.location.href = window.location.hash;
+  }
 }

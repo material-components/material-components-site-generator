@@ -19,6 +19,7 @@
     ]
   },
   "dependencies": {
+    "bowser": "^1.6.1",
     "codemirror": "^5.25.0",
     "lodash": "^4.17.4",
     "material-components-web": "^0.8.0",
