@@ -47,6 +47,6 @@ $icon-ids:
 @each $icon-id in $icon-ids {
   .page--components.page--detail .article.article--icon-#{$icon-id} h1::before,
   .page--components .component-list-item--icon-#{$icon-id} > .component-list-item__link::before {
-    background-image: url('/images/component_icons/ic_#{$icon-id}_24px.svg');
+    background-image: url('/images/component_icons/#{$icon-id}.svg');
   }
 }
