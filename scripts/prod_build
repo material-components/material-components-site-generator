@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Ensure cwd
+cd "$(dirname "$0")/.."
+
+echo 'Cleaning'
+rm -Rf docs-src
+
+echo 'Cloning documentation repositories'
+mkdir -p docs-src
+pushd docs-src
+git clone git@github.com:material-components/material-components-android.git
+git clone git@github.com:material-components/material-components-ios.git
+git clone git@github.com:material-components/material-components-web.git
+git clone git@github.com:material-components/material-components.git
+popd
+
+echo 'Building site'
+BUILD_ENV=production scripts/build docs-src/material-components{,-android,-ios,-web}
