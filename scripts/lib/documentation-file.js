@@ -135,7 +135,8 @@ class DocumentationFile extends JekyllFile {
    */
   transformListItemStyles_(contents) {
     return contents.replace(
-        /^(\s*)([*-])(\s+)([^\n]+)\n\1\s\3({:[^}]+})/gm, '$1$2 $5 $4');
+        /^(\s*)([*-])(\s+)([^\n]*\n(?:\1\s\3[^\n]*\n)*)^\1\s\3({:[^}]+}\n?)/gm,
+        '$1$2 $5  $4');
   }
 
   /**
