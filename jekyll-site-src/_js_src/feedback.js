@@ -15,7 +15,7 @@
  */
 
 const PRODUCT_ID = '5017785';
-const BUCKET_NAME = 'doc_article';
+const BUCKET_ID = 'article';
 
 
 export function initFeedback() {
@@ -35,7 +35,7 @@ function startFeedback() {
 
   window.userfeedback.api.startFeedback({
     productId: PRODUCT_ID,
-    bucket: BUCKET_NAME,
+    bucket: BUCKET_ID,
     enableAnonymousFeedback: true,
     allowNonLoggedInFeedback: true,
   });
