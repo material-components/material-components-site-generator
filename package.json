@@ -3,7 +3,8 @@
   "license": "Apache-2.0",
   "version": "1.0.0",
   "scripts": {
-    "test": "mocha --reporter dot --ui qunit test/**.js"
+    "test": "mocha --reporter dot --ui qunit test/**.js",
+    "test:watch": "mocha --watch --reporter dot --ui qunit test/**.js"
   },
   "babel": {
     "presets": [
@@ -41,6 +42,7 @@
     "js-yaml": "^3.8.2",
     "meow": "^3.7.0",
     "mocha": "^3.3.0",
+    "mock-fs": "^4.3.0",
     "node-sass": "^4.5.1",
     "postcss-loader": "^1.3.3",
     "sass-loader": "^6.0.3",

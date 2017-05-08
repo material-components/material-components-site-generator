@@ -56,7 +56,7 @@ function processHref(href, file, site, srcPathsToFiles) {
   // If the resolved path falls outside the MDC repo directory, or the file
   // doesn't exist, assume it's an example link and return.
   if (!srcLocalUrl.pathname.startsWith(site.repoPath) ||
-      !fs.pathExistsSync(srcLocalUrl.pathname)) {
+      !fs.existsSync(srcLocalUrl.pathname)) {
     return null;
   }
 
