@@ -130,6 +130,10 @@ class DocumentationFile extends JekyllFile {
    * From:
    *     * This is a list item
    *       {: .list-item-css-class }
+   * or
+   *     * This is
+   *       a list item
+   *       {: .list-item-css-class }
    * To:
    *     * {: .list-item-css-class } This is a list item
    */
