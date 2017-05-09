@@ -24,7 +24,8 @@ const fs = require('fs-extra');
 const path = require('path');
 const reporter = require('./lib/reporter');
 const webpack = require('webpack');
-const { ASSET_EXTENSIONS, JEKYLL_CONFIG_PATH, BuildDir } = require('./lib/project-paths');
+
+const { ASSET_EXTENSIONS, BuildDir, JEKYLL_CONFIG_PATH, PROD_SITE_ROOT, } = require('./lib/project-paths');
 const { JekyllConfiguration } = require('./lib/jekyll-config');
 const { PlatformSite } = require('./lib/platform-site');
 const { addWatchToWebpackConfig, setupFileWatches } = require('./lib/watch');
@@ -34,7 +35,8 @@ const { initCli } = require('./lib/cli');
 
 // Parses and validates command line arguments.
 const cli = initCli();
-const platformSites = cli.input.map((repoPath) => new PlatformSite(repoPath));
+const platformSites = cli.input.map((repoPath) =>
+    new PlatformSite(repoPath, cli.buildEnvironment == 'production' ? PROD_SITE_ROOT : ''));
 
 // Ensure that the working directory is the project root
 const projectRootPath = path.join(__dirname, '..');
@@ -55,7 +57,7 @@ fs.copySync(BuildDir.JEKYLL, BuildDir.STAGE);
 
 reporter.step('Processing files/directories', () => {
   platformSites.forEach((site) => {
-    site.prepareForBuild();
+    site.prepareForBuild(BuildDir.STAGE);
   });
 });
 

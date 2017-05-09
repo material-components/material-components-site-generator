@@ -77,7 +77,7 @@
         content: '';
         display: inline-block;
 
-        background-image: url('/images/mdc-logo.svg');
+        background-image: url('#{$rootpath}/images/mdc-logo.svg');
         background-size: cover;
 
         width: 32px;

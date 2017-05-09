@@ -34,8 +34,15 @@ const GLOB_OPTIONS = {
 
 
 class PlatformSite {
-  constructor(repoPath) {
+  /**
+   * @param {string} repoPath Local path to the repository.
+   * @param {string} siteRoot The path portion of the component sites URL. For
+   *     example, if hosted on https://material.io/components, the path would be
+   *     /components (no trailing slash).
+   */
+  constructor(repoPath, siteRoot='') {
     this.repoPath = repoPath;
+    this.siteRoot = siteRoot;
     this.config = readYaml(path.join(repoPath, PLATFORM_CONFIG_PATH));
     this.files_ = null;
   }
@@ -81,12 +88,12 @@ class PlatformSite {
     return this.filesBySection_;
   }
 
-  prepareForBuild() {
+  prepareForBuild(stagePath) {
     if (!this.validateFiles_(this.files)) {
       throw new Error(`Repo at ${ this.repoPath } invalid.`);
     }
 
-    this.prepareFiles_(this.files);
+    this.prepareFiles_(this.files, stagePath);
     this.buildNavigation_(this.filesBySection);
     this.files.forEach((file) => file.write());
   }
@@ -114,7 +121,7 @@ class PlatformSite {
     return false;
   }
 
-  prepareFiles_(files) {
+  prepareFiles_(files, stagePath) {
     const srcPathsToFiles = this.files.reduce((accMap, file) => {
       accMap.set(file.path, file);
       if (file.virtualSourcePath) {
@@ -122,11 +129,11 @@ class PlatformSite {
       }
       return accMap;
     }, new Map());
-    this.files.forEach((file) => this.prepareFile_(file));
+    this.files.forEach((file) => this.prepareFile_(file, stagePath));
     this.files.forEach((file) => rewriteLocalLinks(file, this, srcPathsToFiles));
   }
 
-  prepareFile_(file) {
+  prepareFile_(file, stagePath) {
     const fileMetadata = file.jekyllMetadata;
     if (!fileMetadata.path) {
       reporter.fileWarning(file.path, 'Cannot copy. No path metadata defined.');
@@ -136,8 +143,8 @@ class PlatformSite {
     file.prepareForDocSite();
 
     this.applyPathRemapping_(file, fileMetadata.path);
-    file.path = path.resolve(path.join(BuildDir.STAGE, this.basepath), file.relative);
-    file.base = BuildDir.STAGE;
+    file.path = path.resolve(path.join(stagePath, this.basepath), file.relative);
+    file.base = stagePath;
   }
 
   applyPathRemapping_(file, destPath) {

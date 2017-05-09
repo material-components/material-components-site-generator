@@ -22,26 +22,26 @@
   }
 
   &--code::before {
-    background-image: url('/images/icons/ic_code_24px.svg');
+    background-image: url('#{$rootpath}/images/icons/ic_code_24px.svg');
   }
 
   &--components::before {
-    background-image: url('/images/component_icons/component.svg');
+    background-image: url('#{$rootpath}/images/component_icons/component.svg');
   }
 
   &--guide::before {
-    background-image: url('/images/icons/ic_developer_guide_24px.svg');
+    background-image: url('#{$rootpath}/images/icons/ic_developer_guide_24px.svg');
   }
 
   &--github::before {
-    background-image: url('/images/icons/ic_github_24px.svg');
+    background-image: url('#{$rootpath}/images/icons/ic_github_24px.svg');
   }
 
   &--link::before {
-    background-image: url('/images/icons/ic_link_24px.svg');
+    background-image: url('#{$rootpath}/images/icons/ic_link_24px.svg');
   }
 
   &--spec::before {
-    background-image: url('/images/icons/ic_material_design_24px.svg');
+    background-image: url('#{$rootpath}/images/icons/ic_material_design_24px.svg');
   }
 }

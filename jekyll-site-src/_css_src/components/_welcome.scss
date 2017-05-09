@@ -26,15 +26,15 @@
     }
 
     #{$component}--platform-android &::after {
-      background-image: url('/images/welcome/android.svg');
+      background-image: url('#{$rootpath}/images/welcome/android.svg');
     }
 
     #{$component}--platform-ios &::after {
-      background-image: url('/images/welcome/ios.svg');
+      background-image: url('#{$rootpath}/images/welcome/ios.svg');
     }
 
     #{$component}--platform-web &::after {
-      background-image: url('/images/welcome/web.svg');
+      background-image: url('#{$rootpath}/images/welcome/web.svg');
     }
 
     #{$component}--root & {
@@ -43,7 +43,7 @@
 
       &::after {
         background-position: top left;
-        background-image: url('/images/welcome/root.svg');
+        background-image: url('#{$rootpath}/images/welcome/root.svg');
         margin: 158px 48px 0 0;
       }
     }

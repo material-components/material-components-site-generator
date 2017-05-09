@@ -1,2 +1,3 @@
+rootpath: /components
 jekyll_tidy:
   compress_html: true

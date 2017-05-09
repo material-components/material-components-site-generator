@@ -14,7 +14,7 @@
   z-index: 7; // Highest z-index used by CodeMirror + 1
 
   &__title {
-    background: no-repeat left/32px url('/images/mdc-logo.svg');
+    background: no-repeat left/32px url('#{$rootpath}/images/mdc-logo.svg');
     font-family: $ui-font-family;
     font-weight: 400;
     height: 32px;
@@ -23,7 +23,7 @@
     white-space: nowrap;
 
     #{$component}--root & {
-      background-image: url('/images/material-logo.svg');
+      background-image: url('#{$rootpath}/images/material-logo.svg');
     }
 
     &--mini {

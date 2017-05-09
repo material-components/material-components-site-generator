@@ -53,7 +53,7 @@
     .welcome--#{$homepage-modifier} & {
       @for $i from 1 through 3 {
         &:nth-child(#{$i})::before {
-          background: center / contain url('/images/benefits/#{$asset-prefix}-#{$i}.svg');
+          background: center / contain url('#{$rootpath}/images/benefits/#{$asset-prefix}-#{$i}.svg');
         }
       }
     }

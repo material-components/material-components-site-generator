@@ -2,33 +2,33 @@
   <ul class="toolbar-nav__links">
     {% if include.is_root %}
       <li>
-        <a href="ios/"
+        <a href="{{ site.rootpath }}ios/"
            class="toolbar-nav-link toolbar-nav-link--platform">
           <span class="toolbar-nav-link__text">iOS</span>
         </a>
       </li>
       <li>
-        <a href="android/"
+        <a href="{{ site.rootpath }}android/"
            class="toolbar-nav-link toolbar-nav-link--platform">
           <span class="toolbar-nav-link__text">Android</span>
         </a>
       </li>
       <li>
-        <a href="web/"
+        <a href="{{ site.rootpath }}web/"
            class="toolbar-nav-link toolbar-nav-link--platform">
           <span class="toolbar-nav-link__text">Web</span>
         </a>
       </li>
     {% else %}
       <li>
-        <a href="{{ page.basepath }}/catalog/"
+        <a href="{{ site.rootpath }}{{ page.basepath }}/catalog/"
            class="toolbar-nav-link
                {% if page.section == 'components' %}toolbar-nav-link--active{% endif %}">
           <span class="toolbar-nav-link__text">Components</span>
         </a>
       </li>
       <li class="mdc-menu-anchor">
-        <a href="{{ page.basepath }}/docs/"
+        <a href="{{ site.rootpath }}{{ page.basepath }}/docs/"
            class="toolbar-nav-link toolbar-nav-link--desktop
                {% if page.section == 'docs' %}toolbar-nav-link--active{% endif %}">
           <span class="toolbar-nav-link__text">Documentation</span>
@@ -44,7 +44,7 @@
               <li class="mdc-list-item"
                   role="menuitem"
                   tabindex="0"
-                  data-href="{{ page.site_root }}{{ page.basepath }}{{ nav_item.url }}">
+                  data-href="{{ site.rootpath }}{{ page.basepath }}{{ nav_item.url }}">
                 {{ nav_item.title }}
               </li>
             {% endfor %}

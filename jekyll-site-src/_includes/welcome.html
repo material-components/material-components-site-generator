@@ -11,14 +11,14 @@
       </h2>
       {% if include.is_root == true %}
         <ul class="welcome__links welcome-link-list">
-          <li class="welcome-link-list-item"><a href="ios/">iOS</a></li>
-          <li class="welcome-link-list-item"><a href="android/">ANDROID</a></li>
-          <li class="welcome-link-list-item"><a href="web/">WEB</a></li>
+          <li class="welcome-link-list-item"><a href="{{ site.rootpath }}/ios/">iOS</a></li>
+          <li class="welcome-link-list-item"><a href="{{ site.rootpath }}/android/">ANDROID</a></li>
+          <li class="welcome-link-list-item"><a href="{{ site.rootpath }}/web/">WEB</a></li>
         </ul>
       {% else %}
         <ul class="welcome__links welcome-link-list">
-          <li class="welcome-link-list-item"><a href="{{ page.basepath }}/catalog/">COMPONENTS</a></li>
-          <li class="welcome-link-list-item"><a href="{{ page.basepath }}/docs/">DOCUMENTATION</a></li>
+          <li class="welcome-link-list-item"><a href="{{ site.rootpath }}{{ page.basepath }}/catalog/">COMPONENTS</a></li>
+          <li class="welcome-link-list-item"><a href="{{ site.rootpath }}{{ page.basepath }}/docs/">DOCUMENTATION</a></li>
         </ul>
       {% endif %}
     </div>

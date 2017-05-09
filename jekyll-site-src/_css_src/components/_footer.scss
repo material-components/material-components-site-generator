@@ -26,7 +26,7 @@
 
   &__logo {
     display: inline-block;
-    background: url('/images/google-logo.svg');
+    background: url('#{$rootpath}/images/google-logo.svg');
     background-size: 72px;
     opacity: .54;
     width: 72px;

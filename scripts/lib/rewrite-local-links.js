@@ -78,7 +78,8 @@ function processHref(href, file, site, srcPathsToFiles) {
   // the link to point to it, including the search and hash.
   if (srcPathsToFiles.has(srcLocalUrl.pathname)) {
     const destFile = srcPathsToFiles.get(srcLocalUrl.pathname);
-    const destLocalUrl = url.parse(path.join(site.basepath, destFile.jekyllMetadata.path));
+    const destLocalUrl = url.parse(
+        path.join(site.siteRoot, site.basepath, destFile.jekyllMetadata.path));
     destLocalUrl.search = srcLocalUrl.search;
     destLocalUrl.hash = srcLocalUrl.hash;
     return destLocalUrl.format();

@@ -4,7 +4,7 @@
     {% for component in page.navigation %}
       <li class="component-list-item {% if component.iconId %}component-list-item--icon-{{ component.iconId }}{% endif %}">
         <a class="component-list-item__link"
-           href="{{ page.basepath }}{{  component.url  }}">
+           href="{{ site.rootpath }}{{ page.basepath }}{{  component.url  }}">
           <div class="component-list-item__text">
             <h2 class="component-list-item__title">{{ component.title }}</h2>
             <div class="component-list-item__description">
