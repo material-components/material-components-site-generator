@@ -15,6 +15,7 @@
  */
 
 export const Selector = {
-  WELCOME: '.welcome',
+  MENU: '.mdc-simple-menu',
   TOOLBAR: '.mdc-toolbar',
+  WELCOME: '.welcome',
 };
