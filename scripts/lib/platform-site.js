@@ -119,8 +119,13 @@ class PlatformSite {
   }
 
   prepareFiles_(files) {
-    const srcPathsToFiles = this.files.reduce((accMap, file) =>
-        accMap.set(file.path, file), new Map());
+    const srcPathsToFiles = this.files.reduce((accMap, file) => {
+      accMap.set(file.path, file);
+      if (file.virtualSourcePath) {
+        accMap.set(path.join(this.repoPath, file.virtualSourcePath), file);
+      }
+      return accMap;
+    }, new Map());
     this.files.forEach((file) => this.prepareFile_(file));
     this.files.forEach((file) => rewriteLocalLinks(file, this, srcPathsToFiles));
   }

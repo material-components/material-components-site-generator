@@ -78,6 +78,15 @@ class DocumentationFile extends JekyllFile {
   }
 
   /**
+   * Returns the virtual source path – that is, a path in the source repository
+   * that this file pretends to live at, in order to satisfy local links in the
+   * Markdown.
+   */
+  get virtualSourcePath() {
+    return this.jekyllMetadata.virtual_source_path || null;
+  }
+
+  /**
    * Performs the transforms necessary to take a GitHub-formatted doc file
    * and format it for material.io/components.
    */
