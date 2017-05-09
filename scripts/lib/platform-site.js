@@ -69,11 +69,7 @@ class PlatformSite {
   get filesBySection() {
     if (!this.filesBySection_) {
       this.filesBySection_ = this.files.reduce((map, file) => {
-        const section = file.jekyllMetadata.section;
-        if (!section) {
-          return map;
-        }
-
+        const section = file.jekyllMetadata.section || 'none';
         if (!map.has(section)) {
           map.set(section, []);
         }
@@ -156,9 +152,12 @@ class PlatformSite {
   }
 
   buildNavigation_(filesBySection) {
+    const navItemsBySection = {};
+
     for (const [section, sectionFiles] of filesBySection) {
       const sectionNav = new SectionNavigation(section, sectionFiles, this.basepath);
       const navItems = this.tweakNavigation_(sectionNav);
+      navItemsBySection[section] = navItems;
 
       // Now that we've constructed the navigation for this section, we write
       // it out to every file in the section that hasn't defined their own.
@@ -169,6 +168,7 @@ class PlatformSite {
         }
 
         metadata.navigation = navItems;
+        metadata.nav_sections = navItemsBySection;
       }
     }
   }

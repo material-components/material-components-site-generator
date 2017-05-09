@@ -32,8 +32,14 @@
   height: 100%;
   padding: 0 14px;
 
+  background: none;
   border-bottom: 2px solid transparent;
+  border: none;
   cursor: pointer;
+  font-family: $ui-font-family;
+  font-size: .875rem;
+  letter-spacing: .04em;
+  line-height: 1.25rem;
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
@@ -49,6 +55,10 @@
     }
 
     border-bottom: 2px solid $accent-color;
+  }
+
+  &--mobile {
+    display: none;
   }
 
   // Icon representations are only shown on mobile layouts.
@@ -69,6 +79,16 @@
 
     &--github &__icon {
       display: block;
+    }
+  }
+
+  @include media-small {
+    &--desktop {
+      display: none;
+    }
+
+    &--mobile {
+      display: flex;
     }
   }
 
