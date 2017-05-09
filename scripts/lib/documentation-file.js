@@ -51,7 +51,7 @@ class DocumentationFile extends JekyllFile {
     /**
      * A mapping of template variables to repo local links that have been found
      * in the documentation. The links can then be modified at any time prior to
-     * the file being written, to have the changes be reflected in the output.
+     * the file being written to have the changes be reflected in the output.
      * @type {!Map<string, string>}
      */
     this.localLinkTemplateVars = new Map();
@@ -79,8 +79,8 @@ class DocumentationFile extends JekyllFile {
 
   /**
    * Returns the virtual source path – that is, a path in the source repository
-   * that this file pretends to live at, in order to satisfy local links in the
-   * Markdown.
+   * that this file pretends to live at, so that it may satisfy local links in
+   * the Markdown.
    */
   get virtualSourcePath() {
     return this.jekyllMetadata.virtual_source_path || null;
