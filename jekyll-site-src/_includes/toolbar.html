@@ -3,7 +3,7 @@
     {% if include.is_root %}mdc-toolbar--root{% else %}mdc-toolbar--platform{% endif %}">
   <div class="mdc-toolbar__row">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-      <a class="mdc-toolbar__title-link" href="{{ include.title_link | default: page.basepath }}">
+      <a class="mdc-toolbar__title-link" href="{{ include.title_link | default: site.rootpath + page.basepath }}">
         <h1 class="mdc-toolbar__title mdc-toolbar__title--full">
           {{ include.title }}
         </h1>
