@@ -48,6 +48,12 @@ function determineLinkModifications(file, site, srcPathsToFiles) {
 
 
 function processHref(href, file, site, srcPathsToFiles) {
+  // TODO(shyndman): Figure out why the variable isn't interpolating in the
+  // template.
+  if (href.includes('{{ site.rootpath }}')) {
+    href = href.replace('{{ site.rootpath }}', site.siteRoot);
+  }
+
   const srcLocalUrl = url.parse(path.resolve(file.originalDir, href));
 
   // If the link appears to be an absolute GitHub URL, add the hostname.
@@ -59,7 +65,7 @@ function processHref(href, file, site, srcPathsToFiles) {
   // doesn't exist, assume it's an example link and return.
   if (!srcLocalUrl.pathname.startsWith(site.repoPath) ||
       !fs.existsSync(srcLocalUrl.pathname)) {
-    return null;
+    return href;
   }
 
   // If we're dealing with an asset, copy it over.
