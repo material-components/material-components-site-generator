@@ -32,6 +32,7 @@ const ASSET_EXTENSIONS = new Set([
   '.js', '.css', '.scss'
 ]);
 
+const CONTENT_ASSETS_PATH = 'images/content';
 const JEKYLL_CONFIG_PATH = '_config.yml';
 const PLATFORM_CONFIG_PATH = '.mdc-docsite.yml';
 const PROD_SITE_ROOT = '/components';
@@ -40,6 +41,7 @@ module.exports = {
   BuildDir,
   FilePattern,
   ASSET_EXTENSIONS,
+  CONTENT_ASSETS_PATH,
   JEKYLL_CONFIG_PATH,
   PLATFORM_CONFIG_PATH,
   PROD_SITE_ROOT,

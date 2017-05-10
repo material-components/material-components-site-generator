@@ -17,8 +17,10 @@
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const path = require('path');
+const md5File = require('md5-file');
 const reporter = require('./reporter');
 const url = require('url');
+const { BuildDir, CONTENT_ASSETS_PATH } = require('./project-paths');
 
 
 const ASSET_PATTERN = /\.(mp4|m4v|png|svg|jpe?g|gif)$/i;
@@ -64,9 +66,13 @@ function processHref(href, file, site, srcPathsToFiles) {
   // TODO(shyndman): This feels out of place here. These methods are about
   // rewriting links, not copying assets.
   if (ASSET_PATTERN.test(srcLocalUrl.pathname)) {
-    const destLocalPath = path.resolve(file.dirname, href);
-    fs.copySync(srcLocalUrl.pathname, destLocalPath);
-    return null;
+    const destLocalPath = path.join(
+        CONTENT_ASSETS_PATH,
+        md5File.sync(srcLocalUrl.pathname) +
+        path.extname(srcLocalUrl.pathname));
+    const destAssetHref = path.join(site.siteRoot || '/', destLocalPath);
+    fs.copySync(srcLocalUrl.pathname, path.join(BuildDir.STAGE, destLocalPath));
+    return destAssetHref;
   }
 
   const pathWithReadme = path.join(srcLocalUrl.pathname, 'README.md');

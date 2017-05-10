@@ -2245,6 +2245,10 @@ math-expression-evaluator@^1.2.14:
   version "1.2.16"
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.16.tgz#b357fa1ca9faefb8e48d10c14ef2bcb2d9f0a7c9"
 
+md5-file@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-3.1.1.tgz#db3c92c09bbda5c2de883fa5490dd711fddbbab9"
+
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
