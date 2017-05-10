@@ -1,10 +1,13 @@
 <header class="header">
-  <p class="header-col header-col--primary">
+  <div class="header-col">
     <a class="header-link" href="../{{path_to_root}}">
       {{module_name}} Docs
     </a>
-    {{#doc_coverage}} ({{doc_coverage}}% documented){{/doc_coverage}}
-  </p>
+    {{#doc_coverage}}
+      <span class="header__coverage">({{doc_coverage}}% documented)</span>
+    {{/doc_coverage}}
+
+  </div>
 
   {{#github_url}}
     <p class="header-col header-col--secondary">

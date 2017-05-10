@@ -5,11 +5,11 @@
 // ===========================================================================
 
 $body_background: #fff;
-$body_font: 16px/1.7 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$body_font: 16px/1.7 'Roboto', Helvetica, Arial, sans-serif;
 $text_color: #333;
 $gray_border: 1px solid #ddd;
 
-$heading_weight: 700;
+$heading_weight: 500;
 $light_heading_color: #777;
 
 $quote_color: #858585;
@@ -20,8 +20,8 @@ $link_color: #4183c4;
 $table_alt_row_color: #fbfbfb;
 $table_border_color: #ddd;
 
-$code_bg_color: #f7f7f7;
-$code_font: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$code_bg_color: rgba(0, 0, 0, 0.05);
+$code_font: 'Roboto Mono';
 
 
 // ----- Layout
@@ -32,9 +32,9 @@ $navigation_max_width: 300px;
 
 // ----- Header
 
-$header_bg_color: #444;
+$header_bg_color: #212121;
 $header_link_color: #fff;
-$doc_coverage_color: #999;
+$doc_coverage_color: rgba(255, 255, 255, 0.8);
 
 
 // ----- Breadcrumbs
@@ -65,9 +65,9 @@ $aside_warning_border: 5px solid lighten($aside_warning_color, 20%);
 
 // ----- Footer
 
-$footer_bg_color: #444;
-$footer_text_color: #ddd;
-$footer_link_color: #fff;
+$footer_bg_color: #fafafa;
+$footer_text_color: rgba(0, 0, 0, .87);
+$footer_link_color: rgba(0, 0, 0, .87);
 
 
 // ===========================================================================
@@ -99,7 +99,7 @@ body {
 }
 
 h1 {
-  @include heading(2rem, 1.275em 0 0.6em);
+  @include heading(2rem, 0 0 0.6em);
 }
 
 h2 {
@@ -227,6 +227,9 @@ pre code {
 }
 
 
+
+
+
 // ===========================================================================
 //
 //  Header
@@ -235,10 +238,31 @@ pre code {
 
 .header {
   display: flex;
-  padding: $gutter/2;
-  font-size: 0.875em;
+  flex-direction: row;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  height: 72px;
+  width: 100%;
+
   background: $header_bg_color;
+  box-shadow:
+    0 2px  4px -1px rgba(0, 0, 0, .2),
+    0 4px  5px  0   rgba(0, 0, 0, .14),
+    0 1px 10px  0   rgba(0, 0, 0, .12);
   color: $doc_coverage_color;
+  font-size: 1.25rem;
+  letter-spacing: .02em;
+  padding: $gutter/2;
+}
+
+.header + * {
+  margin-top: 72px;
+}
+
+.header__coverage {
+  font-size: 1em;
 }
 
 .header-col {
@@ -246,11 +270,9 @@ pre code {
   padding: 0 $gutter/2
 }
 
-.header-col--primary {
-  flex: 1;
-}
-
 .header-link {
+  font-family: 'Roboto Mono';
+  font-size: 20px;
   color: $header_link_color;
 }
 
@@ -271,7 +293,6 @@ pre code {
 .breadcrumbs {
   font-size: 0.875em;
   padding: $gutter / 2 $gutter;
-  margin: 0;
   background: $breadcrumbs_bg_color;
   border-bottom: 1px solid $breadcrumbs_border_color;
 }
@@ -291,15 +312,21 @@ pre code {
 .navigation {
   order: 2;
 
+  color: rgba(0, 0, 0, .87);
+  font-family: Roboto Mono;
+  font-size: .875rem;
+  font-weight: 400;
+  letter-spacing: .04em;
+  line-height: 1.25rem;
+
   @media (min-width: 768px) {
     order: 1;
-    width: 25%;
+
     max-width: $navigation_max_width;
-    padding-bottom: $gutter*4;
     overflow: hidden;
+    padding-bottom: $gutter*4;
+    width: 25%;
     word-wrap: normal;
-    background: $navigation_bg_color;
-    border-right: 1px solid $navigation_border_color;
   }
 }
 
@@ -309,8 +336,7 @@ pre code {
 }
 
 .nav-group-name {
-  border-bottom: 1px solid $navigation_border_color;
-  padding: $gutter/2 0 $gutter/2 $gutter;
+  padding: $gutter 0 $gutter/2 $gutter;
 }
 
 .nav-group-name-link {
@@ -325,6 +351,7 @@ pre code {
 .nav-group-task {
   font-size: 1em;
   list-style-type: none;
+  padding: 8px 0;
 }
 
 .nav-group-task-link {
