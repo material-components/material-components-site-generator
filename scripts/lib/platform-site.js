@@ -215,7 +215,7 @@ class PlatformSite {
   newApiDocGenerator_(projectRootPath, destPath) {
     switch (this.config.api_doc_generator) {
       case 'jazzy':
-        return new JazzyApiGenerator(projectRootPath);
+        return new JazzyApiGenerator(this.siteRoot, projectRootPath);
 
       default:
         throw new Error(`(${ this.config.site_platform }) No documentation generator found named '${ this.config.api_doc_generator }'`);
