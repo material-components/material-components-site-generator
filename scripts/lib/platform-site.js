@@ -22,6 +22,7 @@ const yaml = require('js-yaml');
 
 const { DocumentationFile } = require('./documentation-file');
 const { PLATFORM_CONFIG_PATH, BuildDir, FilePattern } = require('./project-paths');
+const { JazzyApiGenerator } = require('./jazzy-api-generator');
 const { SectionNavigation } = require('./section-navigation');
 const { rewriteLocalLinks } = require('./rewrite-local-links');
 const { sync: globSync } = require('glob');
@@ -69,14 +70,10 @@ class PlatformSite {
     return this.files_;
   }
 
-  get directoryPaths() {
-    return globSync(path.join(this.repoPath, FilePattern.DOCS_DIRS), GLOB_OPTIONS);
-  }
-
   get filesBySection() {
     if (!this.filesBySection_) {
       this.filesBySection_ = this.files.reduce((map, file) => {
-        const section = file.jekyllMetadata.section || 'none';
+        const section = file.section;
         if (!map.has(section)) {
           map.set(section, []);
         }
@@ -86,6 +83,15 @@ class PlatformSite {
     }
 
     return this.filesBySection_;
+  }
+
+  /**
+   * @return {!Array<!DocumentationFile>} The list of documentation files that
+   *     mark root folders for the generation of API documentation.
+   */
+  get apiDocRoots() {
+    return this.files
+        .filter((file) => file.isApiDocRoot && file.section == 'components');
   }
 
   prepareForBuild(stagePath) {
@@ -129,6 +135,7 @@ class PlatformSite {
       }
       return accMap;
     }, new Map());
+
     this.files.forEach((file) => this.prepareFile_(file, stagePath));
     this.files.forEach((file) => rewriteLocalLinks(file, this, srcPathsToFiles));
   }
@@ -190,6 +197,28 @@ class PlatformSite {
 
       default:
         return sectionNav.items;
+    }
+  }
+
+  generateApiDocs(projectRootPath, destPath) {
+    const docRoots = this.apiDocRoots;
+    if (docRoots.length === 0) {
+      return;
+    }
+
+    const generator = this.newApiDocGenerator_(projectRootPath, destPath);
+    for (const apiDocRoot of this.apiDocRoots) {
+      generator.build(apiDocRoot);
+    }
+  }
+
+  newApiDocGenerator_(projectRootPath, destPath) {
+    switch (this.config.api_doc_generator) {
+      case 'jazzy':
+        return new JazzyApiGenerator(projectRootPath);
+
+      default:
+        throw new Error(`(${ this.config.site_platform }) No documentation generator found named '${ this.config.api_doc_generator }'`);
     }
   }
 }

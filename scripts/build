@@ -61,6 +61,14 @@ reporter.step('Processing files/directories', () => {
   });
 });
 
+if (cli.flags.apidocs) {
+  reporter.step('Generating API documentation', () => {
+    platformSites.forEach((site) => {
+      site.generateApiDocs(projectRootPath, BuildDir.STAGE);
+    });
+  });
+}
+
 const config = reporter.step('Preparing configuration', () => {
   const c = new JekyllConfiguration(path.join(BuildDir.STAGE, JEKYLL_CONFIG_PATH));
   platformSites.forEach((site) => c.addPlatformConfig(site.config));

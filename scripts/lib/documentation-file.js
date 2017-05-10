@@ -78,6 +78,22 @@ class DocumentationFile extends JekyllFile {
   }
 
   /**
+   * @return {boolean} true if file marks the root folder where API
+   *     documentation should be generated.
+   */
+  get isApiDocRoot() {
+    return !!this.jekyllMetadata.api_doc_root;
+  }
+
+  /**
+   * @return {string} The name of this file's section. Currently the only
+   *     options are
+   */
+  get section() {
+    return this.jekyllMetadata.section || 'none';
+  }
+
+  /**
    * Returns the virtual source path – that is, a path in the source repository
    * that this file pretends to live at, so that it may satisfy local links in
    * the Markdown.

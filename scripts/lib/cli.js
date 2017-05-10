@@ -25,14 +25,17 @@ const cli = meow(`
     $ scripts/build [--watch/-w] <path/to/mdc/repo> [<path/to/another/repo>]*
 
   Options
-    --watch, -w  Watch filesystem for changes.
+    --watch, -w   Watch filesystem for changes.
+    --apidocs, -a Build API documentation. (Increases build time)
 `, {
   defaults: {
     watch: false,
+    apidocs: false,
   },
-  boolean: ['watch'],
+  boolean: ['watch', 'apidocs'],
   alias: {
     'w': 'watch',
+    'a': 'apidocs',
   },
 });
 

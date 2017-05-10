@@ -19,13 +19,13 @@ const path = require('path');
 
 const BuildDir = {
   DIST: 'dist',
+  JAZZY: 'jazzy',
   JEKYLL: 'jekyll-site-src',
   STAGE: '.stage',
 };
 
 const FilePattern = {
   JEKYLL_FILES: '**/*.md',
-  DOCS_DIRS: '**/docs/',
 };
 
 const ASSET_EXTENSIONS = new Set([
