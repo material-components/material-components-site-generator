@@ -1,6 +1,9 @@
 .article {
   @include mdc-typography(body1);
 
+  $asset-min-height: 200px;
+  $asset-padding: 24px;
+
   max-width: 760px;
 
   h1 {
@@ -130,12 +133,12 @@
     justify-content: center;
 
     background: $black-05;
-    padding: 24px;
+    padding: $asset-padding;
     margin: 24px 0 28px;
-    min-height: 200px;
+    min-height: $asset-min-height;
 
-    > video,
-    > img {
+    video,
+    img {
       max-width: 100%;
     }
 
@@ -144,5 +147,13 @@
         width: 240px;
       }
     }
+  }
+
+  &__asset-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: $asset-min-height - 2 * $asset-padding;
   }
 }
