@@ -68,7 +68,8 @@ function processHref(href, file, site, srcPathsToFiles) {
     return href;
   }
 
-  // If we're dealing with an asset, copy it over.
+  // If we're dealing with an asset, give it a name that won't collide, and copy
+  // it to a central directory.
   // TODO(shyndman): This feels out of place here. These methods are about
   // rewriting links, not copying assets.
   if (ASSET_PATTERN.test(srcLocalUrl.pathname)) {
