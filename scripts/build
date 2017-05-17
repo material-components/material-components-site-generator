@@ -107,7 +107,7 @@ function buildJekyll() {
     }
 
     const jekyllEnv = Object.assign({}, process.env, {
-      BUNDLE_GEMFILE: path.join(projectRootPath, 'GEMFILE'),
+      BUNDLE_GEMFILE: path.join(projectRootPath, 'Gemfile'),
     });
     execSync(`bundle exec jekyll build \
         --source ${BuildDir.STAGE} \
