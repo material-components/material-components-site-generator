@@ -177,12 +177,11 @@ class PlatformSite {
       // it out to every file in the section that hasn't defined their own.
       for (const file of sectionFiles) {
         const metadata = file.jekyllMetadata;
-        if (file.navigation) {
-          continue;
-        }
-
-        metadata.navigation = navItems;
         metadata.nav_sections = navItemsBySection;
+
+        if (!metadata.navigation) {
+          metadata.navigation = navItems;
+        }
       }
     }
   }
