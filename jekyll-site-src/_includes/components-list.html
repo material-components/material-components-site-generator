@@ -2,7 +2,7 @@
 <nav>
   <ul class="component-list">
     {% for component in page.navigation %}
-      <li class="component-list-item {% if component.iconId %}component-list-item--icon-{{ component.iconId }}{% endif %}">
+      <li class="component-list-item {% if component.icon_id %}component-list-item--icon-{{ component.icon_id }}{% endif %}">
         <a class="component-list-item__link"
            href="{{ site.rootpath }}{{ page.basepath }}{{  component.url  }}">
           <div class="component-list-item__text">

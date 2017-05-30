@@ -73,8 +73,8 @@ class SectionNavigation {
       title: metadata.navTitle || metadata.title,
       navPriority: metadata.navPriority || 0,
     };
-    if (metadata.iconId) {
-      child.iconId = metadata.iconId;
+    if (metadata.iconId || metadata.icon_id) {
+      child.icon_id = metadata.iconId || metadata.icon_id;
     }
     if (metadata.excerpt) {
       child.excerpt = metadata.excerpt;
