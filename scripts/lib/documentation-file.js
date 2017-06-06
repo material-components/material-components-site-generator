@@ -117,8 +117,9 @@ class DocumentationFile extends JekyllFile {
     contents = this.uncommentJekyllSpecifics_(contents);
     contents = this.transformListItemStyles_(contents);
     contents = this.templatizeLocalLinks_(contents);
-
     this.stringContents = contents;
+
+    this.prepareMetadata_();
     this.prepared_ = true;
   }
 
@@ -198,6 +199,15 @@ class DocumentationFile extends JekyllFile {
     this.localLinkTemplateVars.set(varName, capturedUrl);
 
     return `{{ page.local_links.${varName} }}`;
+  }
+
+  /**
+   * Makes any necessary metadata tweaks during file preparation.
+   */
+  prepareMetadata_() {
+    if (this.jekyllMetadata.iconId) {
+      this.jekyllMetadata.icon_id = this.jekyllMetadata.iconId;
+    }
   }
 
   /**
