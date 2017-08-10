@@ -22,7 +22,7 @@ const path = require('path');
 
 const cli = meow(`
   Usage
-    $ scripts/build [--watch/-w] <path/to/mdc/repo> [<path/to/another/repo>]*
+    $ scripts/build [--apidocs/-a] [--watch/-w] <path/to/mdc/repo> [<path/to/another/repo>]*
 
   Options
     --watch, -w   Watch filesystem for changes.
