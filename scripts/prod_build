@@ -21,4 +21,4 @@ shallow_clone git@github.com:material-components/material-components.git develop
 popd
 
 echo 'Building site'
-BUILD_ENV=production scripts/build docs-src/material-components{,-android,-ios,-web}
+BUILD_ENV=production scripts/build -a docs-src/material-components{,-android,-ios,-web}
