@@ -1,5 +1,9 @@
 #!/bin/bash
 
+function shallow_clone() {
+  git clone --depth 1 --shallow-submodules --branch $2 $1 
+}
+
 # Ensure cwd
 cd "$(dirname "$0")/.."
 
@@ -9,13 +13,11 @@ rm -Rf docs-src
 echo 'Cloning documentation repositories'
 mkdir -p docs-src
 pushd docs-src
-git clone git@github.com:material-components/material-components-android.git
-git clone git@github.com:material-components/material-components-ios.git
-pushd material-components-ios
-git checkout stable
-popd
-git clone git@github.com:material-components/material-components-web.git
-git clone git@github.com:material-components/material-components.git
+
+shallow_clone git@github.com:material-components/material-components-android.git master
+shallow_clone git@github.com:material-components/material-components-ios.git stable
+shallow_clone git@github.com:material-components/material-components-web.git master
+shallow_clone git@github.com:material-components/material-components.git develop
 popd
 
 echo 'Building site'
