@@ -29,17 +29,9 @@
       @include link-styles {
         color: $black;
         font-weight: 500;
-        text-decoration: none;
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-
-        bottom: 4px;
-        left: 0;
-        right: 0;
-        border-bottom: 1px solid $accent-color;
+        text-decoration: underline;
+        text-decoration-color: $accent-color;
+        text-underline-position: under;
       }
     }
   }
