@@ -192,6 +192,7 @@ class PlatformSite {
     switch (sectionNav.name) {
       case 'components':
       case 'docs':
+      case 'codelabs':
         return sectionNav.items[0].children;
 
       default:
