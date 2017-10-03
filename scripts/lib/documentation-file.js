@@ -172,6 +172,8 @@ class DocumentationFile extends JekyllFile {
   /**
    * Searches through the provided contents for relative hrefs and srcs, and
    * replaces them with liquid template variable references. A mapping of
+   * variable identifiers to their associated URLs is stored in
+   * `localLinkTemplateVars`.
    */
   templatizeLocalLinks_(contents) {
     contents = contents.replace(patterns.newMarkdownLinkPattern(), (_, text, url, title='') => {
