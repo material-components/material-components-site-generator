@@ -17,13 +17,13 @@
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const path = require('path');
+const patterns = require('./patterns');
 const md5File = require('md5-file');
 const reporter = require('./reporter');
 const url = require('url');
 const { BuildDir, CONTENT_ASSETS_PATH } = require('./project-paths');
 
 
-const ASSET_PATTERN = /\.(mp4|m4v|png|svg|jpe?g|gif)$/i;
 const GITHUB_BASE_PATH = '/material-components/material-components';
 
 
@@ -61,18 +61,32 @@ function processHref(href, file, site, srcPathsToFiles) {
     return `https://www.github.com${ srcLocalUrl.format() }`;
   }
 
+  const noFileFound =
+      !fs.existsSync(srcLocalUrl.pathname) ||
+      !srcLocalUrl.pathname.startsWith(site.repoPath);
+
   // If the resolved path falls outside the MDC repo directory, or the file
-  // doesn't exist, assume it's an example link and return.
-  if (!srcLocalUrl.pathname.startsWith(site.repoPath) ||
-      !fs.existsSync(srcLocalUrl.pathname)) {
-    return href;
+  // doesn't exist, we're dealing with a broken link. Fail the build.
+  //
+  // Images are currently ignored from broken link checking, as some sites use
+  // images that are repo-external, but still local to the web server.
+  //
+  // TODO(shyndman): Rethink the external images.
+  if (noFileFound) {
+    if (patterns.newAssetPathPattern().test(href)) {
+      reporter.linkWarning(href, file.path, 'Potentially broken image link detected.');
+      return href;
+    }
+
+    reporter.brokenLink(href, file.path);
+    throw new Error('Broken link detected. Stopping build.')
   }
 
   // If we're dealing with an asset, give it a name that won't collide, and copy
   // it to a central directory.
   // TODO(shyndman): This feels out of place here. These methods are about
   // rewriting links, not copying assets.
-  if (ASSET_PATTERN.test(srcLocalUrl.pathname)) {
+  if (patterns.newAssetPathPattern().test(srcLocalUrl.pathname)) {
     const destLocalPath = path.join(
         CONTENT_ASSETS_PATH,
         md5File.sync(srcLocalUrl.pathname) +
@@ -98,7 +112,7 @@ function processHref(href, file, site, srcPathsToFiles) {
     return destLocalUrl.format();
   }
 
-  reporter.linkWarning(href, file.path, 'No local link found. Writing GitHub link.')
+  reporter.linkWarning(href, file.path, 'No local link found. Writing GitHub link.');
 
   const githubUrl = url.parse(site.repoUrl, srcLocalUrl.pathname);
   githubUrl.pathname = path.join(

@@ -17,6 +17,7 @@
 const fs = require('fs-extra');
 const patterns = require('./patterns');
 const url = require('url');
+const uuid = require('uuid/v4');
 const { JekyllFile, FRONT_MATTER_DELIMITER } = require('./jekyll-file');
 
 
@@ -116,7 +117,7 @@ class DocumentationFile extends JekyllFile {
     contents = this.uncommentMetadata_(contents);
     contents = this.uncommentJekyllSpecifics_(contents);
     contents = this.transformListItemStyles_(contents);
-    contents = this.templatizeLocalLinks_(contents);
+    contents = this.transformWithoutCodeBlocks_(contents, (c) => this.templatizeLocalLinks_(c));
     this.stringContents = contents;
 
     this.prepareMetadata_();
@@ -170,6 +171,31 @@ class DocumentationFile extends JekyllFile {
   }
 
   /**
+   * Temporarily removes code blocks from contents before transforming,
+   * transforms, then restores the the blocks.
+   */
+  transformWithoutCodeBlocks_(contents, transformer) {
+    const codeBlockVars = new Map();
+
+    // Replace code blocks with variable references
+    contents = contents.replace(patterns.newMarkdownCodeBlockPattern(), (match) => {
+      const varRef = `{{ code_${ uuid() } }}`;
+      codeBlockVars.set(varRef, match);
+      return varRef;
+    });
+
+    // Run transformation function against code-less Markdown
+    contents = transformer(contents);
+
+    // Restore code blocks
+    for (let [k, v] of codeBlockVars.entries()) {
+      contents = contents.replace(k, v);
+    }
+
+    return contents;
+  }
+
+  /**
    * Searches through the provided contents for relative hrefs and srcs, and
    * replaces them with liquid template variable references. A mapping of
    * variable identifiers to their associated URLs is stored in
@@ -197,7 +223,7 @@ class DocumentationFile extends JekyllFile {
       return capturedUrl;
     }
 
-    const varName = `link_${ this.localLinkTemplateVars.size }`;
+    const varName = `link_${ uuid() }`;
     this.localLinkTemplateVars.set(varName, capturedUrl);
 
     return `{{ page.local_links.${varName} }}`;
