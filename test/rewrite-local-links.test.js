@@ -45,28 +45,35 @@ beforeEach(() => {
 
 afterEach(() => mockFs.restore());
 
-test('Links that don\'t point to anything are ignored', () => {
+test('Links that don\'t point to anything fail the build', () => {
   const file = newDocFile('/destination/file', '/repo/source/file', '/non/existent/file');
   const expectedLocalLinks = new Map(file.localLinkTemplateVars);
-  rewriteLocalLinks(file, site, new Map());
-  assert.deepEqual(
-      Array.from(file.localLinkTemplateVars),
-      Array.from(expectedLocalLinks));
+  assert.throws(() => rewriteLocalLinks(file, site, new Map()));
 });
 
-test('Links to assets are not rewritten', () => {
-  const file = newDocFile('/destination/file', '/repo/source/file', 'docs/screenshot.png');
+test('Links to assets that can\'t be found are ignored', () => {
+  const file = newDocFile('/destination/file', '/repo/source/file', '/non/existent/image.png');
   const expectedLocalLinks = new Map(file.localLinkTemplateVars);
   rewriteLocalLinks(file, site, new Map());
   assert.deepEqual(
       Array.from(file.localLinkTemplateVars),
-      Array.from(expectedLocalLinks));
+      [['link_1', '/non/existent/image.png']]);
 });
 
-test('Assets are copied to the destination', () => {
+test('Links to assets are rewritten to point to a global assets directory', () => {
+  const file = newDocFile('/destination/file', '/repo/source/file', './docs/screenshot.png');
+  rewriteLocalLinks(file, site, new Map());
+  assert.deepEqual(
+      Array.from(file.localLinkTemplateVars),
+      // File name is md5 hash of "docs/screenshot.png"
+      [['link_1', '/images/content/d41d8cd98f00b204e9800998ecf8427e.png']]);
+});
+
+test('Assets are copied to the global assets directory', () => {
   const file = newDocFile('/destination/file', '/repo/source/file', 'docs/screenshot.png');
   rewriteLocalLinks(file, site, new Map());
-  assert(fs.pathExistsSync('/destination/docs/screenshot.png'));
+  console.log(mockFs.getMockRoot().list());
+  assert(fs.pathExistsSync('.stage/images/content/d41d8cd98f00b204e9800998ecf8427e.png'));
 });
 
 test('Local source links will be rewritten to point to the equivalent docsite file', () => {

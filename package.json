@@ -24,7 +24,8 @@
     "codemirror": "^5.25.0",
     "lodash": "^4.17.4",
     "material-components-web": "^0.8.0",
-    "reset-css": "^2.2.0"
+    "reset-css": "^2.2.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",

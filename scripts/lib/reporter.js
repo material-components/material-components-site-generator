@@ -59,14 +59,21 @@ class Reporter {
   }
 
   fileDestinationConflict(destPath, srcPath1, srcPath2) {
-    console.log('filePathConflict', arguments);
-
     if (this.inStep_) {
       this.logLine_();
     }
 
     this.logLine_(chalk.bgRed('Error:'));
     this.logLine_(`${ chalk.yellow(srcPath1) } and \n${ chalk.yellow(srcPath2) } both attempting to write to ${ chalk.yellow(destPath) }`);
+  }
+
+  brokenLink(href, filePath) {
+    if (this.inStep_) {
+      this.logLine_();
+    }
+
+    this.logLine_(chalk.black.bgRed('Error:'));
+    this.logLine_(`Broken link ${ chalk.yellow(href) } in ${ chalk.yellow(filePath) }`);
   }
 
   fatal(err) {

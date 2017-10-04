@@ -43,9 +43,25 @@ function newSrcPattern() {
   return /src=["']([^'"]+)["']/g;
 }
 
+/**
+ * Returns a regular expression for matching Markdown code blocks.
+ */
+function newMarkdownCodeBlockPattern() {
+  return /^(([ \t]*`{3,4})([^\n]*)([\s\S]+?)(^[ \t]*\2))/gm;
+}
+
+/**
+ * Returns a regular expression that matches asset file paths.
+ */
+function newAssetPathPattern() {
+  return /\.(mp4|m4v|png|svg|jpe?g|gif)$/ig;
+}
+
 
 module.exports = {
-  newMarkdownLinkPattern,
+  newAssetPathPattern,
   newHrefPattern,
+  newMarkdownCodeBlockPattern,
+  newMarkdownLinkPattern,
   newSrcPattern,
 };
