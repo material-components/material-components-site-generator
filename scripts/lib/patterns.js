@@ -47,7 +47,7 @@ function newSrcPattern() {
  * Returns a regular expression for matching Markdown code blocks.
  */
 function newMarkdownCodeBlockPattern() {
-  return /^(([ \t]*`{3,4})([^\n]*)([\s\S]+?)(^[ \t]*\2))/gm;
+  return /^(([ \t]*`{3,4})([^\n]*)([^]+?)(^[ \t]*\2))/gm;
 }
 
 /**
