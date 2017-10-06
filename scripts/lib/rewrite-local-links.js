@@ -54,6 +54,7 @@ function processHref(href, file, site, srcPathsToFiles) {
     href = href.replace('{{ site.rootpath }}', site.siteRoot);
   }
 
+  // Parse the href into a URL object to more easily evaluate parts.
   const srcLocalUrl = url.parse(path.resolve(file.originalDir, href));
 
   // If the link appears to be an absolute GitHub URL, add the hostname.
