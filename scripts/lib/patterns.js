@@ -44,10 +44,38 @@ function newSrcPattern() {
 }
 
 /**
- * Returns a regular expression for matching Markdown code blocks.
+ * Returns a regular expression for matching Markdown code (blocks and inline).
  */
-function newMarkdownCodeBlockPattern() {
-  return /^(([ \t]*`{3,4})([^\n]*)([^]+?)(^[ \t]*\2))/gm;
+function newMarkdownCodePattern() {
+  return new RegExp([
+    // CODE BLOCK
+    '^(',
+      // Leading space, followed by 3 or 4 backticks
+      '([ \\t]*`{3,4})',
+      // Match to the end of the first line
+      '([^\\n]*)',
+      // Lazily match everything ([^] is negation of empty set)...
+      '([^]+?)',
+      // ...until we hit the the same number of backticks as captured up front.
+      '(^[ \\t]*\\2)',
+    ')|',
+
+    // INLINE CODE
+    '(',
+      // Starting backtick
+      '`',
+      // Zero or more non-empty lines (inline code can be split across lines,
+      // as long as they aren't blank)
+      '(',
+        '\\n(^[^`\\n]+$)',
+      ')*',
+      // Followed by one character of anything but a backtick (`` isn't valid)
+      '[^`]',
+      // Then lazily match any character on the current line until the ending
+      // backtick.
+      '.*?`',
+    ')',
+  ].join(''), 'gm')
 }
 
 /**
@@ -61,7 +89,7 @@ function newAssetPathPattern() {
 module.exports = {
   newAssetPathPattern,
   newHrefPattern,
-  newMarkdownCodeBlockPattern,
+  newMarkdownCodePattern,
   newMarkdownLinkPattern,
   newSrcPattern,
 };

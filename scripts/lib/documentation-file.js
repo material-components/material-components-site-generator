@@ -178,7 +178,7 @@ class DocumentationFile extends JekyllFile {
     const codeBlockVars = new Map();
 
     // Replace code blocks with variable references
-    contents = contents.replace(patterns.newMarkdownCodeBlockPattern(), (match) => {
+    contents = contents.replace(patterns.newMarkdownCodePattern(), (match) => {
       const varRef = `{{ code_${ uuid() } }}`;
       codeBlockVars.set(varRef, match);
       return varRef;
