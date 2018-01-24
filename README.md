@@ -164,10 +164,15 @@ without its extension. For example, to use `bottom_navigation.svg`, your metadat
 
 ##### path
 
-The path of the document in the site. Ending the path in a `/` will write out an `index.html`.
+The destination path for the document's generated HTML.
 
-All links to other documents in the source repo will be automatically rewritten to reflect their
+Ending the path in a `/` will write out an `index.html`.
+
+All links to other Markdown/files will be automatically rewritten to reflect their
 paths in the generated site.
+
+Confused? Here's the rule: Write all your links so they'll work on GitHub. The site generator 
+will do the rest.
 
 ##### api_doc_root
 
@@ -181,4 +186,4 @@ If omitted, this field defaults to `false`.
 GitHub markdown files will sometimes link to a directory in the source tree that does not have an
 associated README, or its README is inappropriate for inclusion on the documentation site.
 `virtual_source_path` exists so that you can tell a the site generator to treat a file as if it
-exists somewhere that it doesn't.
+exists somewhere in the source repo that it doesn't, so that other files can link to it in the generated site.
