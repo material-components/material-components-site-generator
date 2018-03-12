@@ -88,33 +88,13 @@
   }
 
   .mdc-toolbar--platform & {
-    @include breakpoint($min: 451px, $max: $mobile-toolbar-max-width) {
-      &--github #{$component}__text {
-        display: block;
-      }
-
-      &--github #{$component}__icon {
-        display: none;
-      }
-    }
-
-    @include breakpoint($min: 940px + 1px, $max: 1100px) {
+    @include breakpoint($min: 451px, $max: 1100px) {
       &--github #{$component}__text {
         display: none;
       }
 
       &--github #{$component}__icon {
         display: block;
-      }
-    }
-
-    @include breakpoint($min: 450px + 1px, $max: 940px) {
-      &--github #{$component}__text {
-        display: block;
-      }
-
-      &--github #{$component}__icon {
-        display: none;
       }
     }
   }
