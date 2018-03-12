@@ -18,8 +18,22 @@
         </ul>
       {% else %}
         <ul class="welcome__links welcome-link-list">
-          <li class="welcome-link-list-item"><a href="{{ site.rootpath }}{{ page.basepath }}/catalog/">COMPONENTS</a></li>
-          <li class="welcome-link-list-item"><a href="{{ site.rootpath }}{{ page.basepath }}/docs/">DOCUMENTATION</a></li>
+          <li class="welcome-link-list-item">
+            <a href="
+              {% if page.components_url %}
+                {{ page.components_url }}
+              {% else %}
+                {{ site.rootpath }}{{ page.basepath }}/catalog/
+              {% endif %}">COMPONENTS</a>
+          </li>
+          <li class="welcome-link-list-item">
+            <a href="
+              {% if page.documentation_url %}
+                {{ page.documentation_url }}
+              {% else %}
+                {{ site.rootpath }}{{ page.basepath }}/docs/
+              {% endif %}">DOCUMENTATION</a>
+          </li>
         </ul>
       {% endif %}
     </div>
