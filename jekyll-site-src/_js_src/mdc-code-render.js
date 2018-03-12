@@ -27,6 +27,7 @@
 import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/clike/clike';
 import 'codemirror/mode/css/css';
+import 'codemirror/mode/dart/dart';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/groovy/groovy';
 import 'codemirror/mode/javascript/javascript';
@@ -67,13 +68,17 @@ const kramdownToCodeMirrorMap = {
     language: 'CSS',
     mode: 'text/css',
   },
-  html: {
-    language: 'HTML',
-    mode: 'text/html',
+  dart: {
+    language: 'Dart',
+    mode: 'application/dart',
   },
   groovy: {
     language: 'Groovy',
     mode: 'text/x-groovy',
+  },
+  html: {
+    language: 'HTML',
+    mode: 'text/html',
   },
   java: {
     language: 'Java',
