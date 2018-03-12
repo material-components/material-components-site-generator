@@ -29,7 +29,8 @@
       background-image: url('#{$rootpath}/images/welcome/android.svg');
     }
 
-    #{$component}--platform-ios &::after {
+    #{$component}--platform-ios &::after,
+    #{$component}--platform-flutter &::after {
       background-image: url('#{$rootpath}/images/welcome/ios.svg');
     }
 
