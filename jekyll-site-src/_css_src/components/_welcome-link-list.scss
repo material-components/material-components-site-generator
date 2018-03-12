@@ -33,5 +33,9 @@
     &:hover::after {
       transform: translateY(3px);
     }
+
+    @media(max-width: $tight-welcome-links-max-width) {
+      margin-right: -12px;
+    }
   }
 }
