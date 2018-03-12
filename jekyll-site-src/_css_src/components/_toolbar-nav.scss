@@ -44,11 +44,6 @@
   text-transform: uppercase;
   white-space: nowrap;
 
-  &__text {
-    position: relative;
-    top: 2px;
-  }
-
   &--active {
     @include link-styles {
       color: $accent-color;
