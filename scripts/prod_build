@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function shallow_clone() {
-  git clone --depth 1 --shallow-submodules --branch $2 $1 
+  git clone --depth 1 --shallow-submodules --branch $2 $1
 }
 
 # Ensure cwd
@@ -17,8 +17,9 @@ pushd docs-src
 shallow_clone git@github.com:material-components/material-components-android.git master
 shallow_clone git@github.com:material-components/material-components-ios.git stable
 shallow_clone git@github.com:material-components/material-components-web.git master
+shallow_clone git@github.com:material-components/material-components-flutter.git master
 shallow_clone git@github.com:material-components/material-components.git develop
 popd
 
 echo 'Building site'
-BUILD_ENV=production scripts/build -a docs-src/material-components{,-android,-ios,-web}
+BUILD_ENV=production scripts/build -a docs-src/material-components{,-web,-android,-ios,-flutter}
