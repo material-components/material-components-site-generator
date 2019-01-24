@@ -64,7 +64,8 @@ class PlatformSite {
     if (!this.files_) {
       this.files_ = globSync(path.join(this.repoPath, FilePattern.JEKYLL_FILES), GLOB_OPTIONS)
           .map((filePath) => DocumentationFile.readFromPath(filePath, this.repoPath))
-          .filter((file) => file.isValidJekyll);
+          .filter((file) => file.isValidJekyll)
+          .filter((file) => (file.path.indexOf('/.') == -1 && file.path.indexOf('.') != 0));
     }
 
     return this.files_;
