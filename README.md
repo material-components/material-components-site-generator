@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/material-components/material-components-site-generator)
+
 # Material Components Docsite Generator
 
 The docsite generator transforms Markdown files found in material-component repos, styles them,
