@@ -1,4 +1,4 @@
-# Material Components Docsite Generator
+# Material Components Docsite Generator (Deprecated)
 
 The docsite generator transforms Markdown files found in material-component repos, styles them,
 moves them around, rewrites links to match, and spits out
